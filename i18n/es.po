@@ -39,7 +39,7 @@ msgstr ""
 #: forms.php:163 forms.php:455 forms.php:471 forms.php:492 multiembedq.php:189
 #: multiembedq.php:285 multiembedq2.php:362
 msgid "Submit"
-msgstr ""
+msgstr "Enviar"
 
 #: DEembedq.php:229 OEAembedq.php:357 embedq.php:185 DEembedq.php:234
 #: OEAembedq.php:371 embedq.php:265 OEAembedq.php:372 embedq.php:266
@@ -72,7 +72,7 @@ msgstr ""
 #: embedq.php:292 javascript/AMhelpers2.js:325 javascript/AMhelpers2.js:344
 #: javascript/AMhelpers2_min.js:1 javascript/assess2_min.js:2
 msgid "Correct"
-msgstr ""
+msgstr "Correcto"
 
 #: DEembedq.php:256 OEAembedq.php:384 assessment/displayq2.php:7058
 #: assessment/testutil.php:409 assessment/testutil.php:931
@@ -93,7 +93,7 @@ msgstr ""
 #: javascript/AMhelpers2.js:331 javascript/AMhelpers2.js:346
 #: javascript/AMhelpers2_min.js:1 javascript/assess2_min.js:2
 msgid "Incorrect"
-msgstr ""
+msgstr "Incorrecto"
 
 #: DEembedq.php:260 OEAembedq.php:388 assessment/displayq2.php:7064
 #: assessment/testutil.php:413 assessment/testutil.php:933
@@ -114,7 +114,7 @@ msgstr ""
 #: javascript/AMhelpers2.js:328 javascript/AMhelpers2.js:345
 #: javascript/AMhelpers2_min.js:1 javascript/assess2_min.js:2
 msgid "Partially correct"
-msgstr ""
+msgstr "Parcialmente correcto"
 
 #: DEembedq.php:267 OEAembedq.php:395 embedq.php:223 DEembedq.php:269
 #: OEAembedq.php:406 embedq.php:300 OEAembedq.php:407 embedq.php:301
@@ -125,7 +125,7 @@ msgstr ""
 #: actions.php:221 actions.php:589 actions.php:204 actions.php:544
 #: actions.php:244 actions.php:597
 msgid "Automated new enrollment notice"
-msgstr ""
+msgstr "Aviso automatizado de nueva inscripción"
 
 #: actions.php:222 actions.php:590 actions.php:205 actions.php:545
 #: actions.php:245 actions.php:598
@@ -133,10 +133,12 @@ msgid ""
 "This is an automated system message letting you know this student just "
 "enrolled in your course"
 msgstr ""
+"Este es un mensaje del sistema automatizado que le permite saber que este estudiante"
+"se inscribió en su curso"
 
 #: actions.php:345 actions.php:324 actions.php:368
 msgid "Invalid code"
-msgstr ""
+msgstr "Código inválido"
 
 #: admin/actions.php:28 admin/actions.php:30 admin/admin2.php:16
 #: admin/admin2.php:34 admin/admin2.php:50 admin/admin2.php:129
@@ -157,7 +159,7 @@ msgstr ""
 #: admin/actions.php:38 admin/actions.php:40 admin/userlti.php:104
 #: lti/admin/platforms.php:77 lti/admin/privkeys.php:40
 msgid "Admin"
-msgstr ""
+msgstr "Administrador"
 
 #: admin/actions.php:28 admin/diagonetime.php:29 admin/diagsetup.php:28
 #: admin/forms.php:33 admin/listdiag.php:74 admin/userlti.php:68
@@ -165,26 +167,26 @@ msgstr ""
 #: admin/transfercourse.php:123 admin/userlti.php:93 admin/actions.php:38
 #: admin/userlti.php:105
 msgid "User Details"
-msgstr ""
+msgstr "Detalles de usuario"
 
 #: admin/actions.php:30 admin/diagonetime.php:35 admin/diagsetup.php:34
 #: admin/forms.php:35 admin/listdiag.php:76 admin/userdetails.php:24
 #: admin/actions.php:39 admin/addremoveteachers.php:157 admin/forms.php:57
 #: admin/transfercourse.php:125 admin/userdetails.php:25 admin/actions.php:40
 msgid "Group Details"
-msgstr ""
+msgstr "Detalles del grupo"
 
 #: admin/admin.php:230 admin/admin.php:204
 msgid "Add or remove additional teachers"
-msgstr ""
+msgstr "Agregar o quitar profesores adicionales"
 
 #: admin/admin.php:231 admin/admin.php:205
 msgid "Modify course settings"
-msgstr ""
+msgstr "Modificar la configuración del curso"
 
 #: admin/admin.php:231 admin/admin.php:205
 msgid "Transfer course ownership to someone else"
-msgstr ""
+msgstr "Transferir la propiedad del curso a otra persona"
 
 #: admin/admin2.php:10 admin/userdetails.php:9 admin/groupreportdetails.php:9
 #: admin/userreportdetails.php:10 admin/userreports.php:10
