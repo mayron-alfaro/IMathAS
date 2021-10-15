@@ -191,7 +191,7 @@ msgstr "Transferir la propiedad del curso a otra persona"
 #: admin/admin2.php:10 admin/userdetails.php:9 admin/groupreportdetails.php:9
 #: admin/userreportdetails.php:10 admin/userreports.php:10
 msgid "Guest"
-msgstr ""
+msgstr "Invitado"
 
 #: admin/admin2.php:11 admin/userdetails.php:10 course/course.php:684
 #: msgs/msglist.php:347 admin/groupreportdetails.php:10
@@ -199,19 +199,19 @@ msgstr ""
 #: course/course.php:694 msgs/msglist.php:351 course/course.php:693
 #: includes/getcourseopts.php:52
 msgid "Student"
-msgstr ""
+msgstr "Estudiante"
 
 #: admin/admin2.php:12 admin/userdetails.php:11 admin/admin2.php:13
 #: admin/groupreportdetails.php:12 admin/userdetails.php:12
 #: admin/userreportdetails.php:13 admin/userreports.php:13
 msgid "Tutor/TA/Proctor"
-msgstr ""
+msgstr "Tutor"
 
 #: admin/admin2.php:13 admin/userdetails.php:12 admin/admin2.php:14
 #: admin/groupreportdetails.php:13 admin/userdetails.php:13
 #: admin/userreportdetails.php:14 admin/userreports.php:14
 msgid "Teacher"
-msgstr ""
+msgstr "Profesor"
 
 #: admin/admin2.php:14 admin/userdetails.php:13 admin/admin2.php:15
 #: admin/groupreportdetails.php:14 admin/userdetails.php:14
@@ -253,7 +253,7 @@ msgstr ""
 
 #: admin/admin2.php:170 admin/admin2.php:123
 msgid "Administration"
-msgstr ""
+msgstr "Administración"
 
 #: admin/admin2.php:210 admin/admin2.php:326 admin/admin2.php:163
 #: admin/admin2.php:340 admin/admin2.php:346 course/moddataset.php:984
@@ -264,13 +264,13 @@ msgstr ""
 #: admin/admin2.php:211 admin/admin2.php:327 admin/admin2.php:164
 #: admin/admin2.php:341 admin/admin2.php:347
 msgid "Manage Libraries"
-msgstr ""
+msgstr "Administar Librerías"
 
 #: admin/admin2.php:215 admin/admin2.php:331 course/course.php:528
 #: admin/admin2.php:168 admin/admin2.php:345 course/course.php:519
 #: admin/admin2.php:351 course/course.php:518
 msgid "Export Libraries"
-msgstr ""
+msgstr "Exportar librerías"
 
 #: admin/admin2.php:216 admin/admin2.php:270 admin/admin2.php:314
 #: admin/diagonetime.php:24 admin/diagonetime.php:30 admin/diagonetime.php:36
@@ -280,17 +280,17 @@ msgstr ""
 #: admin/admin2.php:328 admin/userdetails.php:181 index.php:376
 #: admin/admin2.php:334 admin/userdetails.php:185 index.php:392
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnósticos"
 
 #: admin/admin2.php:220 admin/admin2.php:269 admin/admin2.php:347
 #: admin/admin2.php:173 admin/admin2.php:279 admin/admin2.php:361
 #: admin/userreports.php:141 index.php:408 admin/admin2.php:368 index.php:425
 msgid "Add New User"
-msgstr ""
+msgstr "Agregar Nuevo Usuario"
 
 #: admin/admin2.php:227 admin/admin2.php:186 admin/userreports.php:148
 msgid "No users found"
-msgstr ""
+msgstr "Usuarios No Encontrados"
 
 #: admin/admin2.php:231 admin/admin2.php:275 admin/listdiag.php:117
 #: admin/userdetails.php:210 admin/userdetails.php:254
@@ -308,7 +308,7 @@ msgstr ""
 #: course/outcomereport.php:249 util/finddupacctreq.php:76
 #: util/finddupacctreq.php:81
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: admin/admin2.php:232 admin/admin2.php:276 assessment/showtest.php:1410
 #: admin/admin2.php:194 admin/admin2.php:286 admin/groupreportdetails.php:224
@@ -317,7 +317,7 @@ msgstr ""
 #: admin/admin2.php:292 assessment/showtest.php:1413
 #: util/finddupacctreq.php:77 util/finddupacctreq.php:82
 msgid "Username"
-msgstr ""
+msgstr "Usuario"
 
 #: admin/admin2.php:233 admin/admin2.php:277 admin/userdetails.php:189
 #: course/gradebook.php:849 admin/admin2.php:195 admin/admin2.php:287
@@ -333,7 +333,7 @@ msgstr ""
 
 #: admin/admin2.php:253
 msgid "No group found"
-msgstr ""
+msgstr "Grupo No Encontrado"
 
 #: admin/admin2.php:278 admin/userdetails.php:182 admin/admin2.php:196
 #: admin/admin2.php:288 admin/groupreportdetails.php:226
@@ -341,21 +341,21 @@ msgstr ""
 #: admin/userreports.php:158 admin/userreports.php:224 admin/admin2.php:294
 #: admin/userdetails.php:190
 msgid "Role"
-msgstr ""
+msgstr "Rol"
 
 #: admin/admin2.php:279 admin/userdetails.php:190 admin/admin2.php:289
 #: admin/groupreportdetails.php:227 admin/userdetails.php:194
 #: admin/userreportdetails.php:276 admin/userreports.php:225
 #: admin/admin2.php:295 admin/userdetails.php:198
 msgid "Last Login"
-msgstr ""
+msgstr "Último Acceso"
 
 #: admin/admin2.php:280 admin/admin2.php:297 admin/admin2.php:290
 #: admin/admin2.php:309 admin/admin2.php:296 admin/admin2.php:315
 #: course/addquestions.php:1000 course/addrubric.php:155
 #: javascript/qsearch.js:306
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: admin/admin2.php:281 admin/admin2.php:298 admin/diagonetime.php:164
 #: admin/forms.php:52 admin/forms.php:59 admin/forms.php:779
@@ -398,17 +398,17 @@ msgstr ""
 #: lti/admin/platforms.php:116 lti/admin/privkeys.php:64 msgs/viewmsg.php:239
 #: util/finddupacctreq.php:75
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
 #: admin/admin2.php:312 course/course.php:499 course/course.php:509
 #: admin/admin2.php:326 course/course.php:492 course/course.php:502
 #: admin/admin2.php:332 course/course.php:486 lti/admin/platforms.php:102
 msgid "Groups"
-msgstr ""
+msgstr "Grupos"
 
 #: admin/admin2.php:313 admin/admin2.php:327 admin/admin2.php:333
 msgid "Utilities"
-msgstr ""
+msgstr "Utilidades"
 
 #: admin/admin2.php:319 admin/admin2.php:333
 msgid "LTI Provider Creds"
@@ -420,17 +420,17 @@ msgstr ""
 
 #: admin/admin2.php:322 admin/admin2.php:336 admin/admin2.php:342
 msgid "External Tools"
-msgstr ""
+msgstr "Herramientas externas"
 
 #: admin/admin2.php:332 course/course.php:529 admin/admin2.php:346
 #: course/course.php:520 admin/admin2.php:352 course/course.php:519
 msgid "Import Libraries"
-msgstr ""
+msgstr "Importar Librerías"
 
 #: admin/admin2.php:340 admin/admin2.php:354 admin/userreports.php:254
 #: admin/admin2.php:361
 msgid "Find teacher"
-msgstr ""
+msgstr "Encontrar profesor"
 
 #: admin/admin2.php:342 admin/admin2.php:346 admin/admin2.php:355
 #: util/utils.php:152 admin/admin2.php:356 admin/admin2.php:360
@@ -438,16 +438,16 @@ msgstr ""
 #: util/utils.php:269 admin/admin2.php:363 admin/admin2.php:367
 #: admin/admin2.php:376 util/utils.php:275
 msgid "Go"
-msgstr ""
+msgstr "Ir"
 
 #: admin/admin2.php:344 admin/admin2.php:358 admin/admin2.php:365
 msgid "Find user"
-msgstr ""
+msgstr "Encontrar Usuario"
 
 #: admin/admin2.php:353 admin/admin2.php:367 admin/userreports.php:261
 #: admin/admin2.php:374
 msgid "Find group"
-msgstr ""
+msgstr "Encontrar Grupo"
 
 #: admin/calendarfeed.php:188 admin/canvascalexport.php:41
 #: includes/calendardata.php:168
@@ -486,7 +486,7 @@ msgstr ""
 #: course/moddataset.php:1174 course/moddataset.php:1193
 #: course/moddataset.php:1283
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: admin/forms.php:255 admin/forms.php:470 admin/forms.php:560
 msgid "Will be assigned when the course is created"
@@ -497,25 +497,25 @@ msgstr ""
 #: admin/forms.php:439 admin/forms.php:663 admin/forms.php:667
 #: course/course.php:546 lti/ltimenu.php:81
 msgid "Course Settings"
-msgstr ""
+msgstr "Configuración del Curso"
 
 #: admin/forms.php:301 index.php:512 admin/addcourse.php:19
 #: admin/addcourse.php:20 admin/forms.php:574 index.php:520
 #: admin/forms.php:669 index.php:536
 msgid "Add New Course"
-msgstr ""
+msgstr "Agregar Nuevo Curso"
 
 #: admin/forms.php:442 admin/forms.php:886 admin/forms.php:1001
 msgid "Send teachers a message when students enroll"
-msgstr ""
+msgstr "Enviar mensaje al profesor cuando un estudiante se inscriba"
 
 #: admin/forms.php:445 admin/forms.php:889 admin/forms.php:1004
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 #: admin/forms.php:458
 msgid "Show LTI key and URL"
-msgstr ""
+msgstr "Mostrar llave LTI y URL"
 
 #: admin/listdiag.php:90 course/courseshowitems.php:66
 #: course/courseshowitems.php:100 course/courseshowitems.php:116
@@ -534,7 +534,7 @@ msgstr ""
 #: course/courseshowitems.php:2409 course/courseshowitems.php:2456
 #: course/moddataset.php:672
 msgid "Modify"
-msgstr ""
+msgstr "Modificar"
 
 #: admin/listdiag.php:92
 msgid "One-time Passwords"
@@ -542,15 +542,15 @@ msgstr ""
 
 #: admin/listdiag.php:114 admin/listdiag.php:117
 msgid "No Diagnostics to display"
-msgstr ""
+msgstr "Sin diagnósticos para mostrar"
 
 #: admin/listdiag.php:118 admin/listdiag.php:121 admin/forms.php:829
 msgid "Available"
-msgstr ""
+msgstr "Disponible"
 
 #: admin/listdiag.php:119 admin/listdiag.php:122
 msgid "Public"
-msgstr ""
+msgstr "Público"
 
 #: admin/listdiag.php:120 admin/userlti.php:137 index.php:535 index.php:593
 #: admin/importitems2.php:184 admin/listdiag.php:123 admin/userlti.php:195
@@ -558,7 +558,7 @@ msgstr ""
 #: admin/userlti.php:207 header.php:275 index.php:632 index.php:695
 #: ltihome.php:408
 msgid "Course"
-msgstr ""
+msgstr "Curso"
 
 #: admin/listdiag.php:122 admin/listdiag.php:125
 msgid "Owner"
@@ -575,7 +575,7 @@ msgstr ""
 #: javascript/addqsort2.js:1234 lti/show_postback_form.php:98
 #: util/finddupacctreq.php:84 wikis/editwiki.php:210 wikis/viewwiki.php:317
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 #: admin/listdiag.php:133 admin/listdiag.php:134 course/modquestion.php:219
 #: course/modquestion.php:224 course/modquestion.php:235
@@ -589,7 +589,7 @@ msgstr ""
 #: course/modquestion.php:218 course/modquestion.php:223
 #: course/modquestion.php:234 course/modquestion.php:330
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: admin/listdiag.php:133 admin/listdiag.php:134 course/modquestion.php:221
 #: course/modquestion.php:226 course/modquestion.php:235
@@ -635,12 +635,12 @@ msgstr ""
 #: assessment/showtest.php:1230 assessment/showtest.php:1265
 #: assessment/showtest.php:1269 course/course.php:443
 msgid "User Preferences"
-msgstr ""
+msgstr "Preferencias"
 
 #: admin/unhidefromcourselist.php:73 admin/unhidefromcourselist.php:74
 #: admin/unhidefromcourselist.php:98
 msgid "Un-hide from course list"
-msgstr ""
+msgstr "Desocultar de la lista de cursos"
 
 #: admin/unhidefromcourselist.php:75 admin/userdetails.php:388
 #: course/courseshowitems.php:83 course/courseshowitems.php:1891 index.php:69
@@ -653,14 +653,14 @@ msgstr ""
 #: course/gradebook.php:489 lti/ltimenu.php:47 lti/ltimenu.php:53
 #: ltihome.php:472
 msgid "Settings"
-msgstr ""
+msgstr "Configuraciones"
 
 #: admin/unhidefromcourselist.php:76 admin/userdetails.php:389 index.php:71
 #: admin/unhidefromcourselist.php:77 admin/userdetails.php:397
 #: admin/userreportdetails.php:520 index.php:72
 #: admin/unhidefromcourselist.php:101 admin/userdetails.php:401
 msgid "Add/remove teachers"
-msgstr ""
+msgstr "Añadir/Remover profesores"
 
 #: admin/unhidefromcourselist.php:77 admin/userdetails.php:390 index.php:72
 #: admin/unhidefromcourselist.php:78 admin/userdetails.php:398
@@ -673,18 +673,18 @@ msgstr ""
 #: admin/modcourseorder.php:189 admin/unhidefromcourselist.php:90
 #: index.php:572 admin/unhidefromcourselist.php:114 index.php:592
 msgid "Unavailable"
-msgstr ""
+msgstr "No disponible"
 
 #: admin/userdetails.php:26 admin/userdetails.php:165 admin/userdetails.php:27
 #: admin/userdetails.php:168 admin/userreportdetails.php:26
 #: admin/userreportdetails.php:257
 msgid "User Detail"
-msgstr ""
+msgstr "Detalles de usuario"
 
 #: admin/userdetails.php:79 admin/userdetails.php:82
 #: admin/userreportdetails.php:105
 msgid "Deleted"
-msgstr ""
+msgstr "Borrar"
 
 #: admin/userdetails.php:81 admin/userdetails.php:106
 #: admin/userdetails.php:132 admin/userdetails.php:84
@@ -692,7 +692,7 @@ msgstr ""
 #: admin/userreportdetails.php:107 admin/userreportdetails.php:197
 #: admin/userreportdetails.php:223 admin/forms.php:832
 msgid "Available to students"
-msgstr ""
+msgstr "Disponible para estudiantes"
 
 #: admin/userdetails.php:81 admin/userdetails.php:106
 #: admin/userdetails.php:132 admin/userdetails.php:84
@@ -700,7 +700,7 @@ msgstr ""
 #: admin/userreportdetails.php:107 admin/userreportdetails.php:197
 #: admin/userreportdetails.php:223
 msgid "Hidden from students"
-msgstr ""
+msgstr "Oculto para estudiantes"
 
 #: admin/userdetails.php:83 admin/userdetails.php:110
 #: admin/userdetails.php:136 admin/userdetails.php:86
@@ -718,11 +718,11 @@ msgstr ""
 #: admin/userreportdetails.php:230 admin/userreportdetails.php:502
 #: admin/userdetails.php:383
 msgid "Hidden on User's Home Page"
-msgstr ""
+msgstr "Ocultar en Página de Inicio de Usuarios"
 
 #: admin/userdetails.php:171 admin/userdetails.php:174
 msgid "Edit User"
-msgstr ""
+msgstr "Editar Usuario"
 
 #: admin/userdetails.php:173 admin/userdetails.php:176
 msgid "Emulate User"
@@ -732,31 +732,31 @@ msgstr ""
 #: admin/userdetails.php:178 admin/userlti.php:94 admin/userlti.php:167
 #: admin/userdetails.php:182 admin/userlti.php:106 admin/userlti.php:179
 msgid "LTI Connections"
-msgstr ""
+msgstr "Conexiones LTI"
 
 #: admin/userdetails.php:186 admin/userdetails.php:190
 #: admin/userreportdetails.php:272 admin/userdetails.php:194
 msgid "Subgroup of"
-msgstr ""
+msgstr "Subgrupo de"
 
 #: admin/userdetails.php:194 admin/userdetails.php:198
 #: admin/userreportdetails.php:297 admin/userdetails.php:202
 msgid "Jump to"
-msgstr ""
+msgstr "Saltar a"
 
 #: admin/userdetails.php:196 admin/userdetails.php:208
 #: admin/userdetails.php:200 admin/userdetails.php:212
 #: admin/userreportdetails.php:299 admin/userreportdetails.php:311
 #: admin/userdetails.php:204 admin/userdetails.php:216
 msgid "Courses Teaching"
-msgstr ""
+msgstr "Cursos de los que eres profesor"
 
 #: admin/userdetails.php:199 admin/userdetails.php:252
 #: admin/userdetails.php:203 admin/userdetails.php:256
 #: admin/userreportdetails.php:302 admin/userreportdetails.php:379
 #: admin/userdetails.php:207 admin/userdetails.php:260
 msgid "Courses Tutoring"
-msgstr ""
+msgstr "Cursos de los que eres tutor"
 
 #: admin/userdetails.php:202 admin/userdetails.php:291
 #: admin/userdetails.php:206 admin/userdetails.php:297
@@ -774,7 +774,7 @@ msgstr ""
 #: admin/userdetails.php:263 admin/userdetails.php:304 admin/userlti.php:208
 #: forms.php:127 forms.php:404
 msgid "Course ID"
-msgstr ""
+msgstr "Código de curso"
 
 #: admin/userdetails.php:212 admin/userdetails.php:256
 #: admin/userdetails.php:295 admin/userdetails.php:216
@@ -784,7 +784,7 @@ msgstr ""
 #: admin/userdetails.php:264 admin/userdetails.php:305
 #: util/finddupacctreq.php:80
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #: admin/userdetails.php:213 admin/userdetails.php:217
 #: admin/userreportdetails.php:320 admin/userdetails.php:221
@@ -801,16 +801,16 @@ msgstr ""
 #: admin/userdetails.php:384 admin/userdetails.php:393
 #: admin/userreportdetails.php:516 admin/userdetails.php:397
 msgid "Return to home page course list"
-msgstr ""
+msgstr "Regresar al listado de cursos"
 
 #: admin/userdetails.php:385 admin/userdetails.php:394
 #: admin/userreportdetails.php:517 admin/userdetails.php:398
 msgid "Hide from home page course list"
-msgstr ""
+msgstr "Ocultar del listado de cursos"
 
 #: admin/userlti.php:81 admin/userlti.php:109 admin/userlti.php:121
 msgid "Are you SURE?"
-msgstr ""
+msgstr "¿Estás seguro?"
 
 #: admin/userlti.php:115 admin/userlti.php:173 admin/userlti.php:185
 msgid "LTI user connections"
