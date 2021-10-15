@@ -45,7 +45,7 @@ msgstr "Enviar"
 #: OEAembedq.php:371 embedq.php:265 OEAembedq.php:372 embedq.php:266
 #, php-format
 msgid "%1$s out of %2$s"
-msgstr ""
+msgstr "%1$s de %2$s"
 
 #: DEembedq.php:254 DEembedq.php:258 OEAembedq.php:382 OEAembedq.php:386
 #: assessment/displayq2.php:7060 assessment/testutil.php:407
@@ -120,7 +120,7 @@ msgstr "Parcialmente correcto"
 #: OEAembedq.php:406 embedq.php:300 OEAembedq.php:407 embedq.php:301
 #, php-format
 msgid "%1$s out of %2$s (parts: %3$s)"
-msgstr ""
+msgstr "%1$s de %2$s (Partes: %3$s)"
 
 #: actions.php:221 actions.php:589 actions.php:204 actions.php:544
 #: actions.php:244 actions.php:597
@@ -227,29 +227,29 @@ msgstr ""
 
 #: admin/admin2.php:33 admin/admin2.php:34
 msgid "Group Administration"
-msgstr ""
+msgstr "Administración de grupo"
 
 #: admin/admin2.php:41 admin/admin2.php:42 admin/userreports.php:35
 msgid "Pending Users"
-msgstr ""
+msgstr "Usuarios pendientes"
 
 #: admin/admin2.php:48 admin/admin2.php:50 admin/admin2.php:51
 #: admin/admin2.php:53 admin/userreports.php:44 admin/userreports.php:46
 msgid "Group Members"
-msgstr ""
+msgstr "Miembros del grupo"
 
 #: admin/admin2.php:61 admin/admin2.php:64 admin/userreports.php:54
 msgid "Select Teacher"
-msgstr ""
+msgstr "Seleccione profesor"
 
 #: admin/admin2.php:65 admin/admin2.php:68
 msgid "Select User"
-msgstr ""
+msgstr "Seleccione usuario"
 
 #: admin/admin2.php:164 admin/admin2.php:117 admin/userreports.php:74
 #: admin/userreports.php:113
 msgid "Select Group"
-msgstr ""
+msgstr "Seleccione grupo"
 
 #: admin/admin2.php:170 admin/admin2.php:123
 msgid "Administration"
@@ -259,18 +259,18 @@ msgstr "Administración"
 #: admin/admin2.php:340 admin/admin2.php:346 course/moddataset.php:984
 #: course/moddataset.php:990
 msgid "Manage Question Set"
-msgstr ""
+msgstr "Administrar conjunto de preguntas"
 
 #: admin/admin2.php:211 admin/admin2.php:327 admin/admin2.php:164
 #: admin/admin2.php:341 admin/admin2.php:347
 msgid "Manage Libraries"
-msgstr "Administar Librerías"
+msgstr "Administrar bibliotecas"
 
 #: admin/admin2.php:215 admin/admin2.php:331 course/course.php:528
 #: admin/admin2.php:168 admin/admin2.php:345 course/course.php:519
 #: admin/admin2.php:351 course/course.php:518
 msgid "Export Libraries"
-msgstr "Exportar librerías"
+msgstr "Exportar bibliotecas"
 
 #: admin/admin2.php:216 admin/admin2.php:270 admin/admin2.php:314
 #: admin/diagonetime.php:24 admin/diagonetime.php:30 admin/diagonetime.php:36
@@ -329,7 +329,7 @@ msgstr "Usuario"
 #: course/listusers.php:760 forms.php:483 util/finddupacctreq.php:78
 #: util/finddupacctreq.php:83
 msgid "Email"
-msgstr ""
+msgstr "Correo Electrónico"
 
 #: admin/admin2.php:253
 msgid "No group found"
@@ -412,11 +412,11 @@ msgstr "Utilidades"
 
 #: admin/admin2.php:319 admin/admin2.php:333
 msgid "LTI Provider Creds"
-msgstr ""
+msgstr "Credenciales de proveedor LTI"
 
 #: admin/admin2.php:321 admin/admin2.php:335
 msgid "Federation Peers"
-msgstr ""
+msgstr "Compañeros de la Federación"
 
 #: admin/admin2.php:322 admin/admin2.php:336 admin/admin2.php:342
 msgid "External Tools"
@@ -425,7 +425,7 @@ msgstr "Herramientas externas"
 #: admin/admin2.php:332 course/course.php:529 admin/admin2.php:346
 #: course/course.php:520 admin/admin2.php:352 course/course.php:519
 msgid "Import Libraries"
-msgstr "Importar Librerías"
+msgstr "Importar bibliotecas"
 
 #: admin/admin2.php:340 admin/admin2.php:354 admin/userreports.php:254
 #: admin/admin2.php:361
@@ -16037,34 +16037,36 @@ msgstr ""
 
 #: lti/submissionlink.php:40
 msgid "Cannot do a submission launch before an initial regular launch"
-msgstr ""
+msgstr "No se puede realizar un lanzamiento de envío antes de un lanzamiento regular inicial"
 
 #: lti/submissionlink.php:62
 msgid "This student does not have an assessment record yet"
-msgstr ""
+msgstr "Este estudiante aún no tiene un registro de evaluación"
 
 #: ltihome.php:328
 msgid "Link courses"
-msgstr ""
+msgstr "Enlace de cursos"
 
 #: ltihome.php:330
 #, php-format
 msgid "This course on your LMS has not yet been linked to a course on %s. "
-msgstr ""
+msgstr "Este curso en su LMS aún no se ha vinculado a un curso en %s. "
 
 #: ltihome.php:331
 msgid ""
 "Select a course to link with.  If it is a template course, a copy will be "
 "created for you:"
 msgstr ""
+"Seleccione un curso para vincularlo. Si es una plantilla, una copia será "
+"creada para usted: "
 
 #: ltihome.php:335
 msgid "Your Courses"
-msgstr ""
+msgstr "Tus cursos"
 
 #: ltihome.php:343
 msgid "Template Courses"
-msgstr ""
+msgstr "Plantillas de cursos"
 
 #: ltihome.php:371
 #, php-format
@@ -16072,10 +16074,12 @@ msgid ""
 "This course has special %s Terms of Use %s.  By copying this course, you "
 "agree to these terms."
 msgstr ""
+"Este curso contiene especiales %s Términos de uso %s. Al copiar este curso, usted "
+"acepta dichos términos."
 
 #: ltihome.php:372
 msgid "Link Course"
-msgstr ""
+msgstr "Enlace del curso"
 
 #: ltihome.php:373
 #, php-format
@@ -16083,23 +16087,25 @@ msgid ""
 "If you want to create a new course, log directly into %s to create new "
 "courses"
 msgstr ""
+"Si quiere crear un Nuevo Curso, ingrese directamente a %s para crear nuevos"
+"cursos"
 
 #: ltihome.php:377
 msgid "Link Assignment"
-msgstr ""
+msgstr "Enlace de tarea"
 
 #: ltihome.php:379
 msgid "Link Resource"
-msgstr ""
+msgstr "Enlace de recurso"
 
 #: ltihome.php:382
 #, php-format
 msgid "This placement on your LMS has not yet been linked to content on %s. "
-msgstr ""
+msgstr "Esta ubicación en su LMS aún no se ha vinculado al contenido de %s. "
 
 #: ltihome.php:384
 msgid "Select the assessment you'd like to use: "
-msgstr ""
+msgstr "Seleccione la evaluación que le gustaría usar: "
 
 #: ltihome.php:386
 msgid ""
@@ -16108,14 +16114,18 @@ msgid ""
 "assessment. In both cases, grades will not be returned if you set up the "
 "link in this way. "
 msgstr ""
+"Puede realizar un curso completo, en cuyo caso todo el contenido del "
+"curso está disponible en esta ubicación, o puede colocar una "
+"evaluación. En ambos casos, las calificaciones no se devolverán si configura el "
+"enlace de esta manera."
 
 #: ltihome.php:387
 msgid "For grade return, you need to create a new assignment link instead."
-msgstr ""
+msgstr "Para la devolución de calificaciones, debe crear un nuevo enlace de tarea en su lugar."
 
 #: ltihome.php:388
 msgid "Select the placement you'd like to make: "
-msgstr ""
+msgstr "Seleccione la ubicación donde le gustaría realizarlo: "
 
 #: ltihome.php:390
 msgid ""
@@ -16124,58 +16134,62 @@ msgid ""
 "you can place an individual assessment (and grades will be returned, if "
 "supported by your LMS).  Select the placement you'd like to make: "
 msgstr ""
+"Puede realizar un curso completo, en cuyo caso todo el contenido del "
+"curso está disponible en esta ubicación (pero no se devuelven calificaciones), o "
+"puede realizar una evaluación individual (y las calificaciones se devolverán, si "
+"es compatible con su LMS). Seleccione la ubicación donde le gustaría realizarlo: "
 
 #: ltihome.php:396 ltihome.php:409
 msgid "Whole Course Placement"
-msgstr ""
+msgstr "Ubicación de todo el curso"
 
 #: ltihome.php:413
 msgid "Make Placement"
-msgstr ""
+msgstr "Crear ubicación"
 
 #: ltihome.php:414
 #, php-format
 msgid "If you want to create new assessments, log directly into %s"
-msgstr ""
+msgstr "Si desea crear nuevas evaluaciones, inicie sesión directamente en %s"
 
 #: ltihome.php:415
 #, php-format
 msgid "If your LMS course is linked with the wrong course on %s, "
-msgstr ""
+msgstr "Si su curso LMS está vinculado con el curso incorrecto en %s, "
 
 #: ltihome.php:416
 msgid "Are you SURE you want to do this? This may break existing placements."
-msgstr ""
+msgstr "¿Seguro que quieres hacer esto? Esto puede romper las ubicaciones existentes."
 
 #: ltihome.php:416
 msgid "Change course link"
-msgstr ""
+msgstr "Cambiar enlace de curso"
 
 #: ltihome.php:419
 msgid "LTI Placement of whole course"
-msgstr ""
+msgstr "Ubicación LTI de todo el curso"
 
 #: ltihome.php:420
 msgid "Enter course"
-msgstr ""
+msgstr "Ingresar al curso"
 
 #: ltihome.php:421 ltihome.php:475
 msgid "Change placement"
-msgstr ""
+msgstr "Cambiar ubicación"
 
 #: ltihome.php:426
 #, php-format
 msgid "LTI Placement of %s"
-msgstr ""
+msgstr "Colocación de LTI %s"
 
 #: ltihome.php:477
 #, php-format
 msgid "This assessment is housed in course ID %s"
-msgstr ""
+msgstr "Esta evaluación se encuentra en el curso con identificador %s"
 
 #: ltisessionsetup.php:22
 msgid "Session established. Go back to your LMS and try again."
-msgstr ""
+msgstr "Sesión establecida. Regrese a su LMS y vuelva a intentarlo."
 
 #: ltisessionsetup.php:26
 #, php-format
@@ -16183,71 +16197,77 @@ msgid ""
 "Redirecting you back to your LMS...<br/>If you aren't redirected in 5 "
 "seconds, %s click here %s."
 msgstr ""
+"Redirigiéndole a su LMS...<br/>Si no se le redirige en 5 "
+"segundos, %s haga clic aquí %s."
 
 #: util/finddupacctreq.php:60
 msgid "New Request"
-msgstr ""
+msgstr "Nueva solicitud"
 
 #: util/finddupacctreq.php:61
 msgid "Needs Investigation"
-msgstr ""
+msgstr "Investigación de necesidades"
 
 #: util/finddupacctreq.php:62
 msgid "Waiting for Confirmation"
-msgstr ""
+msgstr "Esperando confirmación"
 
 #: util/finddupacctreq.php:63
 msgid "Probably should be Denied"
-msgstr ""
+msgstr "Probablemente debería ser negado"
 
 #: util/finddupacctreq.php:64
 msgid "Requested More Info"
-msgstr ""
+msgstr "Solicitó más información"
 
 #: util/finddupacctreq.php:69
 msgid "Duplicate Pending Account Requests"
-msgstr ""
+msgstr "Solicitudes de cuentas pendientes duplicadas"
 
 #: util/finddupacctreq.php:73
 msgid "Pending User"
-msgstr ""
+msgstr "Usuario pendiente"
 
 #: util/finddupacctreq.php:74
 msgid "Existing Teacher"
-msgstr ""
+msgstr "Profesor existente"
 
 #: util/finddupacctreq.php:79
 msgid "School"
-msgstr ""
+msgstr "Escuela"
 
 #: util/finddupacctreq.php:133
 msgid "Delete Selected Requests"
-msgstr ""
+msgstr "Eliminar solicitudes seleccionadas"
 
 #: util/finddupacctreq.php:134
 msgid ""
 "This will mark the request as denied (without sending an email) and demote "
 "the account to a student account."
 msgstr ""
+"Esto marcará la solicitud como denegada (sin enviar un correo electrónico) y degradará"
+"la cuenta a una cuenta de estudiante."
 
 #: util/finddupacctreq.php:138
 msgid "requests had already been upgraded, and have been updated"
-msgstr ""
+msgstr "las solicitudes han sido actualizadas, y se han actualizado"
 
 #: validate.php:48
 #, php-format
 msgid "Error.  Please %s try again%s"
-msgstr ""
+msgstr "Error. Por favor %s intente nuevamente%s"
 
 #: validate.php:73
 msgid ""
 "Your session has expired. Please go back to your LMS and open this "
 "assignment again."
 msgstr ""
+"Su sesión ha caducado. Vuelva a su LMS y abra esta "
+"tarea nuevamente.
 
 #: validate.php:107
 msgid "You have requested guest access to a course."
-msgstr ""
+msgstr "Ha solicitado acceso de invitado a un curso."
 
 #: validate.php:131
 msgid ""
@@ -16255,53 +16275,62 @@ msgid ""
 "blocking third-party cookies.  Please adjust your browser settings and try "
 "again."
 msgstr ""
+"No se pudo establecer una sesión. Es muy probable que esto sea causado porque su navegador"
+"bloquea de cookies de terceros. Ajuste la configuración de su navegador e intente"
+"nuevamente."
 
 #: validate.php:191
 msgid ""
 "Too many invalid logins - please wait a minute before trying again, or use "
 "the forgot password link to reset your password"
 msgstr ""
+"Demasiados inicios de sesión no válidos; espere un minuto antes de volver a intentarlo o utilice "
+"el enlace de contraseña olvidada para restablecer su contraseña."
 
 #: validate.php:218
 msgid ""
 "You have not yet confirmed your registration.  You must respond to the email "
 "that was sent to you by IMathAS."
 msgstr ""
+"Aún no ha confirmado su registro. Debes responder al correo electrónico "
+"que le envió IMathAS."
 
 #: validate.php:545
 msgid ""
 "You have been locked out of this course by your instructor.  Please see your "
 "instructor for more information."
 msgstr ""
+"Su instructor le ha excluido de este curso. Por favor vea su "
+"instructor para obtener más información."
 
 #: validate.php:644
 msgid "This course is not available at this time"
-msgstr ""
+msgstr "Este curso no está disponible en este momento"
 
 #: validate.php:654
 msgid "This course is currently locked for another assessment"
-msgstr ""
+msgstr "Este curso está actualmente bloqueado para otra evaluación."
 
 #: validate.php:657
 msgid "Go back to the LMS and open the correct assessment"
-msgstr ""
+msgstr "Regrese al LMS y abra la evaluación correcta"
 
 #: validate.php:659
 msgid "Go to Assessment"
-msgstr ""
+msgstr "Ir a Evaluación"
 
 #: validate.php:659 validate.php:661
 msgid "Go Back"
-msgstr ""
+msgstr "Volver"
 
 #: wikis/editwiki.php:210 wikis/viewwiki.php:317
 msgid "Section"
-msgstr ""
+msgstr "Sección"
 
 #: wikis/viewwiki.php:309
 msgid "Viewing page for section: "
-msgstr ""
+msgstr "Viendo la página de la sección: "
 
 #: wikis/viewwiki.php:311
 msgid "Viewing page for group: "
-msgstr ""
+msgstr "Viendo la página para el grupo:"
