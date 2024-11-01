@@ -24,10 +24,18 @@
         <router-link
           v-if = "showNext"
           :to="'/skip/' + (this.qn + 2)"
-          tag="button"
+          custom
+          v-slot="{ navigate }"
         >
-          <icons name="right" alt=""/>
-          {{ $t('scoreresult.next') }}
+          <button
+            type="button"
+            @click="navigate"
+            @keypress.enter="navigate"
+            role="link"
+          >
+            <icons name="right" alt="" />
+            {{ $t('scoreresult.next') }}
+          </button>
         </router-link>
         <button
           v-if = "showSubmit"
@@ -45,7 +53,7 @@
           <icons name="retake" alt="" />
           {{ $t('scoreresult.trysimilar') }}
         </button>
-        <span v-if = "qdata.canretry">
+        <span v-if = "qdata.canretry_primary">
           {{ $t('scoreresult.retryq') }}
         </span>
       </p>
@@ -100,8 +108,11 @@ export default {
       }
       let correct = 0;
       let incorrect = 0;
+      let zeroweight = 0;
       for (let i = 0; i < this.qdata.parts.length; i++) {
-        if (!this.qdata.parts[i].hasOwnProperty('rawscore')) {
+        if (parseFloat(this.qdata.answeights[i]) === 0) {
+          zeroweight++;
+        } else if (!this.qdata.parts[i].hasOwnProperty('rawscore')) {
           continue; // neither correct or incorrect - untried
         } else if (this.qdata.parts[i].rawscore > 0.99) {
           correct++;
@@ -109,9 +120,10 @@ export default {
           incorrect++;
         }
       }
-      if (correct === this.qdata.parts.length) {
+      console.log(correct + ',' + incorrect + ',' + zeroweight);
+      if (correct === this.qdata.parts.length - zeroweight) {
         return 'correct';
-      } else if (incorrect === this.qdata.parts.length) {
+      } else if (incorrect === this.qdata.parts.length - zeroweight) {
         return 'incorrect';
       } else {
         return 'partial';

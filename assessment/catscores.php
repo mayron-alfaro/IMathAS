@@ -2,7 +2,7 @@
 //IMathAS:  Function used to show category breakdown of scores
 //Called from showtest and gradebook
 //(c) 2006 David Lippman
-function catscores($quests,$scores,$defptsposs,$defoutcome=0,$cid) {
+function catscores($quests,$scores,$defptsposs,$defoutcome,$cid) {
 	global $DBH;
 	if (empty($quests)) {
 		return;
@@ -57,7 +57,11 @@ function catscores($quests,$scores,$defptsposs,$defoutcome=0,$cid) {
 	$catposs = array();
 	for ($i=0; $i<count($quests); $i++) {
 		$pts = getpts($scores[$i]);
-		if ($pts<0) { $pts = 0;}
+        if ($pts<0) { $pts = 0;}
+        if (!isset($catscore[$cat[$quests[$i]]])) {
+            $catscore[$cat[$quests[$i]]] = 0;
+            $catposs[$cat[$quests[$i]]] = 0;
+        }
 		$catscore[$cat[$quests[$i]]] += $pts;
 		$catposs[$cat[$quests[$i]]] += $pospts[$quests[$i]];
 	}
@@ -85,10 +89,14 @@ function catscores($quests,$scores,$defptsposs,$defoutcome=0,$cid) {
 			} else {
 				if (isset($catscore[$oi])) {
 				  $out .= '<tr><td><span class="ind'.Sanitize::onlyInt($ind).'">'.Sanitize::encodeStringForDisplay($outcomenames[$oi]).'</span></td>';
-					$pc = round(100*$catscore[$oi]/$catposs[$oi],1);
-					$out .= "<td>" . Sanitize::onlyFloat($catscore[$oi]) . " / " . Sanitize::onlyFloat($catposs[$oi]) . " ($pc%)</td></tr>\n";
-					$totpts += $catscore[$oi];
-					$totposs += $catposs[$oi];
+                  if ($catposs[$oi] > 0) {
+                    $pc = round(100*$catscore[$oi]/$catposs[$oi],1);
+                  } else {
+                    $pc = 0;
+                  }
+                  $out .= "<td>" . Sanitize::onlyFloat($catscore[$oi]) . " / " . Sanitize::onlyFloat($catposs[$oi]) . " ($pc%)</td></tr>\n";
+                  $totpts += $catscore[$oi];
+                  $totposs += $catposs[$oi];
 				}
 			}
 		}
@@ -116,7 +124,11 @@ function catscores($quests,$scores,$defptsposs,$defoutcome=0,$cid) {
 			$catname = Sanitize::encodeStringForDisplay($category);
 		}
 		if ($alt==0) {echo "<tr class=even>"; $alt=1;} else {echo "<tr class=odd>"; $alt=0;}
-		$pc = round(100*$catscore[$category]/$catposs[$category],1);
+        if ($catposs[$category] > 0) {
+		    $pc = round(100*$catscore[$category]/$catposs[$category],1);
+        } else {
+            $pc = 0;
+        }
 		echo "<td>$catname</td><td>" . Sanitize::encodeStringForDisplay($catscore[$category]) . " / " . Sanitize::encodeStringForDisplay($catposs[$category]) . " (" . Sanitize::encodeStringForDisplay($pc) . " %)</td></tr>\n";
 	}
 	echo "</tbody></table>\n";

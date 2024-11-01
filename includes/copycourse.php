@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__."/copyiteminc.php");
+require_once __DIR__."/copyiteminc.php";
 
 // TODO: Revamp this total hack job.
 // Rewrite the item and course copying as a class
@@ -8,7 +8,7 @@ require_once(__DIR__."/copyiteminc.php");
 function copycourse($sourcecid, $name, $newUIver) {
   global $DBH, $CFG, $imasroot, $defaultcoursetheme, $userid, $myrights, $groupid;
   global $copystickyposts, $gbcats, $replacebyarr, $datesbylti, $convertAssessVer;
-  global $removewithdrawn, $usereplaceby, $cid;
+  global $removewithdrawn, $usereplaceby, $cid, $blockcnt;
 
   $blockcnt = 1;
   $itemorder = serialize(array());
@@ -105,7 +105,6 @@ function copycourse($sourcecid, $name, $newUIver) {
   } else {
     $ancestors = intval($sourcecid).','.$ancestors;
   }
-  $ancestors = $ancestors;
   $outcomes = array();
   $query = 'SELECT imas_questionset.id,imas_questionset.replaceby FROM imas_questionset JOIN ';
   $query .= 'imas_questions ON imas_questionset.id=imas_questions.questionsetid JOIN ';
@@ -117,7 +116,11 @@ function copycourse($sourcecid, $name, $newUIver) {
     $replacebyarr[$row[0]] = $row[1];
   }
 
-  if ($outcomesarr!='') {
+  if ($outcomesarr!=='') {
+    // unserialize now so we can check for valid unserialization
+    $outcomesarr = unserialize($outcomesarr);
+  }
+  if ($outcomesarr!=='' && $outcomesarr!==false) {
     $stm = $DBH->prepare("SELECT id,name,ancestors FROM imas_outcomes WHERE courseid=:courseid");
     $stm->execute(array(':courseid'=>$sourcecid));
 
@@ -137,12 +140,16 @@ function copycourse($sourcecid, $name, $newUIver) {
       foreach ($arr as $k=>$v) {
         if (is_array($v)) {
           updateoutcomes($arr[$k]['outcomes']);
+        } else if (!isset($outcomes[$v])) {
+            // outcome exists in outcomesarr, but doesn't actually exist; must not have updated properly
+          unset($arr[$k]);
         } else {
           $arr[$k] = $outcomes[$v];
         }
       }
+      $arr = array_values($arr);
     }
-    $outcomesarr = unserialize($outcomesarr);
+    
     updateoutcomes($outcomesarr);
     $newoutcomearr = serialize($outcomesarr);
   } else {
@@ -152,6 +159,7 @@ function copycourse($sourcecid, $name, $newUIver) {
   $usereplaceby = "all";
   $newitems = array();
   $cid = $destcid; //needed for copyiteminc
+  $_POST['ctc'] = $sourcecid;
   copyallsub($items,'0',$newitems,$gbcats);
   doaftercopy($sourcecid, $newitems);
 

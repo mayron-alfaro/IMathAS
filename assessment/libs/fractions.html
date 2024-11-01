@@ -1,4 +1,8 @@
-<html><body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>fractions help</title>
+    </head><body>
 <h1>Macro Library fractions</h1>
 Fraction operations library
 <BR><ul>
@@ -21,11 +25,11 @@ Fraction operations library
 fractionrand(denom) 
 <BR>returns a proper reduced fraction with the given denominator
 <BR><h3><a name="fractiondiffdrands">fractiondiffdrands</a></h3>
-fractiondiffdrands(min,max,n) {
-<BR>returns n fractions with different denominators from min to max
+fractiondiffdrands(min,max,n,[order]) {
+<BR>returns n fractions with different denominators from min to max. Can set order to 'inc' or 'dec' to sort the values
 <BR><h3><a name="fractiondiffdrandsfrom">fractiondiffdrandsfrom</a></h3>
-fractiondiffdrandsfrom(list,n) {
-<BR>returns n fractions with different denominators from the list
+fractiondiffdrandsfrom(list,n,[order]) {
+<BR>returns n fractions with different denominators from the list. Can set order to 'inc' or 'dec' to sort the values
 <BR><h3><a name="fractionparse">fractionparse</a></h3>
 fractionparse(fraction)
 <BR>converts a fraction into an array(num, denom)
@@ -59,7 +63,7 @@ fractionneg(frac)
 fractionpower(frac, power)
 <BR>raises a fraction to a power
 <BR><h3><a name="fractionroot">fractionroot</a></h3>
-fractionroot(frac, [root])
-<BR>finds the root of the fraction (defaults to square root), rationalizing
-<BR>the denominator.  The output is a string.
+fractionroot(frac, [root, rationalize])
+<BR>finds the root of the fraction (defaults to square root). Rationalizes
+<BR>the denominator by default.  The output is a string.
 <BR>

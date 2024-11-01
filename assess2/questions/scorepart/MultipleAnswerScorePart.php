@@ -2,8 +2,8 @@
 
 namespace IMathAS\assess2\questions\scorepart;
 
-require_once(__DIR__ . '/ScorePart.php');
-require_once(__DIR__ . '/../models/ScorePartResult.php');
+require_once __DIR__ . '/ScorePart.php';
+require_once __DIR__ . '/../models/ScorePartResult.php';
 
 use IMathAS\assess2\questions\models\ScorePartResult;
 use IMathAS\assess2\questions\models\ScoreQuestionParams;
@@ -33,13 +33,13 @@ class MultipleAnswerScorePart implements ScorePart
 
         $defaultreltol = .0015;
 
-        if (is_array($options['questions'][$partnum])) {$questions = $options['questions'][$partnum];} else {$questions = $options['questions'];}
-        if (isset($options['answers'])) {if (is_array($options['answers'])) {$answers = $options['answers'][$partnum];} else {$answers = $options['answers'];}}
-        else if (isset($options['answer'])) {if (is_array($options['answer'])) {$answers = $options['answer'][$partnum];} else {$answers = $options['answer'];}}
-        if (isset($options['noshuffle'])) {if (is_array($options['noshuffle'])) {$noshuffle = $options['noshuffle'][$partnum];} else {$noshuffle = $options['noshuffle'];}}
-
-        if (isset($options['scoremethod']))if (is_array($options['scoremethod'])) {$scoremethod = $options['scoremethod'][$partnum];} else {$scoremethod = $options['scoremethod'];}
-
+        $optionkeys = ['answers', 'noshuffle', 'scoremethod', 'answerformat'];
+        foreach ($optionkeys as $optionkey) {
+            ${$optionkey} = getOptionVal($options, $optionkey, $multi, $partnum);
+        }
+        $questions = getOptionVal($options, 'questions', $multi, $partnum, 2);
+        $answers = trim($answers, ' ,');
+        
         if (!is_array($questions)) {
             $scorePartResult->addScoreMessage(_('Eeek!  $questions is not defined or needs to be an array.  Make sure $questions is defined in the Common Control section.'));
             $scorePartResult->setRawScore(0);
@@ -48,22 +48,34 @@ class MultipleAnswerScorePart implements ScorePart
         if ($multi) { $qn = ($qn+1)*1000+$partnum; }
         
         if ($noshuffle == "last") {
-            $randqkeys = $RND->array_rand(array_slice($questions,0,count($questions)-1),count($questions)-1);
+            $randqkeys = (array) $RND->array_rand(array_slice($questions,0,count($questions)-1),count($questions)-1);
             $RND->shuffle($randqkeys);
             array_push($randqkeys,count($questions)-1);
         } else if ($noshuffle == "all" || count($questions)==1) {
             $randqkeys = array_keys($questions);
+        } else if (strlen($noshuffle)>4 && substr($noshuffle,0,4)=="last") {
+            $n = intval(substr($noshuffle,4));
+            if ($n>count($questions)) {
+                $n = count($questions);
+            }
+            $randqkeys = (array) $RND->array_rand(array_slice($questions,0,count($questions)-$n),count($questions)-$n);
+            $RND->shuffle($randqkeys);
+            for ($i=count($questions)-$n;$i<count($questions);$i++) {
+                array_push($randqkeys,$i);
+            }
         } else {
-            $randqkeys = $RND->array_rand($questions,count($questions));
+            $randqkeys = (array) $RND->array_rand($questions,count($questions));
             $RND->shuffle($randqkeys);
         }
         $qcnt = count($questions);
-        if ($qcnt > 1 && trim($answers) == "") {
+        if (($qcnt > 1 && trim($answers) == "") || $answerformat == 'addnone') {
           $qstr = strtolower(implode(' ', $questions));
           if (strpos($qstr, 'none of') === false) {
             $questions[] = _('None of these');
             array_push($randqkeys, $qcnt);
-            $answers = $qcnt;
+            if ($qcnt > 1 && trim($answers) == "") {
+                $answers = $qcnt;
+            }
           }
         }
         $ansor = explode(' or ', $answers);
@@ -93,7 +105,7 @@ class MultipleAnswerScorePart implements ScorePart
             // To not give credit for an unanswered question, set scoremethod to answers
             $scoremethod = 'answers';
             }
-            if (isset($scoremethod) && $scoremethod=='answers') {
+            if (!empty($scoremethod) && $scoremethod=='answers') {
                 $deduct = 1.0/count($akeys);
             } else {
                 $deduct = 1.0/$qcnt;
@@ -116,7 +128,7 @@ class MultipleAnswerScorePart implements ScorePart
         // just store unrandomized last answers
         sort($origla);
         $scorePartResult->setLastAnswerAsGiven(implode('|',$origla));
-        if (isset($scoremethod)) {
+        if (!empty($scoremethod)) {
             if ($scoremethod=='allornothing' && $bestscore<1) {
                 $bestscore = 0;
             } else if ($scoremethod == 'takeanything') {
@@ -128,6 +140,14 @@ class MultipleAnswerScorePart implements ScorePart
         }
 
         $scorePartResult->setRawScore($bestscore);
+
+        if (isset($GLOBALS['CFG']['hooks']['assess2/questions/scorepart/multiple_answer_score_part'])) {
+            require_once $GLOBALS['CFG']['hooks']['assess2/questions/scorepart/multiple_answer_score_part'];
+            if (isset($onGetResult) && is_callable($onGetResult)) {
+                $onGetResult();
+            }
+        }
+
         return $scorePartResult;
     }
 }

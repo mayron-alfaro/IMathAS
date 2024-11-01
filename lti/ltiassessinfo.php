@@ -4,7 +4,7 @@
 
 use \IMSGlobal\LTI;
 
-require("../init.php");
+require_once "../init.php";
 if (!isset($_SESSION['ltirole']) || $_SESSION['ltirole']!='instructor') {
 	echo _("Not authorized to view this page");
 	exit;
@@ -16,7 +16,7 @@ if (!isset($_GET['launchid'])) {
     exit;
 }
 
-require_once(__DIR__ . '/lib/lti.php');
+require_once __DIR__ . '/lib/lti.php';
 require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/helpers.php';
 
@@ -56,19 +56,33 @@ if (!empty($_POST['makelineitem'])) {
         $iteminfo['submitby']=='by_assessment',
         $includeempty
     );
-    $lineitem = $launch->get_lineitem();
-    require(__DIR__ . '/../includes/ltioutcomes.php');
+    // $scores may include scores from multiple LMS courses, all tied to the same
+    // imathas course. So we'll need to grab all the lineitems and match them up to 
+    // users.
+    $lineitems = [];
+    $lineitems[$localcourse->get_id()] = $launch->get_lineitem();
+    $stm = $DBH->prepare("SELECT lticourseid,lineitem FROM imas_lti_lineitems WHERE itemtype=0 AND typeid=?");
+    $stm->execute([$aid]);
+    while ($row = $stm->fetch(PDO::FETCH_ASSOC)) {
+        $lineitems[$row['lticourseid']] = $row['lineitem'];
+    }
+
+    require_once __DIR__ . '/../includes/ltioutcomes.php';
     $cnt = 0;
     foreach ($scores as $scoredata) {
+        if (!isset($lineitems[$scoredata['lticourseid']])) {
+            continue; // don't have lineitem for this course
+        }
         $sourcedid = 'LTI1.3:|:' . $scoredata['ltiuserid'] . 
-            ':|:' . $lineitem . ':|:' . $platform_id;
+            ':|:' . $lineitems[$scoredata['lticourseid']] . ':|:' . $platform_id;
         calcandupdateLTIgrade(
             $sourcedid,
             $aid,
             $scoredata['userid'],
             $scoredata['score'],
             true,
-            $iteminfo['ptsposs']
+            $iteminfo['ptsposs'],
+            false
         );
         $cnt++;
     }
@@ -76,7 +90,7 @@ if (!empty($_POST['makelineitem'])) {
     if (!empty($GLOBALS['CFG']['LTI']['usequeue'])) {
         $scoreresendmsg .= ' '._('It may take a couple minutes for the updates to show in the LMS.');
     }
-}
+} 
 
 
 //HTML Output
@@ -85,7 +99,7 @@ $placeinhead = '<style>.flexform { display: flex; justify-content: space-between
  .flexform button {margin-left: 10px;}
  .borderwrap { border: 1px solid #ccc; padding: 10px; max-width:600px;}
  .borderwrap h3 { margin-top: 5px;}</style>';
-require("../header.php");
+require_once "../header.php";
 
 echo '<div class="breadcrumb">'.$breadcrumbbase . ' '.$pagetitle.'</div>';
 
@@ -134,7 +148,11 @@ echo '<p class=small>'.sprintf(_('This assessment is housed in %s course ID %s (
         $installname, 
         Sanitize::courseId($cid), 
         Sanitize::encodeStringForDisplay($line['coursename'])
-    ).'</p>';
+    ).'. ';
+if (empty($CFG['LTI']['hideSelfServiceLink'])) {
+    echo '<a href="../admin/userlti.php">'._('Edit course link').'</a>';
+}
+echo '</p>';
 
 
 echo '<h2>'._('LMS Syncing Tools').'</h2>';
@@ -185,7 +203,7 @@ if ($launch->has_nrps() && empty($localcourse->get_allow_direct_login())) {
     echo '</form>';
     echo '</div>';
 }
-require("../footer.php");
+require_once "../footer.php";
 
 function formatdate($date) {
 	if ($date==0 || $date==2000000000) {

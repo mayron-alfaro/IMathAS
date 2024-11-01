@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <title>
+        Sagecell
+    </title>
 <style type="text/css">
 body,html {
 	padding: 0px;
@@ -17,6 +20,15 @@ function getUrlParameter(name) {
 };
 var frame_id = getUrlParameter("frame_id");
 var update_id = getUrlParameter("update_id");
+var update_out = getUrlParameter("update_out");
+var lang = getUrlParameter("lang");
+var hide = getUrlParameter("hide");
+var autoeval = getUrlParameter("autoeval");
+hide = (hide.trim() == "all" ? "editor, evalButton, language, output, done, sessionFiles, messages, sessionTitle" : hide)
+hide = (hide == '' ? ['permalink', 'fullScreen'] : 
+			[...new Set(hide.split(',').map(s => s.trim()).concat(['permalink', 'fullScreen']))]);
+lang = (lang == '' ? sagecell.allLanguages : lang.split(',').map(s => s.trim()));
+autoeval = (autoeval == '' ? false : autoeval);
 
 var observeDOM = (function(){
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver,
@@ -43,11 +55,43 @@ function initcell() {
 	observeDOM($(".sagecell_input")[0], frameresize);
 	observeDOM($(".sagecell_output")[0], frameresize);
 	if (update_id != "") {
-			observeDOM($(".sagecell_input")[0], function() {
-				var code = $(".sagecell_commands").val();
+            const { get, set } = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
+            const scc = $(".sagecell_commands")[0];
+            Object.defineProperty(scc, 'value', {
+                get() {
+                    return get.call(this);
+                },
+                set(newVal) {
+                    window.parent.postMessage( JSON.stringify({
+                        subject: "imathas.update",
+                        id: update_id,
+                        value: newVal.replace(/</g,'&lt;').replace(/>/g,'&gt;')
+                    }), "*");
+                    return set.call(this, newVal);
+                }
+            });
+
+			/*
+            observeDOM approach seemed to be one update behind.
+            setTimeout worked, but required a long delay
+
+            observeDOM($(".sagecell_input")[0], function() {
+                var code = $(".sagecell_commands").val();
+                console.log(code);
+                window.parent.postMessage( JSON.stringify({
+                    subject: "imathas.update",
+                    id: update_id,
+                    value: code.replace(/</g,'&lt;').replace(/>/g,'&gt;')
+                }), "*");
+			});
+            */
+	}
+	if (update_out != "") {
+			observeDOM($(".sagecell_output")[0], function() {
+				var code = $(".sagecell_sessionOutput").text();
 				window.parent.postMessage( JSON.stringify({
 					subject: "imathas.update",
-					id: update_id,
+					id: update_out,
 					value: code
 				}), "*");
 			});
@@ -77,7 +121,9 @@ $(function() {
 		code: code,
 		callback: initcell,
 		evalButtonText: evallabel,
-		hide: ["permalink", "fullScreen"]
+        languages: lang,
+		hide: hide,
+		autoeval: autoeval,
 	});
 });
 </script>

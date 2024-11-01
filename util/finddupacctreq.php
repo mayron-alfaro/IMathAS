@@ -1,6 +1,6 @@
 <?php
 
-require("../init.php");
+require_once "../init.php";
 
 if ($myrights<100 && ($myspecialrights&64)!=64) {exit;}
 
@@ -29,9 +29,11 @@ if (!empty($_POST['todel'])) {
     }
 
     // unenroll from any instructor-enroll courses
-    if (isset($CFG['GEN']['enrollonnewinstructor'])) {
-        require("../includes/unenroll.php");
-        foreach ($CFG['GEN']['enrollonnewinstructor'] as $rcid) {
+    if (isset($CFG['GEN']['enrollonnewinstructor']) || isset($CFG['GEN']['enrolloninstructorapproval'])) {
+        $allInstrEnroll = array_unique(array_merge($CFG['GEN']['enrollonnewinstructor'] ?? [], $CFG['GEN']['enrolloninstructorapproval'] ?? [])); 
+
+        require_once "../includes/unenroll.php";
+        foreach ($allInstrEnroll as $rcid) {
             unenrollstu($rcid, $todel);
         }
     }
@@ -65,7 +67,7 @@ $status = [
 ];
 
 $placeinhead = '<style>tbody tr:nth-child(odd) {background-color: #eee;}</style>';
-require('../header.php');
+require_once '../header.php';
 echo '<h1>'._('Duplicate Pending Account Requests').'</h1>';
 echo '<form method="POST" action="finddupacctreq.php">';
 
@@ -98,9 +100,9 @@ while ($row = $stm->fetch(PDO::FETCH_ASSOC)) {
     } else {
         echo '<td></td>';
     }
-    echo '<td>'.Sanitize::encodeStringForDisplay($row['LastName'].', '.$row['FirstName']).'</td>';
-    echo '<td>'.Sanitize::encodeStringForDisplay($row['SID']).'</td>';
-    echo '<td>'.Sanitize::encodeStringForDisplay($row['email']).'</td>';
+    echo '<td><span class="pii-full-name">'.Sanitize::encodeStringForDisplay($row['LastName'].', '.$row['FirstName']).'</span></td>';
+    echo '<td><span class="pii-username">'.Sanitize::encodeStringForDisplay($row['SID']).'</span></td>';
+    echo '<td><span class="pii-email">'.Sanitize::encodeStringForDisplay($row['email']).'</span></td>';
     $userdata = json_decode($row['reqdata'], true);
     if (isset($userdata['ipeds'])) {
         // handle requests with ipeds info 
@@ -122,9 +124,9 @@ while ($row = $stm->fetch(PDO::FETCH_ASSOC)) {
     echo '<td>'.Sanitize::encodeStringForDisplay($schoolname).'</td>';
     echo '<td>'.$status[$row['status']].'</td>';
 
-    echo '<td>'.Sanitize::encodeStringForDisplay($row['extLast'].', '.$row['extFirst']).'</td>';
-    echo '<td>'.Sanitize::encodeStringForDisplay($row['extSID']).'</td>';
-    echo '<td>'.Sanitize::encodeStringForDisplay($row['extemail']).'</td>';
+    echo '<td><span class="pii-full-name">'.Sanitize::encodeStringForDisplay($row['extLast'].', '.$row['extFirst']).'</span></td>';
+    echo '<td><span class="pii-username">'.Sanitize::encodeStringForDisplay($row['extSID']).'</span></td>';
+    echo '<td><span class="pii-email">'.Sanitize::encodeStringForDisplay($row['extemail']).'</span></td>';
     echo '<td>'.Sanitize::encodeStringForDisplay($row['name']).'</td>';
     echo '</tr>';
 }
@@ -137,4 +139,4 @@ echo '</form>';
 
 echo '<p>'.$fixedcnt.' '._('requests had already been upgraded, and have been updated').'</p>';
 
-require('../footer.php');
+require_once '../footer.php';

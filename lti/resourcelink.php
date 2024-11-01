@@ -1,7 +1,7 @@
 <?php
 
 if (isset($GLOBALS['CFG']['hooks']['lti'])) {
-  require_once($CFG['hooks']['lti']);
+  require_once $CFG['hooks']['lti'];
   /**
    * see ltihooks.php.dist for details
    */
@@ -15,7 +15,7 @@ function link_to_resource($launch, $localuserid, $localcourse, $db) {
   $target = parse_target_link($launch->get_target_link(), $db);
 
   if (empty($target)) {
-    echo "Error parsing requested resource";
+    echo "Error parsing requested resource. Make sure that the launch URL contains a resource identifier. If it does not, you will either need to use the export/import process to bring in the link, or use the LMS's content selection / deep linking tools.";
     exit;
   }
 
@@ -35,11 +35,15 @@ function link_to_resource($launch, $localuserid, $localcourse, $db) {
       } else {
         // need to find the assessment
         $destaid = false;
-        if ($target['refcid'] == $localcourse->get_copiedfrom()) {
+        if ($target['refcid'] === null) {
+            // if assessment has been deleted so refcid is null
+            // see if we already have a descendant of the assessment
+            $destaid = $db->find_aid_by_loose_ancestor($sourceaid, $destcid);
+        } else if ($target['refcid'] == $localcourse->get_copiedfrom()) {
           // aid is in the originally copied course - find our copy of it
           $destaid = $db->find_aid_by_immediate_ancestor($sourceaid, $destcid);
         }
-        if ($destaid === false) {
+        if ($destaid === false && $target['refcid'] !== null) {
           // try looking further back
           $destaid = $db->find_aid_by_ancestor_walkback(
             $sourceaid,
@@ -49,7 +53,8 @@ function link_to_resource($launch, $localuserid, $localcourse, $db) {
         }
         if ($destaid === false) {
           // can't find assessment - copy it
-          require(__DIR__.'/../includes/copycourse.php');
+          $GLOBALS['datesbylti'] = $localcourse->get_dates_by_lti();
+          require_once __DIR__.'/../includes/copycourse.php';
           $destaid = copyassess($sourceaid, $destcid);
         }
         if ($destaid !== false) {
@@ -61,6 +66,8 @@ function link_to_resource($launch, $localuserid, $localcourse, $db) {
           exit;
         }
       }
+    } else if ($target['type'] === 'course') {
+      $link = $db->make_link_assoc($target['refcid'],'course',$resource_link['id'],$contextid,$platform_id);  
     } else if (function_exists('lti_can_ext_handle_launch') && lti_can_ext_handle_launch($launch->get_target_link())) {
       $link = lti_handle_launch($launch, $localcourse, $localuserid, $db);
     } else {
@@ -92,7 +99,7 @@ function link_to_resource($launch, $localuserid, $localcourse, $db) {
       //no default due date set yet, or is the instructor:  set the default due date
       $db->set_assessment_dates($link->get_typeid(), $lms_duedate, $newdatebylti);
     }
-    if ($lms_duedate !== false && $role == 'Learner') {
+    if ($lms_duedate !== false && $role == 'Learner' && $link->get_date_by_lti() > 0) {
       $db->set_or_update_duedate_exception($localuserid, $link, $lms_duedate);
     }
     // if no due date provided, but we're expecting one, throw error
@@ -115,7 +122,7 @@ function link_to_resource($launch, $localuserid, $localcourse, $db) {
       $localcourse->set_UIver($db->get_UIver($localcourse->get_courseid()));
     }
     if ($localcourse->get_UIver() == 1) {
-      header(sprintf('Location: %s/assessment/showtext.php?cid=%d&aid=%d&ltilaunch=true',
+      header(sprintf('Location: %s/assessment/showtest.php?cid=%d&aid=%d&ltilaunch=true',
         $GLOBALS['basesiteurl'],
         $localcourse->get_courseid(),
         $link->get_typeid()

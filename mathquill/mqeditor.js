@@ -25,6 +25,7 @@ var MQeditor = (function($) {
   var blurTimer = null;
   var keyRepeatInterval = null;
   var MQ = MathQuill.getInterface(MathQuill.getInterface.MAX);
+  var greekletters = ['alpha','beta','chi','delta','epsilon','gamma','varphi','phi','psi','sigma','rho','theta','lambda','mu','nu','omega','tau'];
 
   /*
     Config object for MQeditor
@@ -70,6 +71,8 @@ var MQeditor = (function($) {
     }
     var newstate = (typeof state == 'boolean') ? state : (el.type != 'hidden');
     var textId = el.id;
+    var calcformat = el.getAttribute("data-mq") || '';
+
     if (newstate === true) { // enable MQ
       var initval = $(el).attr("type","hidden").val();
       if (config.hasOwnProperty('toMQ')) { // convert format if needed
@@ -80,11 +83,15 @@ var MQeditor = (function($) {
         var span = $("<span/>", {
           id: "mqinput-"+textId,
           class: "mathquill-math-field",
-          text: initval
+          text: initval,
+          "aria-label": el.getAttribute("aria-label")
         });
         var m;
         if ((m = el.className.match(/(ansred|ansyel|ansgrn|ansorg)/)) !== null) {
           span.addClass(m[0]);
+        }
+        if (calcformat.match(/chem/)) {
+          span.addClass("mq-chem");
         }
         var size = (el.hasAttribute("size") ? (el.size > 3 ? el.size/1.8 : el.size) : 10);
         span.css("min-width", size + "em");
@@ -111,18 +118,45 @@ var MQeditor = (function($) {
           };
           thisMQconfig.keyboardPassthrough = true;
         }
+        
+        if (calcformat.match(/chem/)) {
+            thisMQconfig.charsThatBreakOutOfSupSubVar = '';
+            thisMQconfig.charsThatBreakOutOfSupSubOp = '';
+            thisMQconfig.autoSubscriptNumerals = true;
+        }
+        if (calcformat.match(/list/)) {
+            thisMQconfig.charsThatBreakOutOfSupSub = '=<>,';
+        }
+        if (calcformat.match(/allowplusminus/)) {
+            thisMQconfig.quickplusminus = true;
+        }
+
         thisMQconfig.autoOperatorNames = thisMQconfig.autoParenOperators = 
-            'ln log abs exp sin cos tan arcsin arccos arctan sec csc cot arcsec arccsc arccot sinh cosh sech csch tanh coth arcsinh arccosh arctanh';
+            'ln log abs exp sin cos tan arcsinh arccosh arctanh arcsech arccsch arccoth argsinh argcosh argtanh argsech argcsch argcoth arsinh arcosh artanh arsech arcsch arcoth arcsin arccos arctan sec csc cot arcsec arccsc arccot sinh cosh sech csch tanh coth';
+        thisMQconfig.autoCommands = 'pi theta root sqrt ^oo degree';
+        if (calcformat.match(/logic/)) {
+            thisMQconfig.autoCommands += ' neg xor or and implies iff';
+        }
+        if (calcformat.match(/setexp/)) {
+            thisMQconfig.autoCommands += ' nn xor uu ominus cap cup oplus';
+        }
         var vars = el.getAttribute("data-mq-vars") || '';
+        var varpts;
         if (vars != '') {
             vars = (vars=='') ? [] : vars.split(/,/);
             for (var i=0; i<vars.length; i++) {
-                if (vars[i].length > 1 && vars[i].match(/^[a-zA-Z]+$/)) {
-                    thisMQconfig.autoOperatorNames += ' ' + vars[i];
+                varpts = vars[i].split(/_/);
+                for (var j=0; j<varpts.length; j++) {
+                    if (varpts[j].length > 1 && varpts[j].match(/^[a-zA-Z]+$/)) {
+                        if (greekletters.indexOf(varpts[j].toLowerCase())!=-1) {
+                            thisMQconfig.autoCommands += ' ' + varpts[j];
+                        } else {
+                            thisMQconfig.autoOperatorNames += ' ' + varpts[j];
+                        }
+                    }
                 }
             }
         }
-
         if (el.disabled) {
           mqfield = MQ.StaticMath(span[0]);
           span.addClass("disabled");
@@ -135,7 +169,7 @@ var MQeditor = (function($) {
             if (!fromblur) {
               var val = el.value;
               if (config.hasOwnProperty('toMQ')) {
-                val = config.toMQ(val);
+                val = config.toMQ(val, el.id);
               }
               mqfield.latex(val);
             }
@@ -234,6 +268,8 @@ var MQeditor = (function($) {
     } else {
       $("#mqeditor").removeClass("fixedbottom iframeosk");
     }
+    $("#mqeditor").toggleClass('mq-chem',$(mqel).hasClass("mq-chem"));
+
     var rebuild = false;
     // see if the field has changed
     if (curMQfield === null || mqel[0] != curMQfield.el() ||
@@ -292,15 +328,17 @@ var MQeditor = (function($) {
     Hide the editor
    */
   function hideEditor(event) {
-    $(document).trigger('mqeditor:hide');
-    
-    if (config.curlayoutstyle === 'OSK' && !inIframe()) {
-      $("#mqeditor").slideUp(50);
-    } else {
-      $("#mqeditor").hide();
+    if (curMQfield) {
+        $(document).trigger('mqeditor:hide');
+        
+        if (config.curlayoutstyle === 'OSK' && !inIframe()) {
+        $("#mqeditor").slideUp(50);
+        } else {
+        $("#mqeditor").hide();
+        }
+        $("#"+curMQfield.el().id.substring(8)).trigger('change', true);
+        curMQfield = null;
     }
-    $("#"+curMQfield.el().id.substring(8)).trigger('change', true);
-    curMQfield = null;
   }
 
   /*
@@ -419,11 +457,11 @@ var MQeditor = (function($) {
         }
       }
     }
-    if (tabcnt > 1) {
-      $(baseel).find(".mqed-tab").first().addClass("mqed-activetab");
-    } else {
-      $(tabdiv).hide();
-    }
+    // add close button
+    buildButton(tabdiv, {s: 1});
+    buildButton(tabdiv, {p: '&times;', c: 'close', lb: 'close'});
+
+    $(baseel).find(".mqed-tab").first().addClass("mqed-activetab");
   }
 
   /*
@@ -552,7 +590,12 @@ var MQeditor = (function($) {
         $(btnel).addClass("mqed-shift");
       } else if (cmdtype == 'k') {
         $(btnel).addClass("mqed-navkey");
+      } else if (cmdtype == 'close') {
+        $(btnel).addClass("mqed-closebtn");
       }
+    }
+    if (btn.lb) {
+        btnel.setAttribute('aria-label', btn.lb);
     }
     // make it small; 1 for 90%, 2 for 80%, etc.
     if (btn.sm) {
@@ -709,6 +752,9 @@ var MQeditor = (function($) {
           }
         }
       });
+    } else if (cmdtype=='close') {
+        curMQfield.blur();
+        //hideEditor();
     }
   }
   return {

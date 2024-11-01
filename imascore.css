@@ -1,8 +1,10 @@
 html {
-
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
 }
 body {
-
+    background-color:#FFFFFF;
 	margin: 10px;
 	padding: 0px;
 }
@@ -10,7 +12,7 @@ div {
 	margin: 0px;
 	padding: 0px;
 }
-p {
+p, .pdiv {
 	margin: 0;
 	padding: .5em 0;
 }
@@ -70,7 +72,13 @@ span.iteminfo {
 	margin-left: 30px;
 }
 .info {
-	color: #4bb6e8;
+	color: #007585;
+}
+.warn {
+    color: #C40;
+}
+input:invalid {
+	background-color: #faa;
 }
 .noticetext, a.noticetext, a.noticetext:link, a.noticetext:visited {
 	color: #db0000;
@@ -154,7 +162,9 @@ div.block.grouptoggle + div.blockitems {
 	margin-top: 0px
 }
 .hidden,.pseudohidden {
-	display:none;
+    visibility: hidden;
+    position: absolute;
+    height: 0;
 }
 .showinmobile {
 	display:none;
@@ -496,7 +506,7 @@ img.faded {
 	opacity: .3;
 }
 .grey {
-	color: #999;
+	color: #757575;
 }
 .itemgrey {
 	opacity: .5;
@@ -908,6 +918,17 @@ button.plain:hover, button.plain:active {
   text-align: left;
   cursor: pointer;
 }
+#GB_footer {
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    text-align: right;
+    margin-right: 20px;
+}
+#GB_footer button:last-child {
+    margin-right: 20px;
+}
 #GB_caption a, #GB_caption a:hover, #GB_caption a:focus {
 	color: #fff;
 	text-decoration: none;
@@ -979,6 +1000,9 @@ ol li ol {
 
 svg {
 	overflow: hidden;
+}
+embed[type="image/svg+xml"] {
+    display: inline-block;
 }
 
 table.gridded {
@@ -1393,4 +1417,9 @@ a.dropdown-toggle.arrow-down:hover {
     position: absolute;
     border: none;
     width: 100%;
+}
+:not([class="mjx-var"][size="s"]) > [class="mjx-c2032"] {
+    vertical-align: 0.513em;
+    margin-left: 0.025em;
+    font-size: 70.7%;
 }

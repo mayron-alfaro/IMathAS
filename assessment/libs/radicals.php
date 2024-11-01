@@ -1,9 +1,11 @@
 <?php
 //A collection of functions for working with radicals
+//reduceradicalfrac3 added 10/7/24
 //Version 3 Nov 27 2017
 
 global $allowedmacros;
-array_push($allowedmacros,"reduceradical","reduceradicalfrac","reduceradicalfrac2","reducequadraticform");
+array_push($allowedmacros,"reduceradical","reduceradicalfrac","reduceradicalfrac2",
+  "reduceradicalfrac3","reducequadraticform");
 
 //reduceradical(inside,[root,format])
 //given the inside of a radical, reduces it to Aroot(B)
@@ -17,7 +19,7 @@ function reduceradical($in,$root=2,$format="string") {
 		echo 'inputs to radicalfrac must be integers';
 		return;
 	}
-	$in = intval($in);
+	$in = (int)round($in);
 
 	if ($in > 10000000) {
 		if ($GLOBALS['myrights'] > 10) {
@@ -40,18 +42,17 @@ function reduceradical($in,$root=2,$format="string") {
 		return;
     }
 
-	$root = intval($root);
+	$root = (int)round($root);
 
     $iscomplex = false;
+    $sign = '';
 	if ($in<0) {
         if ($root == 2) {
             $iscomplex = true;
         } else {
             $sign = '-';
         }
-	} else {
-		$sign = '';
-	}
+	} 
 
 	$in = abs($in);
 	$max = 	pow($in,1/$root);
@@ -183,11 +184,11 @@ function reduceradicalfrac($n,$rootnum,$d,$root=2,$format="string") {
 //format: default is "string", which returns "2/(3sqrt(5))"
 //                   "disp", returns the string wrapped in backticks for display
 //                   "parts", returns an array of the parts:  array(2,3,5)
-function reduceradicalfrac2($n,$d,$rootnum,$rat=false,$root=2,$format="string") {
+function reduceradicalfrac2($n,$d,$rootdenom,$rat=false,$root=2,$format="string") {
 	if ($rat==true) {
-		return reduceradicalfrac($n, $rootnum, $d*$rootnum, $root, $format);
+		return reduceradicalfrac($n, pow($rootdenom, $root-1), $d*$rootdenom, $root, $format);
 	}
-	list($rootA,$in) = reduceradical($rootnum,$root,"parts");
+	list($rootA,$in) = reduceradical($rootdenom,$root,"parts");
 	$d *= $rootA;
 	$g = gcd($n,$d);
 	$n = $n/$g;
@@ -232,6 +233,105 @@ function reduceradicalfrac2($n,$d,$rootnum,$rat=false,$root=2,$format="string") 
 	}
 }
 
+//reduceradicalfrac3(wholenum,rootnum, wholedenom,rootdenom, [rationalize,rootn,rootd,format])
+//given (wholenum*root(rootnum))/(wholedenom*root(rootdenom)), reduces the root then the fraction
+//rationalize: rationalize the denominator. Default is false.
+//rootn: root of numerator radical.  Default is 2 (sqrt)
+//rootd: root of denominator radical. Default is 2 (sqrt)
+//format: default is "string", which returns something like "(2sqrt(3))/5" or "2/3 sqrt(1/2)" or "3/(2 sqrt(5))"
+//                   "disp", returns the string wrapped in backticks for display
+//                   "parts", returns an array of the reduced parts [wholenum,rootnum,wholedenom,rootdenom,root]
+function reduceradicalfrac3($n,$rootnum,$d,$rootdenom,$rat=false,$rootn=2,$rootd=2,$format="string") {
+	if ($rootn == $rootd) {
+        $root = $rootn;
+    } else { // give common root
+        $root = lcm($rootn,$rootd);
+        $rootnum = pow($rootnum, $root/$rootn);
+        $rootdenom = pow($rootdenom, $root/$rootd);
+    }
+    if ($rat) {
+        $d *= $rootdenom;
+        $rootnum *= pow($rootdenom, $root-1);
+        $rootdenom = 1;
+    }
+    $g = gcd($rootnum,$rootdenom);
+    $rootnum /= $g;
+    $rootdenom /= $g;
+	list($outA,$inA) = reduceradical($rootnum,$root,"parts");
+    list($outB,$inB) = reduceradical($rootdenom,$root,"parts");
+	$n *= $outA;
+    $d *= $outB;
+	$g = gcd($n,$d);
+	$n = $n/$g;
+	$d = $d/$g;
+	if ($d<0) {
+		$n = $n*-1;
+		$d = $d*-1;
+	}
+	if ($format=='string' || $format=='disp') {
+		$outstr = '';
+		if ($format=='disp') {
+			$outstr .= '`';
+		}
+        if ($inA > 1 && $inB > 1) {
+            if ($n != 1 || $d > 1) {
+                $outstr .= $n;
+            }
+            if ($d > 1) {
+                $outstr .= '/' . $d;
+            }
+            if ($root == 2) {
+                $outstr .= "sqrt($inA/$inB)";
+            } else {
+                $outstr .= "root($root)($inA/$inB)";
+            }
+        } else {
+            if ($n != 1 && $inA > 1 && ($d > 1 || $inB > 1)) { // need extra parens around num
+                $outstr .= '(';
+            }
+            if ($n != 1 || $inA == 1) {
+                $outstr .= $n;
+            }
+            if ($inA > 1) {
+                if ($root == 2) {
+                    $outstr .= "sqrt($inA)";
+                } else {
+                    $outstr .= "root($root)($inA)";
+                }
+            }
+            if ($n != 1 && $inA > 1 && ($d > 1 || $inB > 1)) { // need extra parens around num
+                $outstr .= ')';
+            }
+            if ($d > 1 || $inB > 1) {
+                $outstr .= '/';
+                if ($d > 1 && $inB > 1) { // need extra parens around denom
+                    $outstr .= '(';
+                }
+                if ($d > 1) {
+                    $outstr .= $d;
+                }
+                if ($inB > 1) {
+                    if ($root == 2) {
+                        $outstr .= "sqrt($inB)";
+                    } else {
+                        $outstr .= "root($root)($inB)";
+                    }
+                }
+                if ($d > 1 && $inB > 1) { // need extra parens around denom
+                    $outstr .= ')';
+                }
+            }
+        }
+
+		if ($format=='disp') {
+			$outstr .= '`';
+		}
+		return $outstr;
+	} else {
+		return array($n,$inA,$d,$inB,$root);
+	}
+}
+
 
 //reducequadraticform(a,b,c,d,[format])
 //given (a+bsqrt(c))/d, reduces the root then the fraction
@@ -245,14 +345,20 @@ function reducequadraticform($a,$n,$rootnum,$d,$format="string") {
 	} else {
 		$iscomplex = false;
 	}
+	if ($n == 0 || $rootnum == 0) {
+		$n = 0;
+		$rootnum = 0;
+	}
 	$root = 2;
 	//reduce to (a+n sqrt(in))/d
 	list($rootA,$in) = reduceradical($rootnum,$root,"parts");
 	$n *= $rootA;
 	if ($in==1 && !$iscomplex) {
-		$n += $a;
-		$a = 0;
-	}
+		$a += $n;
+		$n = 0;
+	} else if ($in == 0) {
+        $n = 0;
+    }
 	$gr = gcd($n,$d);
 	$gw = gcd($a,$d);
 	$g = gcd($gr,$gw); //gcd of a,n, and d
@@ -264,6 +370,7 @@ function reducequadraticform($a,$n,$rootnum,$d,$format="string") {
 		$n = $n*-1;
 		$d = $d*-1;
 	}
+
 	if ($format=='parts') {
 		return array($a, $n, $in*($iscomplex?-1:1), $d);
 	}
@@ -271,10 +378,10 @@ function reducequadraticform($a,$n,$rootnum,$d,$format="string") {
 	if ($format=='disp') {
 		$outstr .= '`';
 	}
-	if ($d>1) {
+	if ($d>1 && (($a != 0 && $n != 0) || ($n !=0 && abs($n) != 1))) {
 		$outstr .= '(';
 	}
-	if ($a != 0) {
+	if ($a != 0 || $n == 0) {
 		$outstr .= $a;
 		if ($n>0) {
 			$outstr .= '+';
@@ -282,19 +389,22 @@ function reducequadraticform($a,$n,$rootnum,$d,$format="string") {
 		//	$outstr .= '-';
 		}
 	}
-	if (abs($n)!=1 || $in==1) {  //  3root(2) or 1root(1)
+	if ((abs($n)!=1 || $in==1) && $n!=0) {  //  3root(2) or 1root(1)
 		$outstr .= $n;
 	} else if ($n==-1) {
 		$outstr .= '-';
 	}
-	if ($in>1) {
+	if ($in>1 && $n!=0) {
 		$outstr .= "sqrt($in)";
 	}
 	if ($iscomplex) {
 		$outstr .= "i";
 	}
 	if ($d>1) {
-		$outstr .= ")/$d";
+        if (($a != 0 && $n != 0) || ($n != 0 && abs($n) != 1)) {
+            $outstr .= ')';
+        }
+		$outstr .= "/$d";
 	}
 	if ($format=='disp') {
 		$outstr .= '`';

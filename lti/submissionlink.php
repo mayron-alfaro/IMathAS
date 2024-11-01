@@ -1,7 +1,7 @@
 <?php
 
 if (isset($GLOBALS['CFG']['hooks']['lti'])) {
-  require_once($CFG['hooks']['lti']);
+  require_once $CFG['hooks']['lti'];
   /**
    * see ltihooks.php.dist for details
    */
@@ -47,7 +47,7 @@ function link_to_submission($launch, $localuserid, $localcourse, $db) {
     $_SESSION['ltiitemver'] = $localcourse->get_UIver();
     $_SESSION['ltirole'] = strtolower($role);
 
-    $targetuserid = $db->get_local_userid($launch);
+    $targetuserid = $db->get_local_userid($launch, $role);
     if ($targetuserid == false) {
         echo 'Cannot find target student';
         exit;

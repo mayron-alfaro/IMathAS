@@ -59,9 +59,13 @@ class LTI_Message_Launch {
      */
     public static function from_cache($launch_id, Database $database, Cache $cache = null) {
         $new = new LTI_Message_Launch($database, $cache, null);
-        $new->launch_id = $launch_id;
-        $new->jwt = [ 'body' => $new->cache->get_launch_data($launch_id) ];
-        return $new->validate_registration();
+        if ($new->cache->get_launch_data($launch_id) !== false) {
+            $new->launch_id = $launch_id;
+            $new->jwt = [ 'body' => $new->cache->get_launch_data($launch_id) ];
+            return $new->validate_registration();
+        } else {
+            throw new LTI_Exception("Unable to load launch from cache.", 1);
+        }
     }
 
     /**
@@ -275,10 +279,31 @@ class LTI_Message_Launch {
 
     public function get_due_date() {
       $custom = $this->get_custom();
-      if (!empty($custom['canvas_assignment_due_at'])) {
-        $duedate = strtotime($custom['canvas_assignment_due_at']);
+      if (array_key_exists('canvas_assignment_due_at', $custom)) {
+        $duedate = strtotime($custom['canvas_assignment_due_at'] ?? '');
         if ($duedate === false) {
           return 2000000000;
+        } else {
+          return $duedate;
+        }
+      } else if (!empty($custom['link_user_end_sub_time']) && 
+        ($duedate = strtotime($custom['link_user_end_sub_time'])) !== false) {
+        // use user-based sub time if set and valid
+        return $duedate;
+      } else if (!empty($custom['link_end_sub_time'])) {
+        // if general sub time is set but invalid, and avail_time values aren't set or valid either
+        // then treat as available always
+        $duedate = strtotime($custom['link_end_sub_time']);
+        if ($duedate === false) {
+          if (!empty($custom['link_user_end_avail_time']) &&
+            ($duedate = strtotime($custom['link_user_end_avail_time'])) !== false) {
+            return $duedate;
+          } else if (!empty($custom['link_end_avail_time']) && 
+            ($duedate = strtotime($custom['link_end_avail_time'])) !== false) {
+            return $duedate;
+          } else {
+            return 2000000000;
+          }
         } else {
           return $duedate;
         }
@@ -376,7 +401,7 @@ class LTI_Message_Launch {
         } catch(\Exception $e) {
           continue;
         }
-        $newkeys[$key['kid']] = array('alg'=>$key['alg'], 'pub'=>$pubkey['key']);
+        $newkeys[$key['kid']] = array('alg'=> $key['alg'] ?? 'RS256', 'pub'=>$pubkey['key']);
       }
       // record keys
       $this->db->record_keys($key_set_url, $newkeys);
@@ -394,7 +419,9 @@ class LTI_Message_Launch {
     }
 
     public function get_migration_claim() {
-        if (!empty($this->jwt['body']['https://purl.imsglobal.org/spec/lti/claim/lti1p1'])) {
+        if (!empty($this->jwt['body']['https://purl.imsglobal.org/spec/lti/claim/lti1p1']) &&
+            !empty($this->jwt['body']['https://purl.imsglobal.org/spec/lti/claim/lti1p1']['oauth_consumer_key'])
+        ) {
             $claim = $this->jwt['body']['https://purl.imsglobal.org/spec/lti/claim/lti1p1'];
             $claim['signing_string'] = $claim['oauth_consumer_key'] . '&' .
                 $this->jwt['body']["https://purl.imsglobal.org/spec/lti/claim/deployment_id"]. '&' . 
@@ -408,9 +435,21 @@ class LTI_Message_Launch {
         }
     }
 
+    public function get_lti1p1_userid() {
+        if (!empty($this->jwt['body']['https://purl.imsglobal.org/spec/lti/claim/lti1p1']) &&
+            !empty($this->jwt['body']['https://purl.imsglobal.org/spec/lti/claim/lti1p1']['user_id'])
+        ) {
+            return $this->jwt['body']['https://purl.imsglobal.org/spec/lti/claim/lti1p1']['user_id'];
+        } else if (!empty($this->jwt['body']['https://purl.imsglobal.org/spec/lti/claim/lti11_legacy_user_id'])) {
+            return $this->jwt['body']['https://purl.imsglobal.org/spec/lti/claim/lti11_legacy_user_id'];
+        } else {
+            return false;
+        }
+    }
+
     private function validate_state() {
         // Check State for OIDC.
-        if ($this->cookie->get_cookie('lti1p3_' . $this->request['state']) !== $this->request['state']) {
+        if (!isset($this->request['state']) || $this->cookie->get_cookie('lti1p3_' . $this->request['state']) !== $this->request['state']) {
             // Error if state doesn't match
             throw new LTI_Exception("State not found", 1);
         }
@@ -418,11 +457,10 @@ class LTI_Message_Launch {
     }
 
     private function validate_jwt_format() {
-        $jwt = $this->request['id_token'];
-
-        if (empty($jwt)) {
+        if (empty($this->request['id_token'])) {
             throw new LTI_Exception("Missing id_token", 1);
         }
+        $jwt = $this->request['id_token'];
 
         // Get parts of JWT.
         $jwt_parts = explode('.', $jwt);
@@ -449,6 +487,10 @@ class LTI_Message_Launch {
 
     private function validate_registration() {
         // Find registration.
+        if (empty($this->jwt['body']['aud'])) {
+            echo "Unable to find registration. Missing client_id; no aud in JWT";
+            throw new LTI_Exception("Missing aud in JWT.", 1);
+        }
         $client_id = is_array($this->jwt['body']['aud']) ? $this->jwt['body']['aud'][0] : $this->jwt['body']['aud'];
 
         $this->registration = $this->db->find_registration_by_issuer($this->jwt['body']['iss'], $client_id);
@@ -456,7 +498,8 @@ class LTI_Message_Launch {
         if (empty($this->registration)) {
           echo "Unable to find registration with issuer ".
             Sanitize::encodeStringForDisplay($this->jwt['body']['iss']).
-            ' and client_id '.$client_id;
+            ' and client_id '.$client_id.'. ';
+          echo "Ensure the LTI registration information (Client ID and such) from the LMS has been provided to the system admin.";
             throw new LTI_Exception("Registration not found.", 1);
         }
 

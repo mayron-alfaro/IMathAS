@@ -125,13 +125,13 @@ class AssessUtils
   public static function isIPinRange($userip, $range) {
     $ips = array_map('trim', explode(',', $range));
     $userip = explode('.', $userip);
-		$isoneIPok = false;
+	$isoneIPok = false;
     foreach ($ips as $ip) {
       $ip = explode('.', $ip);
       $thisIPok = true;
       for ($i=0;$i<4;$i++) {
         $pts = explode('-', $ip[$i]);
-        if (count($pts) == 2 && $userip[$i] >= $pts[0] && $userip[$i] <= $pts[0]) {
+        if (count($pts) == 2 && $userip[$i] >= $pts[0] && $userip[$i] <= $pts[1]) {
           continue;
         } else if ($ip[$i] == '*') {
           continue;
@@ -143,18 +143,22 @@ class AssessUtils
         }
       }
       if ($thisIPok) {
-				$isoneIPok = true;
-				break;
-			}
+            $isoneIPok = true;
+            break;
+        }
     }
     return $isoneIPok;
   }
 
   public static function getEndMsg($endmsg, $score, $possible) {
-    if ($endmsgs === '') {
+    if ($endmsg === '') {
       return '';
     }
-    $average = round(100*$score/$possible,1);
+    if ($possible > 0) {
+        $average = round(100*$score/$possible,1);
+    } else {
+        $average = 0;
+    }
 
     $endmsg = unserialize($endmsg);
     $redirecturl = '';
@@ -172,10 +176,11 @@ class AssessUtils
       if (strpos($outmsg,'redirectto:')!==false) {
         $redirecturl = trim(substr($outmsg,11));
         $outmsg = "<input type=\"button\" value=\"". _('Continue'). "\" onclick=\"window.location.href='$redirecturl'\"/>";
-      }
-      $outmsg = '<p>'.$outmsg.'</p>';
-      if (!empty($endmsg['commonmsg']) && $endmsg['commonmsg']!='<p></p>') {
-        $outmsg .= $endmsg['commonmsg'];
+      } else {
+        $outmsg = '<p>'.$outmsg.'</p>';
+        if (!empty($endmsg['commonmsg']) && $endmsg['commonmsg']!='<p></p>') {
+            $outmsg .= $endmsg['commonmsg'];
+        }
       }
     }
     return $outmsg;
@@ -199,11 +204,13 @@ class AssessUtils
         $platformid = substr($row['org'], 6); // strip off LTI13-
         $ltiuserid = [];
         if (empty($_SESSION['lti_user_id']) || count($uids)>1 || $asArray) {
-            $uidlist = implode(',', $uids);
-            $stm = $DBH->prepare("SELECT userid,ltiuserid FROM imas_ltiusers WHERE userid in ($uidlist) AND org=?");
-            $stm->execute(array($row['org']));
-            while ($row = $stm->fetch(PDO::FETCH_NUM)) {
-                $ltiuserid[$row[0]] = $row[1];
+            if (count($uids)>0) {
+                $uidlist = implode(',', $uids);
+                $stm = $DBH->prepare("SELECT userid,ltiuserid FROM imas_ltiusers WHERE userid in ($uidlist) AND org=?");
+                $stm->execute(array($row['org']));
+                while ($row = $stm->fetch(PDO::FETCH_NUM)) {
+                    $ltiuserid[$row[0]] = $row[1];
+                }
             }
         } else {
             $ltiuserid = [$uids[0] => $_SESSION['lti_user_id']];

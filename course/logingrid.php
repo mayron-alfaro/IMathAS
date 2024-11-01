@@ -2,7 +2,7 @@
 //IMathAS:  Grid view of login log
 //(c) 2013 David Lippman for Lumen Learning
 
-require("../init.php");
+require_once "../init.php";
 
 
 $cid = Sanitize::courseId($_GET['cid']);
@@ -41,10 +41,10 @@ if (!isset($teacherid)) { // loaded by a NON-teacher
 	$body = "You need to log in as a teacher to access this page";
 } else { // PERMISSIONS ARE OK, PROCEED WITH PROCESSING
 	$now = time();
-	if (isset($_POST['daterange'])) {
-		require("../includes/parsedatetime.php");
-		$start = parsedatetime($_POST['sdate'],'12:00am');
-		$end = parsedatetime($_POST['edate'],'11:59pm');
+	if (isset($_REQUEST['daterange'])) {
+		require_once "../includes/parsedatetime.php";
+		$start = parsedatetime($_REQUEST['sdate'],'12:00am');
+		$end = parsedatetime($_REQUEST['edate'],'11:59pm');
 		if (($end-$start)/86400>365) {
 			$start = $end-365*24*60*60;
 		}
@@ -58,7 +58,8 @@ if (!isset($teacherid)) { // loaded by a NON-teacher
 	$starttime = tzdate("M j, Y, g:i a", $start);
 	$endtime = tzdate("M j, Y, g:i a", $end);
 	$sdate = tzdate("m/d/Y",$start);
-	$edate = tzdate("m/d/Y",$end);
+    $edate = tzdate("m/d/Y",$end);
+    $downloadqs = "&download=true&daterange=go&sdate=".Sanitize::encodeUrlParam($sdate)."&edate=".Sanitize::encodeUrlParam($edate);
 
 	$logins = array();
 	$stm = $DBH->prepare("SELECT userid,logintime FROM imas_login_log WHERE courseid=:courseid AND logintime>=:start AND logintime<=:end");
@@ -122,7 +123,7 @@ if (isset($_GET['download'])) {
 }
 $placeinhead = "<script type=\"text/javascript\" src=\"$staticroot/javascript/DatePicker.js\"></script>";
 $placeinhead .= '<style type="text/css"> table.logingrid td {text-align: center; border-right:1px solid #ccc;} table.logingrid td.left {text-align: left;}</style>';
-require("../header.php");
+require_once "../header.php";
 if ($overwriteBody==1) {
 	echo $body;
 } else {
@@ -131,7 +132,7 @@ if ($overwriteBody==1) {
 	<div id="headerlogingrid" class="pagetitle"><h1>Login Grid View</h1></div>
 
 	<div class="cpmid">
-		<a href="logingrid.php?cid=<?php echo $cid;?>&download=true">Download as CSV</a>
+		<a href="logingrid.php?cid=<?php echo $cid . $downloadqs;?>">Download as CSV</a>
 	</div>
 
 	<form method="post" action="logingrid.php?cid=<?php echo $cid;?>">
@@ -184,9 +185,9 @@ if ($haslocked) {
 		if ($alt==0) {echo '<tr class="even">'; $alt=1;} else {echo '<tr class="odd">'; $alt=0;}
         echo '<td class="left"><a href="viewloginlog.php?cid='.$cid.'&uid='.Sanitize::onlyInt($stu[1]).'">';
         if ($stu[2] > 0) {
-            echo '<span class=greystrike>'.Sanitize::encodeStringForDisplay($stu[0]).'</span>';
+            echo '<span class="greystrike pii-full-name">'.Sanitize::encodeStringForDisplay($stu[0]).'</span>';
         } else {
-            echo Sanitize::encodeStringForDisplay($stu[0]);
+            echo '<span class="pii-full-name">'.Sanitize::encodeStringForDisplay($stu[0]).'</span>';
         }
         echo '</a></td>';
 		for ($i=0;$i<$n;$i++) {
@@ -207,5 +208,5 @@ if ($haslocked) {
 	closes their browser, they can continue using the same session on the same computer until 7pm Thursday.</p>
 <?php
 }
-require("../footer.php");
+require_once "../footer.php";
 ?>

@@ -6,7 +6,7 @@
  * @param  Imathas_LTI_Database $db
  */
 function show_postback_form($launch, $db, $err='') {
-  global $imasroot,$installname,$coursetheme,$CFG;
+  global $imasroot,$staticroot,$installname,$coursetheme,$CFG,$mathimgurl;
   $promptForName = false;
   $promptForAcctCreation = false;
   $promptForLogin = false;
@@ -17,7 +17,7 @@ function show_postback_form($launch, $db, $err='') {
   $platform_id = $launch->get_platform_id();
   $migration_claim = $launch->get_migration_claim();
   // see if we already know who this person is
-  $localuserid = $db->get_local_userid($launch);
+  $localuserid = $db->get_local_userid($launch, $role);
 
   if ($role == 'Learner') {
     $localcourse = $db->get_local_course($contextid, $launch);
@@ -57,8 +57,8 @@ function show_postback_form($launch, $db, $err='') {
   $deflast = '';
   $defemail = '';
   if (!empty($name)) {
-    $deffirst = $name['first'];
-    $deflast = $name['last'];
+    $deffirst = $name['first'] ?? '';
+    $deflast = $name['last'] ?? '';
     if (!empty($launch->get_launch_data()['email'])) {
       $defemail = $launch->get_launch_data()['email'];
     }
@@ -69,13 +69,14 @@ function show_postback_form($launch, $db, $err='') {
 	$placeinhead = "<script type=\"text/javascript\" src=\"$imasroot/javascript/jstz_min.js\" ></script>";
   $placeinhead .= '<script type="text/javascript" src="'.$imasroot.'/javascript/jquery.validate.min.js?v=122917"></script>';
 
-	require("../header.php");
+	require_once "../header.php";
 	echo '<h1>'.sprintf(_('Connecting to %s'),$installname).'</h1>';
   if ($err != '') {
     echo '<p class=noticetext>'.$err.'</p>';
   }
   echo '<form id=postbackform method=post class="limitaftervalidate" action="finishlogin.php">';
   echo '<input type=hidden name=launchid value="'.Sanitize::encodeStringForDisplay($launch->get_launch_id()).'"/>';
+  echo '<div id="errorlive" aria-live="polite" class="sr-only"></div>';
 
   if ($promptForLogin) {
     echo '<p>'.sprintf(_('If you already have an account on %s, please enter your username and password below to enable automated signin.'), $installname).'</p>';
@@ -104,7 +105,7 @@ function show_postback_form($launch, $db, $err='') {
       }
 
       echo '<div class=submit><button type=submit>'._('Create Account').'</button></div>';
-      require_once(__DIR__.'/../includes/newusercommon.php');
+      require_once __DIR__.'/../includes/newusercommon.php';
       $requiredrules = array(
         'curSID'=>'{depends: function(element) {return $("#SID").val()==""}}',
         'curPW'=>'{depends: function(element) {return $("#SID").val()==""}}',
@@ -164,5 +165,5 @@ function show_postback_form($launch, $db, $err='') {
 	</script>
   <?php
   echo '</form>';
-  require('../footer.php');
+  require_once '../footer.php';
 }

@@ -8,8 +8,8 @@
 
 $init_session_start = true;
 $init_skip_csrfp = true;
-require('../init_without_validate.php');
-require_once(__DIR__ . '/lib/lti.php');
+require_once '../init_without_validate.php';
+require_once __DIR__ . '/lib/lti.php';
 require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/helpers.php';
 require_once __DIR__ . '/../includes/password.php';
@@ -29,8 +29,10 @@ $platform_id = $launch->get_platform_id();
 
 // see if we already know who this person is
 $migration_claim = $launch->get_migration_claim();
-$localuserid = $db->get_local_userid($launch);
+$localuserid = $db->get_local_userid($launch, $role);
 $localcourse = $db->get_local_course($contextid, $launch);
+
+$err = '';
 
 // no local user yet.  Parse submitted info.
 if ($localuserid === false) {
@@ -40,14 +42,29 @@ if ($localuserid === false) {
     $role=='Instructor'
   )) {
     // check login
-    $stm = $DBH->prepare('SELECT password,id,groupid FROM imas_users WHERE SID=:sid');
+    $stm = $DBH->prepare('SELECT password,id,groupid,mfa FROM imas_users WHERE SID=:sid');
     $stm->execute(array(':sid'=>$_POST['curSID']));
     if ($stm->rowCount()==0) {
       $err = _('Existing username or password is not valid');
     } else {
-      list($realpw,$tmpuserid,$tmpgroupid) = $stm->fetch(PDO::FETCH_NUM);
+      list($realpw,$tmpuserid,$tmpgroupid,$mfadata) = $stm->fetch(PDO::FETCH_NUM);
       if (password_verify($_POST['curPW'],$realpw)) {
         // valid login
+        if ($mfadata !== '') {
+            $mfadata = json_decode($mfadata, true);
+            if (empty($mfadata['mfatype']) || $mfadata['mfatype'] == 'all') {
+                $flexwidth = true;
+                $nologo = true;
+                require_once '../includes/mfa.php';
+                $formaction = $imasroot."/lti/finishlogin.php";
+                if (!isset($_POST['mfatoken'])) {
+                    mfa_showLoginEntryForm($formaction, '', false);
+                    exit;
+                } else if (!mfa_verify($mfadata, $formaction, $tmpuserid, false)) {
+                    exit;
+                }
+            }
+        }
         $localuserid = $tmpuserid;
         if ($role == 'Instructor') {
           // if teacher, make sure the deployment is associated with the groupid
@@ -63,7 +80,7 @@ if ($localuserid === false) {
     ($role=='Instructor' && !empty($GLOBALS['CFG']['LTI']['allow_instr_create']))
   )) {
     // create new account
-    require_once(__DIR__.'/../includes/newusercommon.php');
+    require_once __DIR__.'/../includes/newusercommon.php';
     $err = checkNewUserValidation();
 
     $groupid = 0;
@@ -134,45 +151,73 @@ if ($localuserid === false) {
 }
 if ($localuserid === false) {
   // wasn't able to create a new user; redisplay form and try again.
-  require(__DIR__ .'/show_postback_form.php');
+  require_once __DIR__ .'/show_postback_form.php';
   show_postback_form($launch, new Imathas_LTI_Database($DBH), $err);
   exit;
 }
 
 // We have a local userid, so log them in.
+if (isset($_SESSION['userid']) && $_SESSION['userid'] != $localuserid) {
+    $_SESSION = [];
+}
 $_SESSION['lti_user_id'] = $ltiuserid;
 $_SESSION['userid'] = $localuserid;
 $_SESSION['ltiver'] = '1.3';
 $_SESSION['tzoffset'] = $_POST['tzoffset'];
+$_SESSION['time'] = time();
+$_SESSION['started'] = time();
 $tzname = '';
+
+// don't need cache anymore for students
+if ($role !== 'Instructor') {
+    unset($_SESSION['lticache'][$launch->get_launch_id()]);
+}
+require_once __DIR__."/../includes/userprefs.php";
+generateuserprefs($localuserid);
 if (!empty($_POST['tzname'])) {
     $_SESSION['tzname'] = $_POST['tzname'];
  	if (date_default_timezone_set($_SESSION['tzname'])) {
         $tzname = $_SESSION['tzname'];
     }
 }
-require_once(__DIR__."/../includes/userprefs.php");
-generateuserprefs();
+
+// log lastaccess
+$db->set_user_lastaccess($localuserid);
+
+if ($role == 'Instructor' && $localcourse === null) {
+    // try looking it up again, now that user connection is established
+    $localcourse = $db->get_local_course($contextid, $launch);
+}
 
 if ($role == 'Instructor' && $localcourse === null) {
   // no course connection yet
-  require(__DIR__.'/connectcourse.php');
+  require_once __DIR__.'/connectcourse.php';
   connect_course($launch, $db, $localuserid);
 } else {
 
   // enroll student in course if needed
-  $contextlabel = $launch->get_platform_context_label();
-  $db->enroll_if_needed($localuserid, $role, $localcourse, $contextlabel);
+  $sectionlabel = $launch->get_platform_context_label();
+  $custom = $launch->get_custom();
+  if (!empty($custom['canvas_sections']) && $role != 'Instructor') {
+    $canvassections = json_decode($custom['canvas_sections'], true);
+    if (is_array($canvassections)) {
+        if (strlen($sectionlabel) + strlen($canvassections[0]) > 37) {
+            $sectionlabel = substr($sectionlabel, 0, 37 - strlen($canvassections[0]));
+        }
+        $sectionlabel .= ' - ' . $canvassections[0];
+    }
+  }
+  $db->enroll_if_needed($localuserid, $role, $localcourse, $sectionlabel);
 
   // we have a course connection
   if ($launch->is_deep_link_launch() && $role == 'Instructor') {
-    require(__DIR__.'/deep_link_form.php');
+    require_once __DIR__.'/deep_link_form.php';
     deep_link_form($launch, $localuserid, $localcourse, $db);
   } else if ($launch->is_submission_review_launch()) {
-    require(__DIR__.'/submissionlink.php');
+    require_once __DIR__.'/submissionlink.php';
     link_to_submission($launch, $localuserid, $localcourse, $db);
   } else if ($launch->is_resource_launch()) {
-    require(__DIR__.'/resourcelink.php');
+    require_once __DIR__.'/resourcelink.php';
     link_to_resource($launch, $localuserid, $localcourse, $db);
   } else {
     echo 'Error - invalid launch type';

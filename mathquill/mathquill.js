@@ -2483,7 +2483,23 @@ Controller.open(function(_, super_) {
               )
            )
         ) {
-            cursor.parent.write(cursor, '(');
+            var str = '', l = cursor[L];
+            // if sub/sup, grab base operator
+            if ((cursor[L].hasOwnProperty("sup") || cursor[L].hasOwnProperty("sub")) &&
+                cursor[L][-1].isPartOfOperator
+            ) {
+                l = cursor[L][-1];
+            }
+            while (l.isPartOfOperator && !l.jQ.hasClass("mq-last")) {
+                str = l.letter + str;
+                if (l[-1] === 0) { break; }
+                l = l[L];
+            }
+            if (cursor.options.autoParenOperators === true ||
+                cursor.options.autoParenOperators.hasOwnProperty(str)
+            ) {
+                cursor.parent.write(cursor, '(', true);
+            }
         }
       block.children().adopt(cursor.parent, cursor[L], cursor[R]);
       var jQ = block.jQize();
@@ -2971,8 +2987,15 @@ var MathCommand = P(MathElement, function(_, super_) {
             cursor.options.autoParenOperators.hasOwnProperty(str)
         ) {
             str += cmd.letter;
-            if (AutoOpNames._maxLength == 0 || !AutoOpNames.hasOwnProperty(str) || issubsup) {
-                cursor.parent.write(cursor, '(');
+            var partofop = false;
+            for (var opname in cursor.options.autoOperatorNames) {
+                if (opname.substring(0, str.length) === str) {
+                    partofop = true;
+                    break;
+                }
+            }
+            if (AutoOpNames._maxLength == 0 || !partofop || issubsup) {
+                cursor.parent.write(cursor, '(', true);
             }
         }
       }
@@ -4116,7 +4139,13 @@ var Digit = P(VanillaSymbol, function(_, super_) {
         && ((cursor[L] instanceof Variable && cursor[L].isItalic !== false)
             || (cursor[L] instanceof SupSub
                 && cursor[L][L] instanceof Variable
-                && cursor[L][L].isItalic !== false))) {
+                && cursor[L][L].isItalic !== false)
+            || (cursor[L] instanceof Bracket 
+                && cursor[L].sides[R].ch == ')')
+            || (cursor[L] instanceof SupSub
+                && cursor[L][L] instanceof Bracket 
+                && cursor[L][L].sides[R].ch == ')')
+    )) {
       LatexCmds._().createLeftOf(cursor);
       super_.createLeftOf.call(this, cursor);
       cursor.insRightOf(cursor.parent.parent);
@@ -4558,7 +4587,7 @@ LatexCmds['\u00bc'] = bind(LatexFragment, '\\frac14');
 LatexCmds['\u00bd'] = bind(LatexFragment, '\\frac12');
 LatexCmds['\u00be'] = bind(LatexFragment, '\\frac34');
 
-var PlusMinus = P(BinaryOperator, function(_) {
+var PlusMinus = P(BinaryOperator, function(_, super_) {
   _.init = VanillaSymbol.prototype.init;
 
   _.contactWeld = _.siblingCreated = _.siblingDeleted = function(opts, dir) {
@@ -4586,9 +4615,21 @@ var PlusMinus = P(BinaryOperator, function(_) {
     this.jQ[0].className = determineOpClassType(this);
     return this;
   };
+  _.createLeftOf = function(cursor) {
+    if (cursor.options.quickplusminus && cursor[L] instanceof PlusMinus && cursor[L].ctrlSeq=='+' && this.ctrlSeq=='-') {
+      cursor[L].ctrlSeq = '\\pm ';
+      cursor[L].text = '\\pm ';
+      cursor[L].htmlTemplate = '<span>&plusmn;</span>';
+      cursor[L].jQ.html('&plusmn;');
+      this.bubble('reflow');
+      return;
+    }
+    super_.createLeftOf.apply(this, arguments);
+  };
 });
 
 LatexCmds['+'] = bind(PlusMinus, '+', '+');
+
 //yes, these are different dashes, I think one is an en dash and the other is a hyphen
 LatexCmds['\u2013'] = LatexCmds['-'] = bind(PlusMinus, '-', '&minus;');
 LatexCmds['\u00b1'] = LatexCmds.pm = LatexCmds.plusmn = LatexCmds.plusminus =
@@ -4863,7 +4904,7 @@ var SupSub = P(MathCommand, function(_, super_) {
   };
   Options.p.charsThatBreakOutOfSupSub = '';
   _.finalizeTree = function() {
-    this.ends[L].write = function(cursor, ch) {
+    this.ends[L].write = function(cursor, ch, nobreaksubsup) {
       if (cursor.options.autoSubscriptNumerals && this === this.parent.sub) {
         if (ch === '_') return;
         var cmd = this.chToCmd(ch, cursor.options);
@@ -4871,7 +4912,7 @@ var SupSub = P(MathCommand, function(_, super_) {
         else cursor.clearSelection().insRightOf(this.parent);
         return cmd.createLeftOf(cursor.show());
       }
-      if (cursor[L] && !cursor[R] && !cursor.selection
+      if (cursor[L] && !cursor[R] && !cursor.selection && !nobreaksubsup
           && cursor.options.charsThatBreakOutOfSupSub.indexOf(ch) > -1) {
         cursor.insRightOf(this.parent);
         // if using space to escape, don't write character
@@ -4879,7 +4920,7 @@ var SupSub = P(MathCommand, function(_, super_) {
           return;
         }
       }
-      if (cursor[L] && !cursor[R] && !cursor.selection
+      if (cursor[L] && !cursor[R] && !cursor.selection && !nobreaksubsup
           && this.parent[L] instanceof Variable
       ) {
           if ((this.parent[L].isItalic !== false && this.parent[L].letter !== 'e' 
@@ -5898,6 +5939,11 @@ Environments.matrix = P(Environment, function(_, super_) {
       }
     }
     if (myColumn.length > 1) {
+      row = rows.indexOf(myRow);
+      // Decrease all following row numbers
+      this.eachChild(function (cell) {
+        if (cell.row > row) cell.row-=1;
+      });
       remove(myRow);
       this.jQ.find('tr').eq(row).remove();
     }
@@ -6229,8 +6275,8 @@ optionProcessors.addCommands = function(cmds) {
     }
     if (cmds[str][0] == 'VanillaSymbol') {
       LatexCmds[str] = bind(VanillaSymbol, cmds[str][1], cmds[str][2]);
-    } else if (cmds[str][0] == 'BinarySymbol') {
-      LatexCmds[str] = bind(BinarySymbol, cmds[str][1], cmds[str][2]);
+    } else if (cmds[str][0] == 'BinaryOperator') {
+      LatexCmds[str] = bind(BinaryOperator, cmds[str][1], cmds[str][2]);
     } else if (cmds[str][0] == 'Variable') {
       LatexCmds[str] = bind(Variable, cmds[str][1], cmds[str][2]);
     } else {
