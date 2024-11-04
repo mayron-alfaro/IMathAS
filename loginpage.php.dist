@@ -21,7 +21,7 @@ if (!isset($imasroot)) { //don't allow direct access to loginpage.php
 		 $challenge = base64_encode(microtime() . rand(0,9999));
 		 $_SESSION['challenge'] = $challenge;
 	 }
-	 $pagetitle = "About Us";
+	 $pagetitle = "Sobre Nosotros";
 	 include("infoheader.php");
 	 
 ?>
@@ -34,14 +34,14 @@ if (!isset($imasroot)) { //don't allow direct access to loginpage.php
 	if ($haslogin) {
 		if ($badsession) {
 			if (isset($_COOKIE[session_name()])) {
-				echo 'Problems with session storage';
+				echo 'Problemas con el almacenamiento de sesión';
 			}  else {
-				echo '<p>Unable to establish a session.  Check that your browser is set to allow session cookies</p>';
+				echo '<p>No se puede establecer una sesión. Verifica que tu navegador esté configurado para permitir cookies de sesión</p>';
 			}
 		} else if (isset($line['password']) && substr($line['password'],0,8)=='cleared_') {
-			echo '<p>Your password has expired since your account has been unused. Use the Reset Password link below to reset your password.</p>';
+			echo '<p>Tu contraseña ha expirado debido a inactividad en tu cuenta. Usa el enlace Restablecer Contraseña abajo para restablecer tu contraseña.</p>';
 		} else {
-			echo "<p>Login Error.  Try Again</p>\n";
+			echo "<p>Error de inicio de sesión. Inténtalo nuevamente</p>\n";
 		}
 	}
 ?>
