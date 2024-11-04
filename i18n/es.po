@@ -798,7 +798,7 @@ msgstr "Propietario (si no es el usuario)"
 #: admin/userreportdetails.php:384 admin/userreportdetails.php:425
 #: admin/userdetails.php:265 admin/userdetails.php:306
 msgid "Course Owner"
-msgstr ""
+msgstr "Propietario del curso"
 
 #: admin/userdetails.php:384 admin/userdetails.php:393
 #: admin/userreportdetails.php:516 admin/userdetails.php:397
@@ -816,16 +816,16 @@ msgstr "¿Estás seguro?"
 
 #: admin/userlti.php:115 admin/userlti.php:173 admin/userlti.php:185
 msgid "LTI user connections"
-msgstr ""
+msgstr "Conexiones de usuario LTI"
 
 #: admin/userlti.php:117 admin/userlti.php:139 admin/userlti.php:175
 #: admin/userlti.php:197 admin/userlti.php:187 admin/userlti.php:209
 msgid "Key:org"
-msgstr ""
+msgstr "Clave:org"
 
 #: admin/userlti.php:118 admin/userlti.php:176 admin/userlti.php:188
 msgid "Remote Userid"
-msgstr ""
+msgstr "ID de usuario remoto"
 
 #: admin/userlti.php:119 admin/userlti.php:141
 #: javascript/assessment_min.js:165 javascript/drawing.js:256
@@ -839,25 +839,25 @@ msgstr ""
 #: javascript/addqsort2.js:1281 javascript/addqsort2.js:1401
 #: javascript/addqsort2.js:1669 javascript/drawing.js:332
 msgid "Remove"
-msgstr ""
+msgstr "Eliminar"
 
 #: admin/userlti.php:127 admin/userlti.php:151 admin/userlti.php:185
 #: admin/userlti.php:213 admin/userlti.php:197 admin/userlti.php:225
 msgid "Remove connection"
-msgstr ""
+msgstr "Eliminar conexión"
 
 #: admin/userlti.php:135 admin/userlti.php:193 admin/userlti.php:205
 msgid "LTI course connections"
-msgstr ""
+msgstr "Conexiones de curso LTI"
 
 #: admin/userlti.php:140
 msgid "contextid"
-msgstr ""
+msgstr "contextoID"
 
 #: assessment/catscores.php:71 assessment/catscores.php:61
 #: assessment/catscores.php:64
 msgid "Categorized Score Breakdown"
-msgstr ""
+msgstr "Desglose de Puntuación por Categoría"
 
 #: assessment/catscores.php:72 course/gradebook.php:508
 #: assessment/catscores.php:62 course/gradebook.php:327
