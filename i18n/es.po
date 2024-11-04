@@ -616,13 +616,15 @@ msgstr "Sí"
 #: course/modquestiongrid2.php:161 course/modquestiongrid2.php:171
 #: course/modquestiongrid2.php:264 course/modquestiongrid2.php:361
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: admin/ltiuserprefs.php:20
 msgid ""
 "Preferences saved. Your new preferences will go into effect when you visit a "
 "new page or load the current page."
 msgstr ""
+"Preferencias guardadas. Tus nuevas preferencias entrarán en efecto cuando visites una "
+"nueva página o cargues la página actual."
 
 #: admin/ltiuserprefs.php:25 assessment/showtest.php:1136
 #: assessment/showtest.php:1140 assessment/showtest.php:1156
@@ -667,7 +669,7 @@ msgstr "Añadir/Remover profesores"
 #: admin/userreportdetails.php:521 index.php:73
 #: admin/unhidefromcourselist.php:102 admin/userdetails.php:402
 msgid "Transfer ownership"
-msgstr ""
+msgstr "Transferir propiedad"
 
 #: admin/unhidefromcourselist.php:83 index.php:487
 #: admin/modcourseorder.php:189 admin/unhidefromcourselist.php:90
@@ -708,7 +710,7 @@ msgstr "Oculto para estudiantes"
 #: admin/userreportdetails.php:109 admin/userreportdetails.php:201
 #: admin/userreportdetails.php:227
 msgid "Locked for Assessment"
-msgstr ""
+msgstr "Bloqueado para evaluación"
 
 #: admin/userdetails.php:86 admin/userdetails.php:113
 #: admin/userdetails.php:139 admin/userdetails.php:370
@@ -726,7 +728,7 @@ msgstr "Editar Usuario"
 
 #: admin/userdetails.php:173 admin/userdetails.php:176
 msgid "Emulate User"
-msgstr ""
+msgstr "Emular usuario"
 
 #: admin/userdetails.php:174 admin/userlti.php:69 admin/userlti.php:109
 #: admin/userdetails.php:178 admin/userlti.php:94 admin/userlti.php:167
@@ -763,7 +765,7 @@ msgstr "Cursos de los que eres tutor"
 #: admin/userreportdetails.php:305 admin/userreportdetails.php:420
 #: admin/userdetails.php:210 admin/userdetails.php:301
 msgid "Courses Taking"
-msgstr ""
+msgstr "Cursos en los que estoy inscrito"
 
 #: admin/userdetails.php:211 admin/userdetails.php:255
 #: admin/userdetails.php:294 admin/userlti.php:138 admin/userdetails.php:215
@@ -789,7 +791,7 @@ msgstr "Estado"
 #: admin/userdetails.php:213 admin/userdetails.php:217
 #: admin/userreportdetails.php:320 admin/userdetails.php:221
 msgid "Owner (if not user)"
-msgstr ""
+msgstr "Propietario (si no es el usuario)"
 
 #: admin/userdetails.php:257 admin/userdetails.php:296
 #: admin/userdetails.php:261 admin/userdetails.php:302
