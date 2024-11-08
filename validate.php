@@ -187,7 +187,7 @@ if ($haslogin && !$hasusername) {
         if ($line != false && isset($line['jsondata'])) {
             $json_data = json_decode($line['jsondata'], true);
             if (isset($json_data['login_blockuntil']) && time() < $json_data['login_blockuntil']) {
-                echo _('Too many invalid logins - please wait a minute before trying again, or use the forgot password link to reset your password');
+                echo _('Demasiados inicios de sesión no válidos. Por favor espere un minuto antes de volver a intentarlo o utilice el enlace ¿Olvidó la contraseña? para restablecer su contraseña.');
                 exit;
             }
         }
@@ -211,7 +211,7 @@ if ($haslogin && !$hasusername) {
         || (isset($CFG['GEN']['newpasswords']) && password_verify($_POST['password'], $line['password']))
     )) {
         if (empty($_POST['tzname']) && $_POST['tzoffset'] == '' && strpos(basename($_SERVER['PHP_SELF']), 'upgrade.php') === false) {
-            echo _('Uh oh, something went wrong.  Please go back and try again');
+            echo _('Oh oh, algo salió mal.  Por favor regrese y vuelva a intentarlo.');
             exit;
         }
         $userid = $line['id'];
@@ -224,7 +224,7 @@ if ($haslogin && !$hasusername) {
         //
         if ($line['rights'] == 0) {
             require_once __DIR__."/header.php";
-            echo _("You have not yet confirmed your registration.  You must respond to the email that was sent to you by IMathAS.");
+            echo _("Aún no ha confirmado su registro.  Debe revisar el correo electrónico que te envió iMathSV, si no lo encuentras busca en la carpeta de SPAM o Correo no deseado, po alguna razón pudo ir a parar allí.");
             require_once __DIR__ . '/footer.php';
             exit;
         }
