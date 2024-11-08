@@ -115,15 +115,15 @@ function getBlockDD($blocktype, $i, $parent, $bnum, $blockid, $name)
     $out .= '</a>';
     $out .= '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu' . $i . '">';
     if ($blocktype == 'T') {
-        $out .= " <li><a href=\"course.php?cid=$cid&folder=$parent-$bnum\">" . _('Edit Contents') . "</a></li>";
+        $out .= " <li><a href=\"course.php?cid=$cid&folder=$parent-$bnum\">" . _('Editar contenidos') . "</a></li>";
     } else if ($blocktype == 'E') {
         $out .= " <li><a href=\"course.php?cid=$cid&folder=$parent-$bnum\">" . _('Enfocar') . "</a></li>";
     }
-    $out .= " <li><a href=\"addblock.php?cid=$cid&id=$parent-$bnum\">" . _('Modify') . "</a></li>";
-    $out .= " <li><a href=\"#\" onclick=\"return moveDialog('$parent','B{$blockid}');\">" . _('Move') . '</a></li>';
-    $out .= " <li><a href=\"deleteblock.php?cid=$cid&id=$parent-$bnum&bid=$blockid&remove=ask\">" . _('Delete') . "</a></li>";
-    $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$parent-$bnum&backref=blockhead{$blockid}\">" . _('Copy') . "</a></li>";
-    $out .= " <li><a href=\"course.php?cid=$cid&togglenewflag=$parent-$bnum\">" . _('Toggle NewFlag') . "</a></li>";
+    $out .= " <li><a href=\"addblock.php?cid=$cid&id=$parent-$bnum\">" . _('Modificar') . "</a></li>";
+    $out .= " <li><a href=\"#\" onclick=\"return moveDialog('$parent','B{$blockid}');\">" . _('Mover') . '</a></li>';
+    $out .= " <li><a href=\"deleteblock.php?cid=$cid&id=$parent-$bnum&bid=$blockid&remove=ask\">" . _('Borrar') . "</a></li>";
+    $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$parent-$bnum&backref=blockhead{$blockid}\">" . _('Copiar') . "</a></li>";
+    $out .= " <li><a href=\"course.php?cid=$cid&togglenewflag=$parent-$bnum\">" . _('Alternar indicador de Nuevo') . "</a></li>";
     $out .= '</ul>';
     $out .= '</div>';
     return $out;
@@ -136,17 +136,17 @@ function getAssessDD($i, $typeid, $parent, $itemid, $thisaddassess, $ver, $name)
     $out .= ' <img src="' . $staticroot . '/img/gearsdd.png" alt="' . _('Options for') . ' ' . Sanitize::encodeStringForDisplay($name) . '" class="mida"/>';
     $out .= '</a>';
     $out .= '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu' . $i . '">';
-    $out .= " <li><a href=\"addquestions2.php?aid=$typeid&cid=$cid\">" . _('Questions') . "</a></li>";
-    $out .= " <li><a href=\"$thisaddassess?id=$typeid&block=$parent&cid=$cid\">" . _('Settings') . "</a></li>";
-    $out .= " <li><a href=\"#\" onclick=\"return moveDialog('$parent','$itemid');\">" . _('Move') . '</a></li>';
-    $out .= " <li><a href=\"deleteassessment.php?id=$typeid&block=$parent&cid=$cid&remove=ask\">" . _('Delete') . "</a></li>";
-    $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$itemid&backref=$itemid\">" . _('Copy') . "</a></li>";
+    $out .= " <li><a href=\"addquestions2.php?aid=$typeid&cid=$cid\">" . _('Preguntas') . "</a></li>";
+    $out .= " <li><a href=\"$thisaddassess?id=$typeid&block=$parent&cid=$cid\">" . _('Ajustes') . "</a></li>";
+    $out .= " <li><a href=\"#\" onclick=\"return moveDialog('$parent','$itemid');\">" . _('Mover') . '</a></li>';
+    $out .= " <li><a href=\"deleteassessment.php?id=$typeid&block=$parent&cid=$cid&remove=ask\">" . _('Borrar') . "</a></li>";
+    $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$itemid&backref=$itemid\">" . _('Copiar') . "</a></li>";
     if ($ver > 1) {
-        $out .= " <li><a href=\"gb-itemanalysis2.php?cid=$cid&aid=$typeid\">" . _('Grades') . "</a></li>";
+        $out .= " <li><a href=\"gb-itemanalysis2.php?cid=$cid&aid=$typeid\">" . _('Calificaciones') . "</a></li>";
     } else {
-        $out .= " <li><a href=\"gb-itemanalysis.php?cid=$cid&asid=average&aid=$typeid\">" . _('Grades') . "</a></li>";
+        $out .= " <li><a href=\"gb-itemanalysis.php?cid=$cid&asid=average&aid=$typeid\">" . _('Calificaciones') . "</a></li>";
     }
-    $out .= " <li><a href=\"contentstats.php?cid=$cid&type=A&id=$typeid\">" . _('Stats') . '</a></li>';
+    $out .= " <li><a href=\"contentstats.php?cid=$cid&type=A&id=$typeid\">" . _('Estadísticas') . '</a></li>';
     $out .= '</ul>';
     $out .= '</div>';
     return $out;
@@ -159,12 +159,12 @@ function getDrillDD($i, $typeid, $parent, $itemid, $name)
     $out .= ' <img src="' . $staticroot . '/img/gearsdd.png" alt="' . _('Options for') . ' ' . Sanitize::encodeStringForDisplay($name) . '" class="mida"/>';
     $out .= '</a>';
     $out .= '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu' . $i . '">';
-    $out .= " <li><a href=\"adddrillassess.php?daid=$typeid&block=$parent&cid=$cid\">" . _('Modify') . "</a></li>";
-    $out .= " <li><a href=\"#\" onclick=\"return moveDialog('$parent','$itemid');\">" . _('Move') . '</a></li>';
-    $out .= " <li><a href=\"deletedrillassess.php?id=$typeid&block=$parent&cid=$cid&remove=ask\">" . _('Delete') . "</a></li>";
-    $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$itemid&backref=$itemid\">" . _('Copy') . "</a></li>";
-    $out .= " <li><a href=\"gb-viewdrill.php?cid=$cid&daid=$typeid\">" . _('Scores') . '</a></li>';
-    $out .= " <li><a href=\"contentstats.php?cid=$cid&type=D&id=$typeid\">" . _('Stats') . '</a></li>';
+    $out .= " <li><a href=\"adddrillassess.php?daid=$typeid&block=$parent&cid=$cid\">" . _('Modificar') . "</a></li>";
+    $out .= " <li><a href=\"#\" onclick=\"return moveDialog('$parent','$itemid');\">" . _('Mover') . '</a></li>';
+    $out .= " <li><a href=\"deletedrillassess.php?id=$typeid&block=$parent&cid=$cid&remove=ask\">" . _('Borrar') . "</a></li>";
+    $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$itemid&backref=$itemid\">" . _('Copiar') . "</a></li>";
+    $out .= " <li><a href=\"gb-viewdrill.php?cid=$cid&daid=$typeid\">" . _('Puntajes') . '</a></li>';
+    $out .= " <li><a href=\"contentstats.php?cid=$cid&type=D&id=$typeid\">" . _('Estadísticas') . '</a></li>';
     $out .= '</ul>';
     $out .= '</div>';
     return $out;
@@ -174,19 +174,19 @@ function getBasicDD($i, $typeid, $parent, $itemid, $typename, $statsletter, $sho
     global $cid, $staticroot;
     $out = '<div class="itemhdrdd dropdown">';
     $out .= '<a tabindex=0 class="dropdown-toggle" id="dropdownMenu' . $i . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-    $out .= ' <img src="' . $staticroot . '/img/gearsdd.png" alt="' . _('Options for') . ' ' . Sanitize::encodeStringForDisplay($name) . '" class="mida"/>';
+    $out .= ' <img src="' . $staticroot . '/img/gearsdd.png" alt="' . _('Opciones para') . ' ' . Sanitize::encodeStringForDisplay($name) . '" class="mida"/>';
     $out .= '</a>';
     $out .= '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu' . $i . '">';
-    $out .= " <li><a href=\"add$typename.php?id=$typeid&block=$parent&cid=$cid\">" . _('Modify') . "</a></li>";
-    $out .= " <li><a href=\"#\" onclick=\"return moveDialog('$parent','$itemid');\">" . _('Move') . '</a></li>';
-    $out .= " <li><a href=\"delete$typename.php?id=$typeid&block=$parent&cid=$cid&remove=ask\">" . _('Delete') . "</a></li>";
+    $out .= " <li><a href=\"add$typename.php?id=$typeid&block=$parent&cid=$cid\">" . _('Modificar') . "</a></li>";
+    $out .= " <li><a href=\"#\" onclick=\"return moveDialog('$parent','$itemid');\">" . _('Mover') . '</a></li>';
+    $out .= " <li><a href=\"delete$typename.php?id=$typeid&block=$parent&cid=$cid&remove=ask\">" . _('Borrar') . "</a></li>";
     if ($typename == 'inlinetext') {
-        $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$itemid&backref=inline{$typeid}\">" . _('Copy') . "</a></li>";
+        $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$itemid&backref=inline{$typeid}\">" . _('Copiar') . "</a></li>";
     } else {
-        $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$itemid&backref=$itemid\">" . _('Copy') . "</a></li>";
+        $out .= " <li><a href=\"copyoneitem.php?cid=$cid&copyid=$itemid&backref=$itemid\">" . _('Copiar') . "</a></li>";
     }
     if ($showstats) {
-        $out .= " <li><a href=\"contentstats.php?cid=$cid&type=$statsletter&id=$typeid\">" . _('Stats') . '</a></li>';
+        $out .= " <li><a href=\"contentstats.php?cid=$cid&type=$statsletter&id=$typeid\">" . _('Estadísticas') . '</a></li>';
     }
     $out .= '</ul>';
     $out .= '</div>';
@@ -286,13 +286,13 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
             $bnum = $i + 1;
             if (in_array($items[$i]['id'], $openblocks)) {$isopen = true;} else { $isopen = false;}
             if (strlen($items[$i]['SH']) == 1 || $items[$i]['SH'][1] == 'O') {
-                $availbeh = _('Expanded');
+                $availbeh = _('Expandido');
             } else if ($items[$i]['SH'][1] == 'F') {
-                $availbeh = _('as Folder');
+                $availbeh = _('como Carpeta');
             } else if ($items[$i]['SH'][1] == 'T') {
-                $availbeh = _('as TreeReader');
+                $availbeh = _('como Álrbol de Lectura');
             } else {
-                $availbeh = _('Collapsed');
+                $availbeh = _('Contraído');
             }
             if (strlen($items[$i]['SH']) > 2) {
                 $contentbehavior = $items[$i]['SH'][2];
@@ -315,17 +315,17 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                     $isopen = true;
                 }
                 if ($items[$i]['avail'] == 2) {
-                    $show = sprintf(_('Showing %s Always'), $availbeh);
+                    $show = sprintf(_('Mostrando %s Siempre'), $availbeh);
                 } else {
-                    $show = sprintf(_('Showing %1$s %2$s until %3$s'), $availbeh, $startdate, $enddate);
+                    $show = sprintf(_('Mostrando %1$s %2$s hasta %3$s'), $availbeh, $startdate, $enddate);
                 }
                 if (isset($items[$i]['grouplimit']) && count($items[$i]['grouplimit']) > 0 && $viewall) {
                     $seclist = implode(', ', array_map(function ($v) {return substr($v, 2);}, $items[$i]['grouplimit']));
                     $show .= '. ';
                     if (count($items[$i]['grouplimit']) > 1) {
-                        $show .= _('Limited to sections');
+                        $show .= _('Limitado a secciones');
                     } else {
-                        $show .= _('Limited to section');
+                        $show .= _('Limitado a la sección');
                     }
                     $show .= ' ' . Sanitize::encodeStringForDisplay($seclist) . '.';
                 }
@@ -357,7 +357,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                         echo "<a href=\"course.php?cid=$cid&folder=$parent-$bnum\" $astyle><b role=\"heading\">{$items[$i]['name']}</b></a> ";
                     }
                     if (isset($items[$i]['newflag']) && $items[$i]['newflag'] == 1) {
-                        echo "<span class=noticetext>", _('New'), "</span>";
+                        echo "<span class=noticetext>", _('Nuevo'), "</span>";
                     }
                     if ($viewall) {
                         echo '<span class="instrdates">';
@@ -404,7 +404,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                         echo "<a href=\"treereader.php?cid=$cid&folder=$parent-$bnum\" $astyle><b>" . Sanitize::encodeStringForDisplay($items[$i]['name']) . "</b></a> ";
                     }
                     if (isset($items[$i]['newflag']) && $items[$i]['newflag'] == 1) {
-                        echo "<span class=noticetext>", _('New'), "</span>";
+                        echo "<span class=noticetext>", _('Nuevo'), "</span>";
                     }
                     if ($viewall) {
                         echo '<span class="instrdates">';
@@ -449,7 +449,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                     echo 'aria-controls="block' . $items[$i]['id'] . '" aria-expanded="' . ($isopen ? "true" : "false") . '"';
                     echo "$astyle>" . Sanitize::encodeStringForDisplay($items[$i]['name']) . "</a></b> ";
                     if (isset($items[$i]['newflag']) && $items[$i]['newflag'] == 1) {
-                        echo "<span class=noticetext>", _('New'), "</span>";
+                        echo "<span class=noticetext>", _('Nuevo'), "</span>";
                     }
                     if ($viewall) {
                         echo '<span class="instrdates">';
@@ -505,20 +505,20 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 }
             } else if ($viewall || ($items[$i]['SH'][0] == 'S' && $items[$i]['avail'] > 0)) { //if "unavailable"
                 if ($items[$i]['avail'] == 0) {
-                    $show = _('Hidden');
+                    $show = _('Oculto');
                 } else if ($items[$i]['SH'][0] == 'S') {
-                    $show = _('Currently Showing');
+                    $show = _('Mostrando actualmente');
                     if (strlen($items[$i]['SH']) > 1 && $items[$i]['SH'][1] == 'F') {
-                        $show .= _(' as Folder. ');
+                        $show .= _(' como Carpeta. ');
                     } else if (strlen($items[$i]['SH']) > 1 && $items[$i]['SH'][1] == 'T') {
-                        $show .= _(' as TreeReader. ');
+                        $show .= _(' como Árbol de Lectura. ');
                     } else {
-                        $show .= _(' Collapsed. ');
+                        $show .= _(' Contraído. ');
                     }
-                    $show .= sprintf(_('Showing %1$s %2$s to %3$s'), $availbeh, $startdate, $enddate);
+                    $show .= sprintf(_('Mostrando %1$s %2$s hasta %3$s'), $availbeh, $startdate, $enddate);
                 } else { //currently hidden, using dates
-                    $show = "Currently Hidden. ";
-                    $show .= sprintf(_('Showing %1$s %2$s to %3$s'), $availbeh, $startdate, $enddate);
+                    $show = "Actualmente oculto. ";
+                    $show .= sprintf(_('Mostrando %1$s %2$s a %3$s'), $availbeh, $startdate, $enddate);
                 }
                 if (strlen($items[$i]['SH']) > 1 && $items[$i]['SH'][1] == 'F') { //show as folder
                     //if ($canedit) {
@@ -544,7 +544,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                     echo "<a href=\"course.php?cid=$cid&folder=$parent-$bnum\" $astyle><b role=\"heading\">";
                     if ($items[$i]['SH'][0] == 'S') {echo "{$items[$i]['name']}</b></a> ";} else {echo "<i>{$items[$i]['name']}</i></b></a>";}
                     if (isset($items[$i]['newflag']) && $items[$i]['newflag'] == 1) {
-                        echo " <span class=noticetext>", _('New'), "</span>";
+                        echo " <span class=noticetext>", _('Nuevo'), "</span>";
                     }
                     if ($viewall) {
                         echo '<span class="instrdates">';
@@ -586,7 +586,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                         echo "<i>" . Sanitize::encodeStringForDisplay($items[$i]['name']) . "</i></b></a>";
                     }
                     if (isset($items[$i]['newflag']) && $items[$i]['newflag'] == 1) {
-                        echo " <span class=noticetext>", _('New'), "</span>";
+                        echo " <span class=noticetext>", _('Nuevo'), "</span>";
                     }
                     if ($viewall) {
                         echo '<span class="instrdates">';
@@ -636,7 +636,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                     }
                     echo "</b> ";
                     if (isset($items[$i]['newflag']) && $items[$i]['newflag'] == 1) {
-                        echo "<span class=noticetext>", _('New'), "</span>";
+                        echo "<span class=noticetext>", _('Nuevo'), "</span>";
                     }
                     if ($viewall) {
                         echo '<span class="instrdates">';
@@ -650,7 +650,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                     } else {
                         echo '<div class="itemhdrright">';
                         echo "<a href=\"" . ($ispublic ? "public" : "course") . ".php?cid=$cid&folder=$parent-$bnum\" $astyle ";
-                        echo 'aria-label="' . _('Isolate block') . ' ' . Sanitize::encodeStringForDisplay($items[$i]['name']) . '">';
+                        echo 'aria-label="' . _('Enfocar bloque') . ' ' . Sanitize::encodeStringForDisplay($items[$i]['name']) . '">';
                         echo _('Enfocar'), "</a>";
                         echo '</div>';
                     }
@@ -684,7 +684,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
 
                         //if (isset($teacherid) && count($items[$i]['items'])>0) {echo generateadditem($parent.'-'.$bnum,'b');}
                     } else {
-                        echo _('Loading content...');
+                        echo _('Cargando contenido...');
                     }
                     echo "</div>";
                     echo '</div>'; //end blockwrap
@@ -717,9 +717,9 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 echo ' <img src="' . $staticroot . '/img/gearsdd.png" alt="Options" class="mida"/>';
                 echo '</a>';
                 echo '<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu' . $i . '">';
-                echo " <li><a href=\"addcalendar.php?id={$items[$i]}&block=$parent&cid=$cid&remove=true\">", _('Delete'), "</a></li>";
-                echo " <li><a href=\"#\" onclick=\"return moveDialog('$parent','{$items[$i]}');\">", _('Move'), '</a></li>';
-                echo " <li><a id=\"mcelink\" href=\"managecalitems.php?cid=$cid\">", _('Manage Events'), "</a></li>";
+                echo " <li><a href=\"addcalendar.php?id={$items[$i]}&block=$parent&cid=$cid&remove=true\">", _('Borrar'), "</a></li>";
+                echo " <li><a href=\"#\" onclick=\"return moveDialog('$parent','{$items[$i]}');\">", _('Mover'), '</a></li>';
+                echo " <li><a id=\"mcelink\" href=\"managecalitems.php?cid=$cid\">", _('Administrar eventos'), "</a></li>";
                 echo '</ul>';
                 echo '</div>';
             }
@@ -834,7 +834,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
             $excusedNote = '';
             if (!$canedit && !empty($excused['A' . $typeid])) {
                 $excusedNote .= '<br/><span class="small">' .
-                _('You have been excused from this assignment. It will not be counted in your grade.') .
+                _('Ha sido excusado de esta tarea. No se contará en tu calificación.') .
                     '</span>';
             }
             if ($line['ver'] > 1) {
@@ -882,17 +882,17 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 if (isset($line['ptsearned'])) {
                     if ($line['ptsstatus'] == 1) {
                         $iconstatus = 1;
-                        $scoremsg = _('You have some unanswered questions');
+                        $scoremsg = _('Tienes algunas preguntas sin respuesta');
                     } else if ($line['ptsstatus'] == 2) {
                         $iconstatus = 2;
-                        $scoremsg = _('All questions attempted');
+                        $scoremsg = _('Todas las preguntas respondidas');
                     }
                     if ($showScoreInIcon && $line['ptsposs'] > 0) {
-                        $scoremsg .= '. ' . _('Score: ') . round(100 * $line['ptsearned'] / $line['ptsposs'], 1) . '%';
+                        $scoremsg .= '. ' . _('Puntaje: ') . round(100 * $line['ptsearned'] / $line['ptsposs'], 1) . '%';
                     }
                 } else {
                     $iconstatus = 0;
-                    $scoremsg = _('You haven\'t started this assessment yet');
+                    $scoremsg = _('Aún no has iniciado esta evaluación');
                 }
             } else {
                 $iconstatus = -1;
@@ -907,7 +907,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 echo getItemIcon('assess', 'assessment', false, $iconstatus, $scoremsg);
 
                 if (substr($line['deffeedback'], 0, 8) == 'Practice') {
-                    $endname = _('Available until');
+                    $endname = _('Disponible hasta');
                 } else {
                     $endname = $duedatewords;
                 }
@@ -941,9 +941,9 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
 
                 if ($tlwrds != '') {
                     if ($line['timelimit'] > $line['enddate'] - $now) {
-                        echo "onclick='return confirm(\"", sprintf(_('This assessment has a time limit of %s, but that will be restricted by the upcoming due date. Click OK to start or continue working on the assessment.'), $tlwrds), "\")' ";
+                        echo "onclick='return confirm(\"", sprintf(_('Esta evaluación tiene un límite de tiempo de %s, pero esto se verá restringido por la fecha de entrega próxima. Haga clic en Aceptar para comenzar o continuar trabajando en la evaluacióny.'), $tlwrds), "\")' ";
                     } else {
-                        echo "onclick='return confirm(\"", sprintf(_('This assessment has a time limit of %s.  Click OK to start or continue working on the assessment.'), $tlwrds), "\")' ";
+                        echo "onclick='return confirm(\"", sprintf(_('Esta evaluación tiene un límite de tiempo de %s. Haga clic en Aceptar para comenzar o continuar trabajando en la evaluación.'), $tlwrds), "\")' ";
                     }
                 }
                 echo ">" . Sanitize::encodeStringForDisplay($line['name']) . "</a></b>";
@@ -961,19 +961,19 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
 
                     echo '<span class="instronly">';
                     if ($line['allowlate'] > 0) {
-                        echo ' <span onmouseover="tipshow(this,\'', _('LatePasses Allowed'), '\')" onmouseout="tipout()">', _('LP'), '</span> ';
+                        echo ' <span onmouseover="tipshow(this,\'', _('Pases Tardíos Permitidos'), '\')" onmouseout="tipout()">', _('LP'), '</span> ';
                     }
                     echo '</span>';
 
                 } else if ($canuselatepass) {
-                    echo " <a href=\"redeemlatepass.php?cid=$cid&aid=$typeid\">", _('Use LatePass'), "</a>";
+                    echo " <a href=\"redeemlatepass.php?cid=$cid&aid=$typeid\">", _('Usar Pase Tardío'), "</a>";
                     if ($canundolatepass) {
-                        echo " | <a href=\"redeemlatepass.php?cid=$cid&aid=$typeid&undo=true\">", _('Un-use LatePass'), "</a>";
+                        echo " | <a href=\"redeemlatepass.php?cid=$cid&aid=$typeid&undo=true\">", _('No usar Pase Tardío'), "</a>";
                     }
                 } else if ($line['allowlate'] > 0 && isset($_SESSION['stuview'])) {
-                    echo _(' LatePass Allowed');
+                    echo _(' Pase Tardío Permitido');
                 } else if ($line['allowlate'] > 0 && $canundolatepass) {
-                    echo " <a href=\"redeemlatepass.php?cid=$cid&aid=$typeid&undo=true\">", _('Un-use LatePass'), "</a>";
+                    echo " <a href=\"redeemlatepass.php?cid=$cid&aid=$typeid&undo=true\">", _('No usar Pase Tardío'), "</a>";
                 }
                 echo '</div>'; //title
 
@@ -994,31 +994,31 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 echo "<div class=title><b><a href=\"$assessUrl\"";
 
                 if ($line['ver'] > 1) {
-                    echo ">" . Sanitize::encodeStringForDisplay($line['name']) . "</a></b><BR> ", sprintf(_('Past Due Date of %s.  Showing as Practice'), $enddate) . '.';
+                    echo ">" . Sanitize::encodeStringForDisplay($line['name']) . "</a></b><BR> ", sprintf(_('Fecha de entrega pasada de %s. Mostrando como Práctica'), $enddate) . '.';
                 } else {
-                    echo ">" . Sanitize::encodeStringForDisplay($line['name']) . "</a></b><BR> ", sprintf(_('Past Due Date of %s.  Showing as Review'), $enddate) . '.';
+                    echo ">" . Sanitize::encodeStringForDisplay($line['name']) . "</a></b><BR> ", sprintf(_('Fecha de entrega pasada de %s. Mostrando como Revisión'), $enddate) . '.';
                 }
                 if ($line['reviewdate'] != 2000000000) {
                     echo " ", _('until'), " $reviewdate \n";
                 }
                 if ($canuselatepass) {
-                    echo " <a href=\"redeemlatepass.php?cid=$cid&aid=$typeid\">", _('Use LatePass'), "</a>";
+                    echo " <a href=\"redeemlatepass.php?cid=$cid&aid=$typeid\">", _('Usar Pase Tardío'), "</a>";
                     echo $excusedNote;
                 }
                 if ($canedit) {
                     echo '<span class="instronly">';
                     if ($line['allowlate'] > 0) {
-                        echo ' <span onmouseover="tipshow(this,\'', _('LatePasses Allowed'), '\')" onmouseout="tipout()">LP</span> ';
+                        echo ' <span onmouseover="tipshow(this,\'', _('Pase Tardío Permitido'), '\')" onmouseout="tipout()">LP</span> ';
                     }
                     echo '</span>';
 
                 } else if (isset($_SESSION['stuview']) && $line['allowlate'] > 10 && ($now - $line['enddate']) < $latepasshrs * 3600) {
-                    echo _(' LatePass Allowed');
+                    echo _(' Pase Tardío Permitido');
                 }
                 if ($line['ver'] > 1) {
-                    echo filter("<br/><i>" . _('This assessment is in practice mode - no scores will be saved') . "</i>");
+                    echo filter("<br/><i>" . _('Esta evaluación está en modo de práctica: no se guardarán puntuaciones.') . "</i>");
                 } else {
-                    echo filter("<br/><i>" . _('This assessment is in review mode - no scores will be saved') . "</i>");
+                    echo filter("<br/><i>" . _('Esta evaluación está en modo de revisión: no se guardarán puntuaciones.') . "</i>");
                 }
                 echo '</div>'; //title
                 if ($canedit) {
@@ -1054,7 +1054,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 echo getItemIcon('assess', 'assessment', true, $iconstatus, $scoremsg);
 
                 if (substr($line['deffeedback'], 0, 8) == 'Practice') {
-                    $endname = _('Available until');
+                    $endname = _('Disponible hasta');
                 } else {
                     $endname = $duedatewords;
                 }
@@ -1080,9 +1080,9 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
             } else if (!$viewall && $line['avail'] > 0 && ($nothidden || $showgreyedout) && (($greyitems & 1 && $now < $line['startdate']) || ($greyitems & 2 && $now > $line['enddate']))) { //show greyed
 
                 if ($now < $line['startdate']) {
-                    $show = sprintf(_('Will be available starting %1$s'), $startdate);
+                    $show = sprintf(_('Estará disponible a partir de %1$s'), $startdate);
                 } else {
-                    $show = sprintf(_('This assessment was due %1$s'), $enddate);
+                    $show = sprintf(_('Esta evaluación se debió realizar antes de %1$s'), $enddate);
                 }
                 beginitem($canedit, $items[$i]); //echo "<div class=item>\n";
                 echo '<div class="itemhdr">';
@@ -1105,14 +1105,14 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 if ($line['avail'] == 0) {
                     $show = _('Hidden');
                 } else if ($line['date_by_lti'] == 1) {
-                    $show = _('Waiting for date to be set via LTI');
+                    $show = _('Esperando que se fije la fecha vía LTI');
                 } else {
-                    $show = sprintf(_('Available %1$s until %2$s'), $startdate, $enddate);
+                    $show = sprintf(_('Disponible %1$s hasta %2$s'), $startdate, $enddate);
                     if ($line['reviewdate'] > 0 && $line['enddate'] != 2000000000) {
                         if ($line['ver'] > 1) {
-                            $show .= sprintf(_(', Practice until %s'), $reviewdate);
+                            $show .= sprintf(_(', Práctica hasta %s'), $reviewdate);
                         } else {
-                            $show .= sprintf(_(', Review until %s'), $reviewdate);
+                            $show .= sprintf(_(', Revisión hasta %s'), $reviewdate);
                         }
                     }
                 }
@@ -1132,7 +1132,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
 
                     echo '<span class="instronly">';
                     if ($line['allowlate'] > 0) {
-                        echo ' <span onmouseover="tipshow(this,\'', _('LatePasses Allowed'), '\')" onmouseout="tipout()">', _('LP'), '</span> ';
+                        echo ' <span onmouseover="tipshow(this,\'', _('Pase Tardío permitido'), '\')" onmouseout="tipout()">', _('LP'), '</span> ';
                     }
                     echo '</span>';
                 }
@@ -1234,16 +1234,16 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 $startdate = formatdate($line['startdate']);
             }
             if ($line['enddate'] == 2000000000) {
-                $enddate = _('Always');
+                $enddate = _('Siempre');
             } else {
                 $enddate = formatdate($line['enddate']);
             }
             if ($line['avail'] == 2 || ($line['startdate'] < $now && $line['enddate'] > $now && $line['avail'] == 1)) {
                 if ($line['avail'] == 2) {
-                    $show = _('Showing Always ');
+                    $show = _('Mostrando siempre ');
                     $color = '#0f0';
                 } else {
-                    $show = _('Showing until:') . " $enddate";
+                    $show = _('Mostrando hasta:') . " $enddate";
                     $color = makecolor2($line['startdate'], $line['enddate'], $now);
                 }
                 beginitem($canedit, 'inline' . $typeid); // echo "<div class=item>\n";
@@ -1351,12 +1351,12 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 }
             }
             if ($line['startdate'] == 0) {
-                $startdate = _('Always');
+                $startdate = _('Siempre');
             } else {
                 $startdate = formatdate($line['startdate']);
             }
             if ($line['enddate'] == 2000000000) {
-                $enddate = _('Always');
+                $enddate = _('Siempre');
             } else {
                 $enddate = formatdate($line['enddate']);
             }
@@ -1365,10 +1365,10 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
 
             if ($line['avail'] == 2 || ($line['avail'] == 1 && $line['startdate'] < $now && $line['enddate'] > $now)) {
                 if ($line['avail'] == 2) {
-                    $show = _('Showing Always ');
+                    $show = _('Mostrando siempre ');
                     $color = '#0f0';
                 } else {
-                    $show = _('Showing until:') . " $enddate";
+                    $show = _('Mostrando hasta:') . " $enddate";
                     $color = makecolor2($line['startdate'], $line['enddate'], $now);
                 }
                 beginitem($canedit, $items[$i]); //echo "<div class=item>\n";
@@ -1395,9 +1395,9 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
             } else if (!$viewall && $line['avail'] > 0 && (($greyitems & 1 && $now < $line['startdate']) || ($greyitems & 2 && $now > $line['enddate']))) { //show greyed
 
                 if ($now < $line['startdate']) {
-                    $show = sprintf(_('Will be available starting %1$s'), $startdate);
+                    $show = sprintf(_('Estará disponible a partir de %1$s'), $startdate);
                 } else {
-                    $show = sprintf(_('This item was available until %1$s'), $enddate);
+                    $show = sprintf(_('Estuvo disponible hasta %1$s'), $enddate);
                 }
                 beginitem($canedit, $items[$i]); //echo "<div class=item>\n";
                 echo '<div class="itemhdr">';
@@ -1458,12 +1458,12 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 $line['summary'] = str_replace('<a ', '<a ' . $rec, $line['summary']);
             }
             if ($line['startdate'] == 0) {
-                $startdate = _('Always');
+                $startdate = _('Siempre');
             } else {
                 $startdate = formatdate($line['startdate']);
             }
             if ($line['enddate'] == 2000000000) {
-                $enddate = _('Always');
+                $enddate = _('Siempre');
             } else {
                 $enddate = formatdate($line['enddate']);
             }
@@ -1533,10 +1533,10 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
 
             if ($line['avail'] == 2 || ($line['avail'] == 1 && $line['startdate'] < $now && $line['enddate'] > $now)) {
                 if ($line['avail'] == 2) {
-                    $show = _('Showing Always ');
+                    $show = _('Mostrando siempre ');
                     $color = '#0f0';
                 } else {
-                    $show = _('Showing until:') . " $enddate";
+                    $show = _('Mostrando hasta:') . " $enddate";
                     $color = makecolor2($line['startdate'], $line['enddate'], $now);
                 }
                 beginitem($canedit, $items[$i]); //echo "<div class=item>\n";
@@ -1560,7 +1560,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 enditem($canedit); //echo "</div>\n";
             } else if ($viewall) {
                 if ($line['avail'] == 0) {
-                    $show = _('Hidden');
+                    $show = _('Oculto');
                 } else {
                     $show = sprintf(_('Showing %1$s until %2$s'), $startdate, $enddate);
                 }
@@ -1595,21 +1595,21 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 }
             }
             if ($line['startdate'] == 0) {
-                $startdate = _('Always');
+                $startdate = _('Siempre');
             } else {
                 $startdate = formatdate($line['startdate']);
             }
             if ($line['enddate'] == 2000000000) {
-                $enddate = _('Always');
+                $enddate = _('Siempre');
             } else {
                 $enddate = formatdate($line['enddate']);
             }
             if ($line['avail'] == 2 || ($line['avail'] == 1 && $line['startdate'] < $now && $line['enddate'] > $now)) {
                 if ($line['avail'] == 2) {
-                    $show = _('Showing Always ');
+                    $show = _('Mostrando siempre ');
                     $color = '#0f0';
                 } else {
-                    $show = _('Showing until:') . " $enddate";
+                    $show = _('Mostrando hasta:') . " $enddate";
                     $color = makecolor2($line['startdate'], $line['enddate'], $now);
                 }
                 $duedates = "";
@@ -1651,16 +1651,16 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 }
                 if ($duedates != '') {echo "<br/>$duedates";}
                 if ($line['allowlate'] > 0 && isset($_SESSION['stuview'])) {
-                    echo _(' LatePass Allowed');
+                    echo _(' Pase Tardío Permitido');
                 } else if (!$canedit) {
                     if ($canuselatepassP || $canuselatepassR) {
-                        echo " <a href=\"redeemlatepassforum.php?cid=$cid&fid=$typeid\">", _('Use LatePass'), "</a>";
+                        echo " <a href=\"redeemlatepassforum.php?cid=$cid&fid=$typeid\">", _('Usar Pase Tardío'), "</a>";
                         if ($canundolatepass) {
                             echo ' |';
                         }
                     }
                     if ($canundolatepass) {
-                        echo " <a href=\"redeemlatepassforum.php?cid=$cid&fid=$typeid&undo=true\">", _('Un-use LatePass'), "</a>";
+                        echo " <a href=\"redeemlatepassforum.php?cid=$cid&fid=$typeid&undo=true\">", _('No utilizar Pase Tardío'), "</a>";
                     }
                 }
                 echo '</div>'; //title
@@ -1674,23 +1674,23 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 (($line['postby'] != 2000000000 && $line['postby'] != 0) || $line['replyby'] != 2000000000 && $line['replyby'] != 0)) { //show greyed
 
                 if ($now < $line['startdate']) {
-                    $show = sprintf(_('Will be available starting %1$s'), $startdate);
+                    $show = sprintf(_('Estará disponible a partir de %1$s'), $startdate);
                 } else {
-                    $show = sprintf(_('This forum closed %1$s'), $enddate);
+                    $show = sprintf(_('Este foro se cerró %1$s'), $enddate);
                 }
                 $duedates = "";
                 if ($line['postby'] != 2000000000 && $line['postby'] != 0) {
                     if ($line['postby'] > $now) {
-                        $duedates .= sprintf(_('New Threads will be due %s. '), formatdate($line['postby']));
+                        $duedates .= sprintf(_('Los nuevos hilos deberán entregarse %s. '), formatdate($line['postby']));
                     } else {
-                        $duedates .= sprintf(_('New Threads were due %s. '), formatdate($line['postby']));
+                        $duedates .= sprintf(_('Los nuevos hilos debían entregarse %s. '), formatdate($line['postby']));
                     }
                 }
                 if ($line['replyby'] != 2000000000 && $line['replyby'] != 0) {
                     if ($line['replyby'] > $now) {
-                        $duedates .= sprintf(_('Replies will be due %s. '), formatdate($line['replyby']));
+                        $duedates .= sprintf(_('Las respuestas deberán entregarse %s. '), formatdate($line['replyby']));
                     } else {
-                        $duedates .= sprintf(_('Replies were due %s. '), formatdate($line['replyby']));
+                        $duedates .= sprintf(_('Las respuestas debían entregarse %s. '), formatdate($line['replyby']));
                     }
                 }
                 beginitem($canedit, $items[$i]); //echo "<div class=item>\n";
@@ -1701,13 +1701,13 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 echo "<br/><i>$duedates</i>\n";
                 if (!$canedit) {
                     if ($canuselatepassP || $canuselatepassR) {
-                        echo " <a href=\"redeemlatepassforum.php?cid=$cid&fid=$typeid\">", _('Use LatePass'), "</a>";
+                        echo " <a href=\"redeemlatepassforum.php?cid=$cid&fid=$typeid\">", _('Usar Pase Tardío'), "</a>";
                         if ($canundolatepass) {
                             echo ' |';
                         }
                     }
                     if ($canundolatepass) {
-                        echo " <a href=\"redeemlatepassforum.php?cid=$cid&fid=$typeid&undo=true\">", _('Un-use LatePass'), "</a>";
+                        echo " <a href=\"redeemlatepassforum.php?cid=$cid&fid=$typeid&undo=true\">", _('No usar Pase Tardío'), "</a>";
                     }
                 }
                 echo '</div>'; //title
@@ -1719,9 +1719,9 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 enditem($canedit);
             } else if ($viewall) {
                 if ($line['avail'] == 0) {
-                    $show = _('Hidden');
+                    $show = _('Oculto');
                 } else {
-                    $show = sprintf(_('Showing %1$s until %2$s'), $startdate, $enddate);
+                    $show = sprintf(_('Mostrando %1$s hasta %2$s'), $startdate, $enddate);
                 }
                 $duedates = "";
                 if ($line['postby'] != 2000000000 && $line['postby'] != 0) {
@@ -1757,7 +1757,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 if ($canedit) {
                     echo '<span class="instronly">';
                     if ($line['allowlate'] > 0) {
-                        echo ' <span onmouseover="tipshow(this,\'', _('LatePasses Allowed'), '\')" onmouseout="tipout()">', _('LP'), '</span> ';
+                        echo ' <span onmouseover="tipshow(this,\'', _('Pase Tardío Permitido'), '\')" onmouseout="tipout()">', _('LP'), '</span> ';
                     }
                     echo '</span>';
                 }
@@ -1779,12 +1779,12 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                 }
             }
             if ($line['startdate'] == 0) {
-                $startdate = _('Always');
+                $startdate = _('Siempre');
             } else {
                 $startdate = formatdate($line['startdate']);
             }
             if ($line['enddate'] == 2000000000) {
-                $enddate = _('Always');
+                $enddate = _('Siempre');
             } else {
                 $enddate = formatdate($line['enddate']);
             }
@@ -1827,10 +1827,10 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
             }
             if ($line['avail'] == 2 || ($line['avail'] == 1 && $line['startdate'] < $now && $line['enddate'] > $now)) {
                 if ($line['avail'] == 2) {
-                    $show = _('Showing Always ');
+                    $show = _('Mostrando siempre ');
                     $color = '#0f0';
                 } else {
-                    $show = _('Showing until:') . " $enddate";
+                    $show = _('Mostrando hasta:') . " $enddate";
                     $color = makecolor2($line['startdate'], $line['enddate'], $now);
                 }
                 $duedates = "";
@@ -1853,7 +1853,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                     }
                     echo "<b><a href=\"../wikis/viewwiki.php?cid=$cid&id={$line['id']}\" $rec>" . Sanitize::encodeStringForDisplay($line['name']) . "</a></b>\n";
                     if ($hasnew) {
-                        echo " <span class=noticetext>", _('New Revisions'), "</span>";
+                        echo " <span class=noticetext>", _('Nuevas revisiones'), "</span>";
                     }
                 }
                 if ($viewall) {
@@ -1883,7 +1883,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
 
                 echo "<div class=title><i> <b><a href=\"../wikis/viewwiki.php?cid=$cid&id={$line['id']}\">" . Sanitize::encodeStringForDisplay($line['name']) . "</a></b></i> ";
                 if ($hasnew) {
-                    echo " <span class=noticetext>", _('New Revisions'), "</span>";
+                    echo " <span class=noticetext>", _('Nuevas revisiones'), "</span>";
                 }
                 echo '<span class="instrdates">';
                 echo "<br/><i>$show </i>";
@@ -1910,11 +1910,11 @@ function generateadditem($blk, $tb)
     if (isset($CFG['CPS']['additemtype']) && $CFG['CPS']['additemtype'][0] == 'links') {
         if ($tb == 'BB' || $tb == 'LB') {$tb = 'b';}
         if ($tb == 't' && $blk == '0') {
-            $html = '<div id="topadditem" class="additembox"><span><b>' . _('Add here:') . '</b> ';
+            $html = '<div id="topadditem" class="additembox"><span><b>' . _('Añadir aquí:') . '</b> ';
         } else if ($tb == 'b' && $blk == '0') {
-            $html = '<div id="bottomadditem" class="additembox"><span><b>' . _('Add here:') . '</b> ';
+            $html = '<div id="bottomadditem" class="additembox"><span><b>' . _('Añadir aquí:') . '</b> ';
         } else {
-            $html = '<div class="additembox"><span><b>' . _('Add here:') . '</b> ';
+            $html = '<div class="additembox"><span><b>' . _('Añadir aquí:') . '</b> ';
         }
 
         $blkUrlParam = Sanitize::encodeUrlParam($blk);
@@ -1937,19 +1937,19 @@ function generateadditem($blk, $tb)
         if (isset($CFG['CPS']['miniicons']['inline'])) {
             $html .= "<img alt=\"inline text\" class=\"mida\" src=\"$staticroot/img/{$CFG['CPS']['miniicons']['inline']}\"/> ";
         }
-        $html .= _('Text') . "</a> | ";
+        $html .= _('Texto') . "</a> | ";
 
         $html .= "<a href=\"addlinkedtext.php?block=$blkUrlParam&tb=$tbUrlParam&cid=$cid\">";
         if (isset($CFG['CPS']['miniicons']['linked'])) {
             $html .= "<img alt=\"linked text\" class=\"mida\" src=\"$staticroot/img/{$CFG['CPS']['miniicons']['linked']}\"/> ";
         }
-        $html .= _('Link') . "</a> | ";
+        $html .= _('Enlace') . "</a> | ";
 
         $html .= "<a href=\"addforum.php?block=$blkUrlParam&tb=$tbUrlParam&cid=$cid\">";
         if (isset($CFG['CPS']['miniicons']['forum'])) {
             $html .= "<img alt=\"forum\" class=\"mida\" src=\"$staticroot/img/{$CFG['CPS']['miniicons']['forum']}\"/> ";
         }
-        $html .= _('Forum') . "</a> | ";
+        $html .= _('Foro') . "</a> | ";
 
         $html .= "<a href=\"addwiki.php?block=$blkUrlParam&tb=$tbUrlParam&cid=$cid\">";
         if (isset($CFG['CPS']['miniicons']['wiki'])) {
@@ -1961,45 +1961,45 @@ function generateadditem($blk, $tb)
         if (isset($CFG['CPS']['miniicons']['drill'])) {
             $html .= "<img alt=\"drill\" class=\"mida\" src=\"$staticroot/img/{$CFG['CPS']['miniicons']['drill']}\"/> ";
         }
-        $html .= _('Drill') . "</a> | ";
+        $html .= _('Práctica') . "</a> | ";
 
         $html .= "<a href=\"addblock.php?block=$blkUrlParam&tb=$tbUrlParam&cid=$cid\">";
         if (isset($CFG['CPS']['miniicons']['folder'])) {
             $html .= "<img alt=\"folder\" class=\"mida\" src=\"$staticroot/img/{$CFG['CPS']['miniicons']['folder']}\"/> ";
         }
-        $html .= _('Block') . "</a> | ";
+        $html .= _('Bloque') . "</a> | ";
 
         $html .= "<a href=\"addcalendar.php?block=$blkUrlParam&tb=$tbUrlParam&cid=$cid\">";
         if (isset($CFG['CPS']['miniicons']['calendar'])) {
             $html .= "<img alt=\"calendar\" class=\"mida\" src=\"$staticroot/img/{$CFG['CPS']['miniicons']['calendar']}\"/> ";
         }
-        $html .= _('Calendar') . "</a>";
+        $html .= _('Calendario') . "</a>";
         $html .= '</span>';
         $html .= '</div>';
 
     } else {
         $html = sprintf("<select aria-label=\"%s\" name=addtype id=\"addtype%s-%s\" onchange=\"additem('%s','%s')\" ",
-            _('Add An Item'),
+            _('Añadir un ítem'),
             Sanitize::encodeStringForDisplay($blk), Sanitize::encodeStringForDisplay($tb),
             Sanitize::encodeStringForJavascript($blk), Sanitize::encodeStringForJavascript($tb));
         if ($tb == 't') {
             $html .= 'style="margin-bottom:5px;"';
         }
         $html .= ">\n";
-        $html .= "<option value=\"\">" . _('Add An Item...') . "</option>\n";
+        $html .= "<option value=\"\">" . _('Añadir un ítem...') . "</option>\n";
         if ($addassess == 'addassessment2.php') {
-            $html .= "<option value=\"assessment2\">" . _('Add Assessment') . "</option>\n";
+            $html .= "<option value=\"assessment2\">" . _('Añadir evaluación') . "</option>\n";
         } else {
-            $html .= "<option value=\"assessment\">" . _('Add Assessment') . "</option>\n";
+            $html .= "<option value=\"assessment\">" . _('Añadir evaluación') . "</option>\n";
         }
         //$html .= "<option value=\"drillassess\">Add Drill</option>\n";
-        $html .= "<option value=\"inlinetext\">" . _('Add Inline Text') . "</option>\n";
-        $html .= "<option value=\"linkedtext\">" . _('Add Link') . "</option>\n";
-        $html .= "<option value=\"forum\">" . _('Add Forum') . "</option>\n";
-        $html .= "<option value=\"wiki\">" . _('Add Wiki') . "</option>\n";
-        $html .= "<option value=\"drillassess\">" . _('Add Drill') . "</option>\n";
-        $html .= "<option value=\"block\">" . _('Add Block') . "</option>\n";
-        $html .= "<option value=\"calendar\">" . _('Add Calendar') . "</option>\n";
+        $html .= "<option value=\"inlinetext\">" . _('Añadir texto') . "</option>\n";
+        $html .= "<option value=\"linkedtext\">" . _('Añadir enlace') . "</option>\n";
+        $html .= "<option value=\"forum\">" . _('Añadir foro') . "</option>\n";
+        $html .= "<option value=\"wiki\">" . _('Añadir Wiki') . "</option>\n";
+        $html .= "<option value=\"drillassess\">" . _('Añadir práctica') . "</option>\n";
+        $html .= "<option value=\"block\">" . _('Añadir bloque') . "</option>\n";
+        $html .= "<option value=\"calendar\">" . _('Añadir calendario') . "</option>\n";
         $html .= "</select><BR>\n";
 
     }
@@ -2018,11 +2018,11 @@ function generatemoveselect($num, $count, $blk, $blocklist)
     }
     for ($i = 0; $i < count($blocklist); $i++) {
         if ($num != $blocklist[$i]) {
-            $html .= "<option value=\"B-{$blocklist[$i]}\">" . sprintf(_('Into %s'), $blocklist[$i]) . "</option>\n";
+            $html .= "<option value=\"B-{$blocklist[$i]}\">" . sprintf(_('En %s'), $blocklist[$i]) . "</option>\n";
         }
     }
     if ($blk != '0') {
-        $html .= '<option value="O-' . $blk . '">' . _('Out of Block') . '</option>';
+        $html .= '<option value="O-' . $blk . '">' . _('Fuera del bloque') . '</option>';
     }
     $html .= "</select>\n";
     return $html;
@@ -2133,29 +2133,29 @@ function quickview($items, $parent, $showdates = false, $showlinks = true)
         if (is_array($items[$i])) { //is a block
 
             if ($items[$i]['startdate'] == 0) {
-                $startdate = _('Always');
+                $startdate = _('Siempre');
             } else {
                 $startdate = formatdate($items[$i]['startdate']);
             }
             if ($items[$i]['enddate'] == 2000000000) {
-                $enddate = _('Always');
+                $enddate = _('Siempre');
             } else {
                 $enddate = formatdate($items[$i]['enddate']);
             }
             $bnum = $i + 1;
             if (strlen($items[$i]['SH']) == 1 || $items[$i]['SH'][1] == 'O') {
-                $availbeh = _('Expanded');
+                $availbeh = _('Expandido');
             } else if ($items[$i]['SH'][1] == 'F') {
-                $availbeh = _('as Folder');
+                $availbeh = _('como Carpeta');
             } else {
-                $availbeh = _('Collapsed');
+                $availbeh = _('Contraído');
             }
             if ($items[$i]['avail'] == 2) {
-                $show = sprintf(('Showing %s Always'), $availbeh);
+                $show = sprintf(('Mostrando %s Siempre'), $availbeh);
             } else if ($items[$i]['avail'] == 0) {
                 $show = _('Hidden');
             } else {
-                $show = sprintf(_('Showing %1$s %2$s until %3$s'), $availbeh, $startdate, $enddate);
+                $show = sprintf(_('Mostrando %1$s %2$s hasta %3$s'), $availbeh, $startdate, $enddate);
             }
             if ($items[$i]['avail'] == 2) {
                 $color = '#0f0';
@@ -2190,10 +2190,10 @@ function quickview($items, $parent, $showdates = false, $showlinks = true)
             }
             if ($showlinks) {
                 echo '<span class="links">';
-                echo " <a href=\"addblock.php?cid=$cid&id=$parent-$bnum\">", _('Modify'), "</a>";
-                echo " | <a href=\"deleteblock.php?cid=$cid&id=$parent-$bnum&bid=" . intval($items[$i]['id']) . "&remove=ask\">", _('Delete'), "</a>";
-                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=$parent-$bnum\">", _('Copy'), "</a>";
-                echo " | <a href=\"course.php?cid=$cid&togglenewflag=$parent-$bnum\">", _('NewFlag'), "</a>";
+                echo " <a href=\"addblock.php?cid=$cid&id=$parent-$bnum\">", _('Modiicar'), "</a>";
+                echo " | <a href=\"deleteblock.php?cid=$cid&id=$parent-$bnum&bid=" . intval($items[$i]['id']) . "&remove=ask\">", _('Borrar'), "</a>";
+                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=$parent-$bnum\">", _('Copiar'), "</a>";
+                echo " | <a href=\"course.php?cid=$cid&togglenewflag=$parent-$bnum\">", _('Indicador de Nuevo'), "</a>";
                 echo '</span>';
             }
             if (count($items[$i]['items']) > 0) {
@@ -2247,19 +2247,19 @@ function quickview($items, $parent, $showdates = false, $showlinks = true)
                 //echo '<b>'.$line['name'].'</b> ';
             } else if ($line['avail'] == 1 && $line['startdate'] < $now && $line['reviewdate'] > $now) {
                 if ($line['ver'] > 1) {
-                    $show = sprintf(_('Practice until %s'), $reviewdate);
+                    $show = sprintf(_('Práctica hasta %s'), $reviewdate);
                 } else {
-                    $show = sprintf(_('Review until %s'), $reviewdate);
+                    $show = sprintf(_('Revisión hasta %s'), $reviewdate);
                 }
                 //echo '<b>'.$line['name'].'</b> ';
                 echo '<b><span id="A' . $typeid . '" onclick="editinplace(this)">' . Sanitize::encodeStringForDisplay($line['name']) . "</span></b>";
             } else {
-                $show = sprintf(_('Available %1$s to %2$s'), $startdate, $enddate);
+                $show = sprintf(_('Disponible de %1$s a %2$s'), $startdate, $enddate);
                 if ($line['reviewdate'] > 0 && $line['enddate'] != 2000000000) {
                     if ($line['ver'] > 1) {
-                        $show .= sprintf(_(', practice until %s'), $reviewdate);
+                        $show .= sprintf(_(', práctica hasta %s'), $reviewdate);
                     } else {
-                        $show .= sprintf(_(', review until %s'), $reviewdate);
+                        $show .= sprintf(_(', revisión hasta %s'), $reviewdate);
                     }
                 }
                 //echo '<i><b>'.$line['name'].'</b></i> ';
@@ -2271,18 +2271,18 @@ function quickview($items, $parent, $showdates = false, $showlinks = true)
             if ($showlinks) {
                 echo '<span class="links">';
                 if ($line['ver'] > 1) {
-                    echo " <a href=\"addquestions2.php?aid=" . Sanitize::onlyInt($typeid) . "&cid=$cid\">", _('Questions'), "</a> | ";
-                    echo "<a href=\"addassessment2.php?id=" . Sanitize::onlyInt($typeid) . "&cid=$cid\">", _('Settings'), "</a> | \n";
+                    echo " <a href=\"addquestions2.php?aid=" . Sanitize::onlyInt($typeid) . "&cid=$cid\">", _('Preguntas'), "</a> | ";
+                    echo "<a href=\"addassessment2.php?id=" . Sanitize::onlyInt($typeid) . "&cid=$cid\">", _('Ajustes'), "</a> | \n";
                 } else {
-                    echo " <a href=\"addquestions.php?aid=" . Sanitize::onlyInt($typeid) . "&cid=$cid\">", _('Questions'), "</a> | ";
-                    echo "<a href=\"addassessment.php?id=" . Sanitize::onlyInt($typeid) . "&cid=$cid\">", _('Settings'), "</a> | \n";
+                    echo " <a href=\"addquestions.php?aid=" . Sanitize::onlyInt($typeid) . "&cid=$cid\">", _('Preguntas'), "</a> | ";
+                    echo "<a href=\"addassessment.php?id=" . Sanitize::onlyInt($typeid) . "&cid=$cid\">", _('Ajustes'), "</a> | \n";
                 }
-                echo "<a href=\"deleteassessment.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid&remove=ask\">", _('Delete'), "</a>\n";
-                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=" . Sanitize::encodeUrlParam($items[$i]) . "\">", _('Copy'), "</a>";
+                echo "<a href=\"deleteassessment.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid&remove=ask\">", _('Borrar'), "</a>\n";
+                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=" . Sanitize::encodeUrlParam($items[$i]) . "\">", _('Copiar'), "</a>";
                 if ($line['ver'] > 1) {
-                    echo " | <a href=\"gb-itemanalysis2.php?cid=$cid&aid=" . Sanitize::onlyInt($typeid) . "\">", _('Grades'), "</a>";
+                    echo " | <a href=\"gb-itemanalysis2.php?cid=$cid&aid=" . Sanitize::onlyInt($typeid) . "\">", _('Calificaciones'), "</a>";
                 } else {
-                    echo " | <a href=\"gb-itemanalysis.php?cid=$cid&asid=average&aid=" . Sanitize::onlyInt($typeid) . "\">", _('Grades'), "</a>";
+                    echo " | <a href=\"gb-itemanalysis.php?cid=$cid&asid=average&aid=" . Sanitize::onlyInt($typeid) . "\">", _('Calificaciones'), "</a>";
                 }
                 echo '</span>';
             }
@@ -2342,12 +2342,12 @@ function quickview($items, $parent, $showdates = false, $showlinks = true)
             $typeid = Sanitize::onlyInt($itemtypes[$items[$i]][1]);
             list($line['name'], $line['startdate'], $line['enddate'], $line['avail']) = $iteminfo['LinkedText'][$typeid];
             if ($line['startdate'] == 0) {
-                $startdate = _('Always');
+                $startdate = _('Siempre');
             } else {
                 $startdate = formatdate($line['startdate']);
             }
             if ($line['enddate'] == 2000000000) {
-                $enddate = _('Always');
+                $enddate = _('Siempre');
             } else {
                 $enddate = formatdate($line['enddate']);
             }
@@ -2389,12 +2389,12 @@ function quickview($items, $parent, $showdates = false, $showlinks = true)
             $typeid = Sanitize::onlyInt($itemtypes[$items[$i]][1]);
             list($line['name'], $line['startdate'], $line['enddate'], $line['avail']) = $iteminfo['Forum'][$typeid];
             if ($line['startdate'] == 0) {
-                $startdate = _('Always');
+                $startdate = _('Siempre');
             } else {
                 $startdate = formatdate($line['startdate']);
             }
             if ($line['enddate'] == 2000000000) {
-                $enddate = _('Always');
+                $enddate = _('Siempre');
             } else {
                 $enddate = formatdate($line['enddate']);
             }
@@ -2426,9 +2426,9 @@ function quickview($items, $parent, $showdates = false, $showlinks = true)
             }
             if ($showlinks) {
                 echo '<span class="links">';
-                echo " <a href=\"addforum.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid\">", _('Modify'), "</a> | \n";
-                echo "<a href=\"deleteforum.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid&remove=ask\">", _('Delete'), "</a>\n";
-                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=" . Sanitize::encodeUrlParam($items[$i]) . "\">", _('Copy'), "</a>";
+                echo " <a href=\"addforum.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid\">", _('Modificar'), "</a> | \n";
+                echo "<a href=\"deleteforum.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid&remove=ask\">", _('Borrar'), "</a>\n";
+                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=" . Sanitize::encodeUrlParam($items[$i]) . "\">", _('Copiar'), "</a>";
                 echo '</span>';
             }
             echo '</li>';
@@ -2473,9 +2473,9 @@ function quickview($items, $parent, $showdates = false, $showlinks = true)
             }
             if ($showlinks) {
                 echo '<span class="links">';
-                echo " <a href=\"addwiki.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid\">", _('Modify'), "</a> | \n";
-                echo "<a href=\"deletewiki.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid&remove=ask\">", _('Delete'), "</a>\n";
-                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=" . Sanitize::encodeUrlParam($items[$i]) . "\">", _('Copy'), "</a>";
+                echo " <a href=\"addwiki.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid\">", _('Modificar'), "</a> | \n";
+                echo "<a href=\"deletewiki.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid&remove=ask\">", _('Borrar'), "</a>\n";
+                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=" . Sanitize::encodeUrlParam($items[$i]) . "\">", _('Copiar'), "</a>";
                 echo '</span>';
             }
             echo '</li>';
@@ -2520,10 +2520,10 @@ function quickview($items, $parent, $showdates = false, $showlinks = true)
             }
             if ($showlinks) {
                 echo ' <span class="links">';
-                echo "<a href=\"adddrillassess.php?daid=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid\">", _('Modify'), "</a> | \n";
-                echo "<a href=\"deletedrillassess.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid&remove=ask\">", _('Delete'), "</a>\n";
-                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=" . Sanitize::encodeUrlParam($items[$i]) . "\">", _('Copy'), "</a>";
-                echo " | <a href=\"gb-viewdrill.php?cid=$cid&daid=" . Sanitize::onlyInt($typeid) . "\">", _('Scores'), "</a>";
+                echo "<a href=\"adddrillassess.php?daid=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid\">", _('Modificar'), "</a> | \n";
+                echo "<a href=\"deletedrillassess.php?id=" . Sanitize::onlyInt($typeid) . "&block=$parent&cid=$cid&remove=ask\">", _('Borrar'), "</a>\n";
+                echo " | <a href=\"copyoneitem.php?cid=$cid&copyid=" . Sanitize::encodeUrlParam($items[$i]) . "\">", _('Copiar'), "</a>";
+                echo " | <a href=\"gb-viewdrill.php?cid=$cid&daid=" . Sanitize::onlyInt($typeid) . "\">", _('Puntajes'), "</a>";
                 echo '</span>';
             }
             echo '</li>';
