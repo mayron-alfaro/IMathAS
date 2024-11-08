@@ -85,7 +85,7 @@ require_once "includes/sanitize.php";
 		if ($error != '') {
 			require_once "header.php";
 			if ($gb == '') {
-				echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_("New User Signup"),"</div>\n";
+				echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_("New User Signup"),"</div>\n";
 			}
 			echo '<div id="headerforms" class="pagetitle"><h1>',_('New User Signup'),'</h1></div>';
 			echo $error;
@@ -184,7 +184,7 @@ require_once "includes/sanitize.php";
 
 			require_once "header.php";
 			if ($gb == '') {
-				echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_("New User Signup"),"</div>\n";
+				echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_("New User Signup"),"</div>\n";
 			}
 			echo '<div id="headerforms" class="pagetitle"><h1>',_('New User Signup'),'</h1></div>';
 			echo _("Registration recorded.  You should shortly receive an email with confirmation instructions.");
@@ -194,7 +194,7 @@ require_once "includes/sanitize.php";
 		} else {
 			$pagetitle = _('Account Created');
 			require_once "header.php";
-			echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_("New User Signup"),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_("New User Signup"),"</div>\n";
 			echo '<div id="headerforms" class="pagetitle"><h1>',_('New User Signup'),'</h1></div>';
 			echo "<p>",sprintf(_("Your account with username %s has been created.  If you forget your password, you can ask your instructor to reset your password or use the forgotten password link on the login page."),"<b>" . Sanitize::encodeStringForDisplay($_POST['SID']) . "</b>"),"</p>\n";
 			if (trim($_POST['courseid'])!='') {
@@ -556,7 +556,7 @@ require_once "includes/sanitize.php";
 		}
 		$pagetopper = '';
 		if ($gb == '') {
-			$pagetopper .= "<div class=breadcrumb><a href=\"index.php\">"._("Home")."</a> &gt; "._("Enroll in a Course")."</div>\n";
+			$pagetopper .= "<div class=breadcrumb><a href=\"index.php\">"._("Inicio")."</a> &gt; "._("Enroll in a Course")."</div>\n";
 		}
 		$pagetopper .= '<div id="headerforms" class="pagetitle"><h1>'._('Enroll in a Course').'</h1></div>';
 		if (empty($_POST['cid']) || !is_numeric($_POST['cid'])) {
@@ -719,7 +719,7 @@ require_once "includes/sanitize.php";
 	} else if (isset($_GET['action']) && $_GET['action']=="chguserinfo") {
 		$pagetopper = '';
 		if ($gb == '') {
-			$pagetopper .= "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; Modify User Profile</div>\n";
+			$pagetopper .= "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; Modify User Profile</div>\n";
 		}
 		$pagetopper .= '<div id="headerforms" class="pagetitle"><h1>Modify User Profile</h1></div>';
 		require_once 'includes/userpics.php';
