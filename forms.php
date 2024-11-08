@@ -41,7 +41,7 @@ require_once "header.php";
 switch($_GET['action']) {
 	case "newuser":
 		if ($gb == '') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_('New Student Signup'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('New Student Signup'),"</div>\n";
 		}
 		echo '<div id="headerforms" class="pagetitle"><h1>',_('New Student Signup'),'</h1></div>';
 		echo "<form id=\"newuserform\" class=limitaftervalidate method=post action=\"actions.php?action=newuser$gb\">\n";
@@ -49,10 +49,10 @@ switch($_GET['action']) {
         echo "<span class=form><label for=\"SID\">$longloginprompt:</label></span> <input class=\"form pii-username\" type=\"text\" size=12 id=SID name=SID><BR class=\"form\">\n";
 		echo "<span class=\"form\"><label for=\"pw1\">",_('Choose a password:'),"</label></span><input class=\"form\" type=\"password\" size=20 id=pw1 name=pw1><BR class=\"form\">\n";
 		echo "<span class=\"form\"><label for=\"pw2\">",_('Confirm password:'),"</label></span> <input class=\"form\" type=\"password\" size=20 id=pw2 name=pw2><BR class=\"form\">\n";
-		echo "<span class=\"form\"><label for=\"firstname\">",_('Enter First Name:'),"</label></span> <input class=\"form pii-first-name\" type=\"text\" size=20 id=firstname name=firstname autocomplete=\"given-name\"><BR class=\"form\">\n";
-		echo "<span class=\"form\"><label for=\"lastname\">",_('Enter Last Name:'),"</label></span> <input class=\"form pii-last-name\" type=\"text\" size=20 id=lastname name=lastname autocomplete=\"family-name\"><BR class=\"form\">\n";
-		echo "<span class=\"form\"><label for=\"email\">",_('Enter E-mail address:'),"</label></span>  <input class=\"form pii-email\" type=\"text\" size=60 id=email name=email autocomplete=\"email\"><BR class=\"form\">\n";
-		echo "<span class=form><label for=\"msgnot\">",_('Notify me by email when I receive a new message:'),"</label></span><span class=formright><input type=checkbox id=msgnot name=msgnot checked=\"checked\" /></span><BR class=form>\n";
+		echo "<span class=\"form\"><label for=\"firstname\">",_('Nombres:'),"</label></span> <input class=\"form pii-first-name\" type=\"text\" size=20 id=firstname name=firstname autocomplete=\"given-name\"><BR class=\"form\">\n";
+		echo "<span class=\"form\"><label for=\"lastname\">",_('Apellidos:'),"</label></span> <input class=\"form pii-last-name\" type=\"text\" size=20 id=lastname name=lastname autocomplete=\"family-name\"><BR class=\"form\">\n";
+		echo "<span class=\"form\"><label for=\"email\">",_('Correo electrónico:'),"</label></span>  <input class=\"form pii-email\" type=\"text\" size=60 id=email name=email autocomplete=\"email\"><BR class=\"form\">\n";
+		echo "<span class=form><label for=\"msgnot\">",_('Notificarme por correo si recibo un mensaje nuevo:'),"</label></span><span class=formright><input type=checkbox id=msgnot name=msgnot checked=\"checked\" /></span><BR class=form>\n";
         if (isset($CFG['GEN']['COPPA'])) {
 			echo "<span class=form><label for=\"over13\">",_('I am 13 years old or older'),"</label></span><span class=formright><input type=checkbox name=over13 id=over13 onchange=\"toggleOver13()\"></span><br class=form />\n";
         }
@@ -151,7 +151,7 @@ switch($_GET['action']) {
         $mfa = $stm->fetchColumn(0);
 
 		if ($gb == '' && $_GET['action']!='forcechgpwd') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_('Change Password'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Change Password'),"</div>\n";
 		}
 		echo '<div id="headerforms" class="pagetitle"><h1>',_('Change Your Password'),'</h1></div>';
 		if ($_GET['action']=='forcechgpwd') {
@@ -227,9 +227,9 @@ switch($_GET['action']) {
             }
         </script>';
 		if ($gb == '') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_('Modify User Profile'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Modificar información de perfil'),"</div>\n";
 		}
-		echo '<div id="headerforms" class="pagetitle"><h1>',_('User Profile'),'</h1></div>';
+		echo '<div id="headerforms" class="pagetitle"><h1>',_('Perfil'),'</h1></div>';
 
 		//call hook, if defined
 		if (function_exists('chguserinfoExtras')) {
@@ -237,35 +237,35 @@ switch($_GET['action']) {
 		}
 
 		echo "<form id=\"pageform\" class=limitaftervalidate enctype=\"multipart/form-data\" method=post action=\"actions.php?action=chguserinfo$gb\">\n";
-		echo '<fieldset id="userinfoprofile"><legend>',_('Profile Settings'),'</legend>';
+		echo '<fieldset id="userinfoprofile"><legend>',_('Ajustes'),'</legend>';
         echo '<div id="errorlive" aria-live="polite" class="sr-only"></div>';
         echo '<div id="infolive" aria-live="polite" class="sr-only"></div>';
-		echo "<span class=form><label for=\"firstname\">",_('Enter First Name'),":</label></span> <input class=\"form pii-first-name\" type=text size=20 id=firstname name=firstname autocomplete=\"given-name\" value=\"".Sanitize::encodeStringForDisplay($line['FirstName'])."\" /><br class=\"form\" />\n";
-		echo "<span class=form><label for=\"lastname\">",_('Enter Last Name'),":</label></span> <input class=\"form pii-first-name\" type=text size=20 id=lastname name=lastname autocomplete=\"family-name\" value=\"".Sanitize::encodeStringForDisplay($line['LastName'])."\"><BR class=form>\n";
+		echo "<span class=form><label for=\"firstname\">",_('Nombres'),":</label></span> <input class=\"form pii-first-name\" type=text size=20 id=firstname name=firstname autocomplete=\"given-name\" value=\"".Sanitize::encodeStringForDisplay($line['FirstName'])."\" /><br class=\"form\" />\n";
+		echo "<span class=form><label for=\"lastname\">",_('Apellidos'),":</label></span> <input class=\"form pii-first-name\" type=text size=20 id=lastname name=lastname autocomplete=\"family-name\" value=\"".Sanitize::encodeStringForDisplay($line['LastName'])."\"><BR class=form>\n";
 		if ($myrights>10 && $groupid>0) {
 			$stm = $DBH->prepare("SELECT name FROM imas_groups WHERE id=:id");
 			$stm->execute(array(':id'=>$groupid));
 			$r = $stm->fetch(PDO::FETCH_NUM);
 			echo '<span class="form">'._('Group').':</span><span class="formright">'.Sanitize::encodeStringForDisplay($r[0]).'</span><br class="form"/>';
 		}
-		echo '<span class="form"><label for="dochgpw">',_('Change Password?'),'</label></span> ';
+		echo '<span class="form"><label for="dochgpw">',_('¿Cambiar contraseña?'),'</label></span> ';
         echo '<span class="formright"><input type="checkbox" name="dochgpw" id="dochgpw" onclick="togglechgpw(this)" aria-controls="pwinfo" aria-expanded="false"/></span><br class="form" />';
 		echo '<div style="display:none" id="pwinfo" tabindex="-1">';
 		echo "<span class=form><label for=\"pw1\">",_('Enter new password:'),"</label></span>  <input class=form type=password id=pw1 name=pw1 size=40> <BR class=form>\n";
 		echo "<span class=form><label for=\"pw2\">",_('Verify new password:'),"</label></span>  <input class=form type=password id=pw2 name=pw2 size=40> <BR class=form>\n";
         echo '</div>';
-        echo '<span class=form><label for="dochgmfa">'._('2-factor Authentication').'</label></span>';
+        echo '<span class=form><label for="dochgmfa">'._('Autenticación 2-F').'</label></span>';
         echo '<span class="formright"><select name="dochgmfa" id="dochgmfa" onchange="togglechgmfa(this)" ';
         if ($line['mfa']=='') {
             echo 'aria-controls="mfainfo" aria-expanded=false ';
         }
         echo '/> ';
-        echo '<option value=0 '.($mfatype == 0 ? 'selected':'').'>'._('Disable').'</option>';
+        echo '<option value=0 '.($mfatype == 0 ? 'selected':'').'>'._('Deshabilitado').'</option>';
         if ($line['rights'] > 74) {
             echo '<option value=1 '.($mfatype == 1 ? 'selected':'').'>'._('Enable for admin actions').'</option>';
             echo '<option value=2 '.($mfatype == 2 ? 'selected':'').'>'._('Enable for login and admin actions').'</option>';
         } else {
-            echo '<option value=2 '.($mfatype == 2 ? 'selected':'').'>'._('Enable').'</option>';
+            echo '<option value=2 '.($mfatype == 2 ? 'selected':'').'>'._('Habilitado').'</option>';
         }
         echo '</select></span><br class="form" />';
 				
@@ -291,7 +291,7 @@ switch($_GET['action']) {
             }
         }
 
-		echo "<span class=form><label for=\"email\">",_('Enter E-mail address:'),"</label></span>  <input class=\"form pii-email\" type=text size=60 id=email name=email autocomplete=\"email\" value=\"".Sanitize::emailAddress($line['email'])."\"><BR class=form>\n";
+		echo "<span class=form><label for=\"email\">",_('Correo electrónico:'),"</label></span>  <input class=\"form pii-email\" type=text size=60 id=email name=email autocomplete=\"email\" value=\"".Sanitize::emailAddress($line['email'])."\"><BR class=form>\n";
         
         echo '<div style="display:none" id="seccheck">';
         echo '<p class="noticetext">'._('The changes you are making require additional security verification.').'</p>';
@@ -301,7 +301,7 @@ switch($_GET['action']) {
         }
         echo '</div>';
 
-        echo "<span class=form><label for=\"msgnot\">",_('Notify me by email when I receive a new message:'),"</label></span><span class=formright><input type=checkbox id=msgnot name=msgnot ";
+        echo "<span class=form><label for=\"msgnot\">",_('Notificarme por correo si recibo un mensaje nuevo:'),"</label></span><span class=formright><input type=checkbox id=msgnot name=msgnot ";
 		if ($line['msgnotify']==1) {echo "checked=1";}
 		echo " /></span><BR class=form>\n";
 		if (isset($CFG['FCM']) && isset($CFG['FCM']['webApiKey']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== false) {
@@ -309,7 +309,7 @@ switch($_GET['action']) {
 			echo '<a href="'.$imasroot.'/admin/FCMsetup.php">'.('Setup push notifications on this device').'</a></span><br class=form>';
 		}
 
-		echo "<span class=form><label for=\"stupic\">",_('Picture:'),"</label></span>";
+		echo "<span class=form><label for=\"stupic\">",_('Fotografía:'),"</label></span>";
 		echo "<span class=\"formright\">";
 		if ($line['hasuserimg']==1) {
 			if(isset($GLOBALS['CFG']['GEN']['AWSforcoursefiles']) && $GLOBALS['CFG']['GEN']['AWSforcoursefiles'] == true) {
@@ -320,10 +320,10 @@ switch($_GET['action']) {
 				echo "<img class=\"pii-image\" src=\"$imasroot/course/files/userimg_$userid.jpg\" alt=\"User picture\"/> <input type=\"checkbox\" name=\"removepic\" id=removepic value=\"1\" /> <label for=removepic>Remove</label> ";
 			}
 		} else {
-			echo _("No Pic ");
+			echo _("Sin fotografía");
 		}
 		echo '<br/><input type="file" name="stupic" id="stupic"/></span><br class="form" />';
-		echo '<span class="form"><label for="perpage">',_('Messages/Posts per page:'),'</label></span>';
+		echo '<span class="form"><label for="perpage">',_('Mensajes/Publicaciones por página:'),'</label></span>';
 		echo '<span class="formright"><select name="perpage" id="perpage">';
 		for ($i=10;$i<=100;$i+=10) {
 			echo '<option value="'.$i.'" ';
@@ -344,24 +344,24 @@ switch($_GET['action']) {
 		if (!isset($CFG['GEN']['fixedhomelayout']) || !in_array(2,$CFG['GEN']['fixedhomelayout'])) {
 			$hpsets .= '<input type="checkbox" name="homelayout10" id="homelayout10" ';
 			if (in_array(10,$pagelayout[2])) {$hpsets .= 'checked="checked"';}
-			$hpsets .=  ' /> <label for="homelayout10">'._('New messages widget').'</label><br/>';
+			$hpsets .=  ' /> <label for="homelayout10">'._('Widget de mensaje nuevo').'</label><br/>';
 
 			$hpsets .= '<input type="checkbox" name="homelayout11" id="homelayout11" ';
 			if (in_array(11,$pagelayout[2])) {$hpsets .= 'checked="checked"';}
-			$hpsets .= ' /> <label for="homelayout11">'._('New forum posts widget').'</label><br/>';
+			$hpsets .= ' /> <label for="homelayout11">'._('Widget de nueva publicación en foro').'</label><br/>';
 		}
 		if (!isset($CFG['GEN']['fixedhomelayout']) || !in_array(3,$CFG['GEN']['fixedhomelayout'])) {
 
 			$hpsets .= '<input type="checkbox" name="homelayout3-0" id="homelayout3-0" ';
 			if (in_array(0,$pagelayout[3])) {$hpsets .= 'checked="checked"';}
-			$hpsets .= ' /> <label for="homelayout3-0">'._('New messages notes on course list').'</label><br/>';
+			$hpsets .= ' /> <label for="homelayout3-0">'._('Notas de nuevos mensajes en la lista de cursos').'</label><br/>';
 
 			$hpsets .= '<input type="checkbox" name="homelayout3-1" id="homelayout3-1" ';
 			if (in_array(1,$pagelayout[3])) {$hpsets .= 'checked="checked"';}
-			$hpsets .= ' /> <label for="homelayout3-1">'._('New posts notes on course list').'</label><br/>';
+			$hpsets .= ' /> <label for="homelayout3-1">'._('Notas de nuevas publicaciones en la lista de cursos').'</label><br/>';
 		}
 		if ($hpsets != '') {
-			echo '<span class="form">',_('Show on home page:'),'</span><span class="formright">';
+			echo '<span class="form">',_('Ver en página de inicio:'),'</span><span class="formright">';
 			echo $hpsets;
 			echo '</span><br class="form" />';
 
@@ -451,7 +451,7 @@ switch($_GET['action']) {
 		break;
 	case "enroll":
 		if ($gb == '') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_('Enroll in a Course'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Enroll in a Course'),"</div>\n";
 		}
 		echo '<div id="headerforms" class="pagetitle"><h1>',_('Enroll in a Course'),'</h1></div>';
 		echo "<form id=\"pageform\" method=post action=\"actions.php?action=enroll$gb\">";
@@ -506,7 +506,7 @@ switch($_GET['action']) {
 	case "unenroll":
 		if (!isset($_GET['cid'])) { echo _("Course ID not specified")."\n"; break;}
 		if ($gb == '') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_('Unenroll'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Unenroll'),"</div>\n";
 		}
 		echo '<div id="headerforms" class="pagetitle"><h1>',_('Unenroll'),'</h1></div>';
 
@@ -518,7 +518,7 @@ switch($_GET['action']) {
 		break;
 	case "resetpw":
 		if ($gb == '') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_('Password Reset'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Password Reset'),"</div>\n";
 		}
 		echo '<div id="headerforms" class="pagetitle"><h1>',_('Reset Password'),'</h1></div>';
 		echo "<form id=\"pageform\" class=limitaftervalidate method=post action=\"actions.php?action=resetpw$gb\">\n";
@@ -559,7 +559,7 @@ switch($_GET['action']) {
 		break;
 	case "lookupusername":
 		if ($gb == '') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_('Username Lookup'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Username Lookup'),"</div>\n";
 		}
 		echo '<div id="headerforms" class="pagetitle"><h1>',_('Lookup Username'),'</h1></div>';
 		echo "<form id=\"pageform\" method=post action=\"actions.php?action=lookupusername$gb\">\n";
@@ -586,7 +586,7 @@ switch($_GET['action']) {
 		$stm->execute(array(':id'=>$userid));
 		$hidelist = explode(',', $stm->fetchColumn(0));
 		if ($gb == '') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Home</a> &gt; ",_('Forum Widget Settings'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Forum Widget Settings'),"</div>\n";
 		}
 		echo '<div id="headerforms" class="pagetitle"><h1>',_('Forum Widget Settings'),'</h1></div>';
 		echo '<p>',_('The most recent 10 posts from each course show in the New Forum Posts widget.  Select the courses you want to show in the widget.'),'</p>';
