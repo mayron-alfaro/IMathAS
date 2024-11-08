@@ -62,21 +62,21 @@ $placeinhead = '
 $placeinhead .= "<script type=\"text/javascript\" src=\"$staticroot/javascript/tablesorter.js\"></script>\n";
 if ($myrights>15) {
 	$placeinhead .= '<script type="text/javascript">$(function() {
-  var html = \'<div class="coursedd dropdown"><a role="button" tabindex=0 class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="'.$staticroot.'/img/gears.png" alt="Options"/></a>\';
+  var html = \'<div class="coursedd dropdown"><a role="button" tabindex=0 class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="'.$staticroot.'/img/gears.png" alt="Opciones"/></a>\';
   html += \'<ul role="menu" class="dropdown-menu dropdown-menu-right">\';
   $(".courselist-teach li[data-cid]:not(.coursegroup)").css("clear","both").each(function (i,el) {
   	var cid = $(el).attr("data-cid");
   	if ($(el).attr("data-isowner")=="true" && '.($myrights>39?'true':'false').') {
-  		var thishtml = html + \' <li><a href="admin/forms.php?from=home&action=modify&id=\'+cid+\'">'._('Settings').'</a></li>\';
-  		thishtml += \' <li><a href="#" onclick="hidefromcourselist(this,\'+cid+\',\\\'teach\\\');return false;">'._('Hide from course list').'</a></li>\';
-  		thishtml += \' <li><a href="admin/addremoveteachers.php?from=home&id=\'+cid+\'">'._('Add/remove teachers').'</a></li>\';
-  		thishtml += \' <li><a href="admin/transfercourse.php?from=home&id=\'+cid+\'">'._('Transfer ownership').'</a></li>\';
-  		thishtml += \' <li><a href="admin/forms.php?from=home&action=delete&id=\'+cid+\'">'._('Delete').'</a></li>\';
+  		var thishtml = html + \' <li><a href="admin/forms.php?from=home&action=modify&id=\'+cid+\'">'._('Configuración').'</a></li>\';
+  		thishtml += \' <li><a href="#" onclick="hidefromcourselist(this,\'+cid+\',\\\'teach\\\');return false;">'._('Ocultar de la lista de cursos').'</a></li>\';
+  		thishtml += \' <li><a href="admin/addremoveteachers.php?from=home&id=\'+cid+\'">'._('Agregar/quitar profesores').'</a></li>\';
+  		thishtml += \' <li><a href="admin/transfercourse.php?from=home&id=\'+cid+\'">'._('Transferir propiedad').'</a></li>\';
+  		thishtml += \' <li><a href="admin/forms.php?from=home&action=delete&id=\'+cid+\'">'._('Eliminar').'</a></li>\';
   		thishtml += \'</ul></div>\';
   		$(el).append(thishtml);
   	} else if ($(el).attr("data-isowner")!="true") {
-  		var thishtml = html + \' <li><a href="#" onclick="hidefromcourselist(this,\'+cid+\',\\\'teach\\\');return false;">'._('Hide from course list').'</a></li>\';
-  		thishtml += \' <li><a href="#" onclick="removeSelfAsCoteacher(this,\'+cid+\');return false;">'._('Remove yourself as a co-teacher').'</a></li>\';
+  		var thishtml = html + \' <li><a href="#" onclick="hidefromcourselist(this,\'+cid+\',\\\'teach\\\');return false;">'._('Ocultar de la lista de cursos').'</a></li>\';
+  		thishtml += \' <li><a href="#" onclick="removeSelfAsCoteacher(this,\'+cid+\');return false;">'._('Eliminarse como co-profesor').'</a></li>\';
   		thishtml += \'</ul></div>\';
   		$(el).append(thishtml);
   	}
@@ -375,27 +375,27 @@ if (!empty($CFG['logquestionerrors']) && $myrights >= 20) {
 require_once "header.php";
 $msgtotal = array_sum($newmsgcnt);
 if (!isset($CFG['GEN']['homelinkbox'])) {
-	echo '<div class="floatright" id="homelinkbox" role="navigation" aria-label="'._('Site tools').'">';
+	echo '<div class="floatright" id="homelinkbox" role="navigation" aria-label="'._('Herramientas del sitio').'">';
 	if (!isset($CFG['GEN']['hidedefindexmenu'])) {
 		if ($myrights>5) {
-			echo "<a href=\"forms.php?action=chguserinfo\">", _('Change User Info'), "</a> | \n";
-			echo "<a href=\"forms.php?action=chgpwd\">", _('Change Password'), "</a> | \n";
+			echo "<a href=\"forms.php?action=chguserinfo\">", _('Cambiar información de usuario'), "</a> | \n";
+			echo "<a href=\"forms.php?action=chgpwd\">", _('Cambiar contraseña'), "</a> | \n";
 		}
-		echo '<a href="actions.php?action=logout">', _('Log Out'), '</a><br/>';
+		echo '<a href="actions.php?action=logout">', _('Cerrar sesión'), '</a><br/>';
 	}
-	echo '<a href="msgs/msglist.php?cid=0">', _('Messages'), '</a>';
+	echo '<a href="msgs/msglist.php?cid=0">', _('Mensajes'), '</a>';
 	if ($msgtotal>0) {
-		echo ' <a href="msgs/newmsglist.php?cid=0" class="noticetext">', sprintf(_('New (%d)'), Sanitize::onlyFloat($msgtotal)), '</a>';
+		echo ' <a href="msgs/newmsglist.php?cid=0" class="noticetext">', sprintf(_('Nuevo (%d)'), Sanitize::onlyFloat($msgtotal)), '</a>';
 	}
 	if ($myrights > 9) {
-		echo " | <a href=\"help.php?section=usingimas\">", _('Help'), "</a>\n";
+		echo " | <a href=\"help.php?section=usingimas\">", _('Ayuda'), "</a>\n";
 	}
 	if ($myrights >=75) {
-		echo '<br/><a href="admin/admin2.php">'._('Admin Page').'</a>';
+		echo '<br/><a href="admin/admin2.php">'._('Página de administración').'</a>';
 	} else if (($myspecialrights&4)==4) {
-		echo '<br/><a href="admin/listdiag.php">'._('Diagnostics').'</a>';
+		echo '<br/><a href="admin/listdiag.php">'._('Diagnósticos').'</a>';
 	} else if (!empty($userHasAdminMFA)) {
-		echo '<br/><a href="admin/forms.php?action=entermfa">'._('Enable Admin Features').'</a>';
+		echo '<br/><a href="admin/forms.php?action=entermfa">'._('Habilitar funciones de administración').'</a>';
 	}
 	if ((($myspecialrights&32)==32) || $myrights == 100) {
 		if ($myrights >=75 || ($myspecialrights&4)==4) {
@@ -403,7 +403,7 @@ if (!isset($CFG['GEN']['homelinkbox'])) {
 		} else {
 			echo '<br/>';
 		}
-		echo '<a href="admin/userreports.php">'._('User Reports').'</a>';
+		echo '<a href="admin/userreports.php">'._('Informes de usuarios').'</a>';
 	}
 	echo '</div>';
 }
@@ -412,25 +412,25 @@ echo '<div class="pagetitle" id="headerhome" role="banner"><h1>';
 if (isset($CFG['GEN']['hometitle'])) {
 	echo $CFG['GEN']['hometitle'];
 } else {
-	echo _('Welcome to'), " $installname, ";
+	echo _('Bienvenido a'), " $installname, ";
     printf('<span class="pii-full-name">%s</span>', Sanitize::encodeStringForDisplay($userfullname));
 }
 echo '</h1>';
 echo '</div>';
 if (isset($_SESSION['emulateuseroriginaluser'])) {
-	echo '<p>Currenting emulating this user.  <a href="util/utils.php?unemulateuser=true">Stop emulating user</a></p>';
+	echo '<p>Actualmente emulando este usuario.  <a href="util/utils.php?unemulateuser=true">Dejar de emular usuario</a></p>';
 }
 
 if ($myrights==100 && count($brokencnt)>0) {
-	echo '<div><span class="noticetext">'.Sanitize::onlyFloat(array_sum($brokencnt)).'</span> questions, '.(array_sum($brokencnt)-$brokencnt[0]).' public, reported broken systemwide</div>';
+	echo '<div><span class="noticetext">'.Sanitize::onlyFloat(array_sum($brokencnt)).'</span> preguntas, '.(array_sum($brokencnt)-$brokencnt[0]).' públicas, reportadas como rotas a nivel del sistema</div>';
 }
 if (!empty($CFG['logquestionerrors']) && $myrights>=20 && $qerrcnt>0) {
-    echo '<div><span class="noticetext">'.Sanitize::onlyInt($qerrcnt).'</span> ' . _('of your questions have logged errors') . '. <a target="_blank" href="util/questionerrors.php">' . _('View errors') . '</a></div>';
+    echo '<div><span class="noticetext">'.Sanitize::onlyInt($qerrcnt).'</span> ' . _('de tus preguntas han registrado errores') . '. <a target="_blank" href="util/questionerrors.php">' . _('Ver errores') . '</a></div>';
 }
 if ($myrights<75 && ($myspecialrights&(16+32))!=0) {
 	echo '<div>';
 	if (($myspecialrights&(16+32))!=0) {
-		echo '<a href="admin/forms.php?from=home&action=newadmin">'._('Add New User').'</a> ';
+		echo '<a href="admin/forms.php?from=home&action=newadmin">'._('Agregar nuevo usuario').'</a> ';
 	}
 	echo '</div>';
 }
@@ -441,21 +441,21 @@ if ($myrights==100 || ($myspecialrights&64)!=0) {
 		$newreqs[$row[0]] = $row[1];
 	}
 	if (count($newreqs)>0) {
-		echo '<div> There are <span class=noticetext>'.(isset($newreqs[0])?$newreqs[0]:0).'</span> new account requests';
-		unset($newreqs[0]); // don't count below
+		echo '<div> Hay <span class=noticetext>'.(isset($newreqs[0])?$newreqs[0]:0).'</span> nuevas solicitudes de cuenta';
+		unset($newreqs[0]); // no contar abajo
         if (count($newreqs)>0) {
-			echo ' and <span class=noticetext>'.array_sum($newreqs).'</span> pending requests';
+			echo ' y <span class=noticetext>'.array_sum($newreqs).'</span> solicitudes pendientes';
 		}
-		echo '. <a href="admin/approvepending2.php?from=home">'._('Approve Pending Instructor Accounts').'</a>';
+		echo '. <a href="admin/approvepending2.php?from=home">'._('Aprobar Cuentas de Instructor Pendientes').'</a>';
 	}
 }
 if (isset($tzname) && isset($_SESSION['logintzname']) && $tzname!=$_SESSION['logintzname']) {
-	echo '<div class="sysnotice">'.sprintf(_('Notice: You have requested that times be displayed based on the <b>%s</b> time zone, and your computer is reporting you are currently in a different time zone. Be aware that times will display based on the %s timezone as requested, not your local time'),$tzname,$tzname).'</div>';
+	echo '<div class="sysnotice">'.sprintf(_('Aviso: Has solicitado que las horas se muestren según la zona horaria de <b>%s</b>, y tu computadora indica que estás en una zona horaria diferente. Ten en cuenta que los horarios se mostrarán en la zona horaria de %s como se solicitó, no en tu hora local'),$tzname,$tzname).'</div>';
 }
 if (substr($myemail,0,7)==='BOUNCED') {
 	echo '<div class="sysnotice">';
-	echo _('We have been unable to send emails to the address you have listed. Please update the email address in your profile.').' ';
-	echo '<a href="forms.php?action=chguserinfo">'._('Edit Now').'</a>.';
+	echo _('No hemos podido enviar correos electrónicos a la dirección que tienes registrada. Por favor, actualiza la dirección de correo electrónico en tu perfil.').' ';
+	echo '<a href="forms.php?action=chguserinfo">'._('Editar Ahora').'</a>.';
 	echo '</div>';
 }
 
@@ -474,14 +474,14 @@ for ($i=0; $i<3; $i++) {
 		switch ($pagelayout[$i][$j]) {
 			case 0:
 				if ($myrights>10) {
-					printCourses($page_teacherCourseData,_('Courses you\'re teaching'),'teach',$teachhashiddencourses);
+					printCourses($page_teacherCourseData,_('Cursos que enseñas'),'teach',$teachhashiddencourses);
 				}
 				break;
 			case 1:
-				printCourses($page_tutorCourseData,_('Courses you\'re tutoring'),'tutor',$tutorhashiddencourses);
+				printCourses($page_tutorCourseData,_('Cursos en los que eres tutor'),'tutor',$tutorhashiddencourses);
 				break;
 			case 2:
-				printCourses($page_studentCourseData,_('Courses you\'re taking'),'take',$stuhashiddencourses);
+				printCourses($page_studentCourseData,_('Cursos en los que estás inscrito'),'take',$stuhashiddencourses);
 				break;
 			case 10:
 				printMessagesGadget();
@@ -520,9 +520,9 @@ function printCourses($data,$title,$type=null,$hashiddencourses=false) {
 		}
 	}
 	if ($type=='teach' && $myrights>39 && count($data)==0) {
-		echo '<li>', _('To add a course, click the button below'), '</li>';
+		echo '<li>', _('Para agregar un curso, haz clic en el botón de abajo'), '</li>';
 	} else if ($type=='teach' && $myrights<13 && $myrights>10 && count($data)==0) {
-		echo '<li>', _('Your instructor account has not been approved yet. Please be patient.'), '</li>';
+		echo '<li>', _('Tu cuenta de instructor aún no ha sido aprobada. Por favor, sé paciente.'), '</li>';
 	}
 	echo '</ul>';
 
@@ -536,27 +536,27 @@ function printCourses($data,$title,$type=null,$hashiddencourses=false) {
 		}
 		if ($hasCleanup) {
 			echo '<p class="small info"><span class="warn">**</span> ';
-			echo _('course is scheduled for cleanup').'</p>';
+			echo _('el curso está programado para limpieza').'</p>';
 		}
 	}
     if ($type=='take' && substr($username, 0, 4) != 'lti-') {
-        echo '<div class="center"><a class="abutton" href="forms.php?action=enroll">', _('Enroll in a New Class'), '</a></div>';
+        echo '<div class="center"><a class="abutton" href="forms.php?action=enroll">', _('Inscribirse en una nueva clase'), '</a></div>';
     } else if ($type=='teach' && $myrights>39) {
-        echo '<div class="center"><a class="abutton" href="admin/addcourse.php">', _('Add New Course'), '</a></div>';
+        echo '<div class="center"><a class="abutton" href="admin/addcourse.php">', _('Agregar nuevo curso'), '</a></div>';
     }
 
     echo '<div class="center">';
     if (count($data)>0) {
-        echo '<a class="small" href="admin/modcourseorder.php?type='.$type.'">',_('Change Course Order'),'</a><br/>';
+        echo '<a class="small" href="admin/modcourseorder.php?type='.$type.'">',_('Cambiar el orden de los cursos'),'</a><br/>';
     }
     //echo '</div><div class="center">';
-    echo '<a id="unhidelink'.$type.'" '.($hashiddencourses?'':'style="display:none"').' class="small" href="admin/unhidefromcourselist.php?type='.$type.'">',_('View hidden courses'),'</a> ';
+    echo '<a id="unhidelink'.$type.'" '.($hashiddencourses?'':'style="display:none"').' class="small" href="admin/unhidefromcourselist.php?type='.$type.'">',_('Ver cursos ocultos'),'</a> ';
     if ($type=='teach' && count($data)>0) {
-        echo '<br/><a class="small" href="admin/forms.php?action=findstudent&from=home">',_('Find Student'),'</a> ';
+        echo '<br/><a class="small" href="admin/forms.php?action=findstudent&from=home">',_('Buscar estudiante'),'</a> ';
     }
     echo '</div>';
     if ($type=='teach' && ($myrights>=75 || ($myspecialrights&4)==4)) {
-        echo '<div class="center"><a class="abutton" href="admin/admin2.php">', _('Admin Page'), '</a></div>';
+        echo '<div class="center"><a class="abutton" href="admin/admin2.php">', _('Página de administración'), '</a></div>';
     }
 
     echo '</div>';
@@ -595,59 +595,58 @@ function printCourseLine($data, $type=null) {
 		echo Sanitize::encodeStringForDisplay($data['name']);
 	}
 	if ($type=='teach' && $data['cleanupdate']>1) {
-		echo ' <span style="color:orange;" title="'._('course is scheduled for cleanup').'">**</span>';
+		echo ' <span style="color:orange;" title="'._('el curso está programado para limpieza').'">**</span>';
 	}
 	if (isset($data['available']) && (($data['available']&1)==1)) {
-		echo ' <em style="color:green;" class=small>', _('Unavailable'), '</em>';
+		echo ' <em style="color:green;" class=small>', _('No disponible'), '</em>';
 	}
 	if (isset($data['startdate']) && $now<$data['startdate']) {
 		echo ' <em style="color:green;" class=small>';
-		echo _('Starts ').tzdate('m/d/Y', $data['startdate']);
+		echo _('Inicia ').tzdate('m/d/Y', $data['startdate']);
 		echo '</em>';
 	} else if (isset($data['enddate']) && $now>$data['enddate']) {
 		echo ' <em style="color:green;" class=small>';
-		echo _('Ended ').tzdate('m/d/Y', $data['enddate']);
+		echo _('Finalizó ').tzdate('m/d/Y', $data['enddate']);
 		echo '</em>';
 	}
 
 	if (isset($data['lockaid']) && $data['lockaid']>0) {
-		echo ' <em style="color:green;">', _('Lockdown'), '</em>';
+		echo ' <em style="color:green;">', _('Bloqueo'), '</em>';
 	}
 	if ($shownewmsgnote && isset($newmsgcnt[$data['id']]) && $newmsgcnt[$data['id']]>0) {
         if ($type == 'take' && $data['locked'] > 0) {
-		    echo ' <a class="noticetext" href="msgs/msglist.php?page=-1&cid=0&filtercid='.$data['id'].'">', sprintf(_('Messages (%d)'), $newmsgcnt[$data['id']]), '</a>';
+		    echo ' <a class="noticetext" href="msgs/msglist.php?page=-1&cid=0&filtercid='.$data['id'].'">', sprintf(_('Mensajes (%d)'), $newmsgcnt[$data['id']]), '</a>';
         } else {
-		    echo ' <a class="noticetext" href="msgs/msglist.php?page=-1&cid='.$data['id'].'">', sprintf(_('Messages (%d)'), $newmsgcnt[$data['id']]), '</a>';
+		    echo ' <a class="noticetext" href="msgs/msglist.php?page=-1&cid='.$data['id'].'">', sprintf(_('Mensajes (%d)'), $newmsgcnt[$data['id']]), '</a>';
         }
 	}
 	if ($shownewpostnote && isset($newpostcnt[$data['id']]) && $newpostcnt[$data['id']]>0) {
 		printf(' <a class="noticetext" href="forums/newthreads.php?from=home&cid=%d">%s</a>',$data['id'],
-			_('Posts ('.Sanitize::onlyInt($newpostcnt[$data['id']]).')'));
-		// echo ' <a class="noticetext" href="forums/newthreads.php?from=home&cid='.Sanitize::encodeUrlParam($data['id']).'">', sprintf(_('Posts (%d)'), $newpostcnt[$data['id']]), '</a>';
+			_('Publicaciones ('.Sanitize::onlyInt($newpostcnt[$data['id']]).')'));
 	}
 	if ($type != 'teach' || ($data['ownerid']==$userid && $myrights<40) || $myrights<20) {
-		echo '<div class="delx"><a href="#" onclick="return hidefromcourselist(this,'.$data['id'].',\''.$type.'\');" title="'._("Hide from course list").'" aria-label="'._("Hide from course list").'">x</a></div>';
+		echo '<div class="delx"><a href="#" onclick="return hidefromcourselist(this,'.$data['id'].',\''.$type.'\');" title="'._("Ocultar de la lista de cursos").'" aria-label="'._("Ocultar de la lista de cursos").'">x</a></div>';
 	}
 	echo '</li>';
-
+	
 }
 
 function printMessagesGadget() {
 	global $page_newmessagelist, $page_coursenames;
-	echo '<div role="complementary" aria-label="'._('New messages').'">';
-	echo '<div class="block"><h2>', _('New messages'), '</h2></div>';
+	echo '<div role="complementary" aria-label="'._('Mensajes nuevos').'">';
+	echo '<div class="block"><h2>', _('Mensajes nuevos'), '</h2></div>';
 	echo '<div class="blockitems">';
 	if (count($page_newmessagelist)==0) {
-		echo '<p>', _('No new messages'), '</p>';
+		echo '<p>', _('Sin mensajes nuevos'), '</p>';
 		echo '</div></div>';
 		return;
 	}
-	echo '<table class="gb" id="newmsglist"><thead><tr><th>', _('Message'), '</th><th>', _('From'), '</th><th>', _('Course'), '</th><th>' ,_('Sent'), '</th></tr></thead>';
+	echo '<table class="gb" id="newmsglist"><thead><tr><th>', _('Mensaje'), '</th><th>', _('De'), '</th><th>', _('Curso'), '</th><th>' ,_('Enviado'), '</th></tr></thead>';
 	echo '<tbody>';
 	foreach ($page_newmessagelist as $line) {
 		echo '<tr>';
 		if (trim($line['title'])=='') {
-			$line['title'] = '['._('No Subject').']';
+			$line['title'] = '['._('Sin asunto').']';
 		}
 		$n = 0;
 		while (strpos($line['title'],'Re: ')===0) {
@@ -684,15 +683,15 @@ function printMessagesGadget() {
 }
 function printPostsGadget() {
 	global $DBH,$page_newpostlist, $page_coursenames, $postthreads,$imasroot,$staticroot;
-	echo '<div role="complementary" aria-label="'._('New forum posts').'">';
+	echo '<div role="complementary" aria-label="'._('Nuevas publicaciones en el foro').'">';
 	echo '<div class="block">';
 	//echo "<span class=\"floatright\"><a href=\"#\" onclick=\"GB_show('Forum Widget Settings','$imasroot/forms.php?action=forumwidgetsettings&greybox=true',800,'auto')\" title=\"Forum Widget Settings\"><img style=\"vertical-align:top\" src=\"$imasroot/img/gears.png\"/></a></span>";
 	echo "<span class=\"floatright\"><a href=\"forms.php?action=forumwidgetsettings\"><img style=\"vertical-align:top\" src=\"$staticroot/img/gears.png\" alt=\"Settings\"/></a></span>";
 
-	echo '<h2>', _('New forum posts'), '</h2></div>';
+	echo '<h2>', _('Nuevas publicaciones en el foro'), '</h2></div>';
 	echo '<div class="blockitems">';
 	if (count($page_newpostlist)==0) {
-		echo '<p>', _('No new posts'), '</p>';
+		echo '<p>', _('Sin publicaciones nuevas'), '</p>';
 		echo '</div></div>';
 		return;
 	}
@@ -705,13 +704,13 @@ function printPostsGadget() {
 		$threaddata[$tline['id']] = $tline;
 	}
 
-	echo '<table class="gb" id="newpostlist"><thead><tr><th>', _('Thread'), '</th><th>', _('Started By'), '</th><th>', _('Course'), '</th><th>', _('Last Post'), '</th></tr></thead>';
+	echo '<table class="gb" id="newpostlist"><thead><tr><th>', _('Hilo'), '</th><th>', _('Iniciado por'), '</th><th>', _('Curso'), '</th><th>', _('Última publicación'), '</th></tr></thead>';
 	echo '<tbody>';
 	foreach ($page_newpostlist as $line) {
 		echo '<tr>';
 		$subject = $threaddata[$line['threadid']]['subject'];
 		if (trim($subject)=='') {
-			$subject = '['._('No Subject').']';
+			$subject = '['._('Sin asunto').']';
 		}
 		$n = 0;
 		while (strpos($subject,'Re: ')===0) {
@@ -727,7 +726,7 @@ function printPostsGadget() {
 		echo $subject;
 		echo '</a></td>';
 		if ($threaddata[$line['threadid']]['isanon']==1) {
-			echo '<td>', _('Anonymous'), '</td>';
+			echo '<td>', _('Anonimo'), '</td>';
 		} else {
 			echo '<td><span class="pii-full-name">'.Sanitize::encodeStringForDisplay($threaddata[$line['threadid']]['LastName']).', '.Sanitize::encodeStringForDisplay($threaddata[$line['threadid']]['FirstName']).'</span></td>';
 		}
