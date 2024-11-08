@@ -597,7 +597,7 @@ if ($hasusername) {
             $breadcrumbbase = '';
         }
     } else {
-        $breadcrumbbase = "<a href=\"$imasroot/index.php\">Home</a> &gt; ";
+        $breadcrumbbase = "<a href=\"$imasroot/index.php\">Inicio</a> &gt; ";
     }
 
     if ((isset($_GET['cid']) && $_GET['cid'] != "admin" && $_GET['cid'] > 0) || (isset($_SESSION['courseid']) && strpos(basename($_SERVER['PHP_SELF']), 'showtest.php') !== false)) {
@@ -621,7 +621,7 @@ if ($hasusername) {
             if ($line['locked'] > 0) {
                 require_once __DIR__."/header.php";
                 echo "<p>", _("You have been locked out of this course by your instructor.  Please see your instructor for more information."), "</p>";
-                echo "<p><a href=\"$imasroot/index.php\">Home</a></p>";
+                echo "<p><a href=\"$imasroot/index.php\">Inicio</a></p>";
                 require_once __DIR__ . '/footer.php';
                 exit;
             } else {
@@ -763,9 +763,9 @@ if ($hasusername) {
                                 echo '</form>';
                             }
                         } else if ($courseUIver > 1) {
-                            echo "<p><a href=\"$imasroot/assess2/?cid=$cid&aid=" . Sanitize::encodeUrlParam($lockaid) . "\">", _("Go to Assessment"), "</a> | <a href=\"$imasroot/index.php\">", _("Home"), "</a></p>";
+                            echo "<p><a href=\"$imasroot/assess2/?cid=$cid&aid=" . Sanitize::encodeUrlParam($lockaid) . "\">", _("Go to Assessment"), "</a> | <a href=\"$imasroot/index.php\">", _("Inicio"), "</a></p>";
                         } else {
-                            echo "<p><a href=\"$imasroot/assessment/showtest.php?cid=$cid&id=" . Sanitize::encodeUrlParam($lockaid) . "\">Go to Assessment</a> | <a href=\"$imasroot/index.php\">", _("Home"), "</a></p>";
+                            echo "<p><a href=\"$imasroot/assessment/showtest.php?cid=$cid&id=" . Sanitize::encodeUrlParam($lockaid) . "\">Go to Assessment</a> | <a href=\"$imasroot/index.php\">", _("Inicio"), "</a></p>";
                         }
                         require_once __DIR__ . '/footer.php';
                         //header('Location: ' . $GLOBALS['basesiteurl'] . "/assessment/showtest.php?cid=$cid&id=$lockaid");
