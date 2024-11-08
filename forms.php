@@ -451,9 +451,9 @@ switch($_GET['action']) {
 		break;
 	case "enroll":
 		if ($gb == '') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Enroll in a Course'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Inscribirse en un nuevo curso'),"</div>\n";
 		}
-		echo '<div id="headerforms" class="pagetitle"><h1>',_('Enroll in a Course'),'</h1></div>';
+		echo '<div id="headerforms" class="pagetitle"><h1>',_('Datos del nuevo curso'),'</h1></div>';
 		echo "<form id=\"pageform\" method=post action=\"actions.php?action=enroll$gb\">";
 		$doselfenroll = false;
         $stm = $DBH->query("SELECT id,name FROM imas_courses WHERE istemplate > 0 AND (istemplate&4)=4 AND available<4 ORDER BY name");
@@ -479,14 +479,14 @@ switch($_GET['action']) {
 			echo '<script type="text/javascript"> function courseselectupdate(el) { var c = document.getElementById("courseinfo"); var c2 = document.getElementById("selfenrollwarn"); ';
 			echo 'if (el.value==0) {c.style.display="";c2.style.display="none";} else {c.style.display="none";c2.style.display="";}}</script>';
 		} else {
-			echo '<p>',_('Enter the course ID provided by your teacher.'),'</p>';
+			echo '<p>',_('Ingrese la información proporcionada por su profesor.'),'</p>';
 			echo '<input type="hidden" name="courseselect" id="courseselect" value="0"/>';
 		}
-		echo '<span class="form"><label for="cid">',_('Course ID'),':</label></span><input class="form" type="text" size="20" name="cid" id="cid"/><br class="form"/>';
-		echo '<span class="form"><label for="ekey">',_('Enrollment Key'),':</label></span><input class="form" type="text" size="20" name="ekey" id="ekey"/><br class="form"/>';
+		echo '<span class="form"><label for="cid">',_('ID del Curso'),':</label></span><input class="form" type="text" size="20" name="cid" id="cid"/><br class="form"/>';
+		echo '<span class="form"><label for="ekey">',_('Clave de inscripción'),':</label></span><input class="form" type="text" size="20" name="ekey" id="ekey"/><br class="form"/>';
 		if ($doselfenroll) {
 			echo '</div>';
-			echo '<div id="selfenrollwarn" class=noticetext style="display:none;">',_('Warning: You have selected a non-credit self-study course. ');
+			echo '<div id="selfenrollwarn" class=noticetext style="display:none;">',_('Advertencia: has seleccionado un curso de autoaprendizaje sin créditos o notas. ');
 			echo sprintf(_('If you are using %s with an instructor-led course, this is NOT what you want; nothing you do in the self-study course will be viewable by your instructor or count towards your course. For an instructor-led course, you need to enter the course ID and key provided by your instructor.'),$installname);
 			echo '</div>';
 		}
@@ -500,7 +500,7 @@ switch($_GET['action']) {
 			invalidHandler: function() {setTimeout(function(){$("#pageform").removeClass("submitted").removeClass("submitted2");}, 100)}}
 		);
 		</script>';
-		echo '<div class=submit><input type=submit value="',_('Sign Up'),'"></div>';
+		echo '<div class=submit><input type=submit value="',_('Unirse'),'"></div>';
 		echo '</form>';
 		break;
 	case "unenroll":
