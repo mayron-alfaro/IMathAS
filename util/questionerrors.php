@@ -108,7 +108,7 @@ function quicksave() {
 </script>';
 require_once '../header.php';
 
-echo '<div class=breadcrumb><a href="../index.php">'._('Home').'</a> &gt; '._('Question Errors').'</div>';
+echo '<div class=breadcrumb><a href="../index.php">'._('Inicio').'</a> &gt; '._('Question Errors').'</div>';
 echo '<h2>'._('Question Errors').'</h2>';
 
 echo '<p>'._('The questions listed below have logged an error. Some error may occur on display, some on scoring, and some may only occur on invalid student inputs. ');
