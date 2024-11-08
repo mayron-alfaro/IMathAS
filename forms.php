@@ -151,26 +151,26 @@ switch($_GET['action']) {
         $mfa = $stm->fetchColumn(0);
 
 		if ($gb == '' && $_GET['action']!='forcechgpwd') {
-			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Change Password'),"</div>\n";
+			echo "<div class=breadcrumb><a href=\"index.php\">Inicio</a> &gt; ",_('Cambiar contraseña'),"</div>\n";
 		}
-		echo '<div id="headerforms" class="pagetitle"><h1>',_('Change Your Password'),'</h1></div>';
+		echo '<div id="headerforms" class="pagetitle"><h1>',_('Cambia tu contraseña'),'</h1></div>';
 		if ($_GET['action']=='forcechgpwd') {
-			echo '<p>'._('To ensure the security of your account, we are requiring a password change. Please select a new password.').'</p>';
+			echo '<p>'._('Para garantizar la seguridad de su cuenta, requerimos un cambio de contraseña. Por favor seleccione una nueva contraseña.').'</p>';
 			echo "<form id=\"pageform\" class=limitaftervalidate method=post action=\"actions.php?action=forcechgpwd$gb\">\n";
 		} else {
 			echo "<form id=\"pageform\" class=limitaftervalidate method=post action=\"actions.php?action=chgpwd$gb\">\n";
 		}
         echo '<div id="errorlive" aria-live="polite" class="sr-only"></div>';
-		echo "<span class=form><label for=\"oldpw\">",_('Enter old password'),":</label></span> <input class=form type=password id=oldpw name=oldpw size=40 /> <BR class=form>\n";
+		echo "<span class=form><label for=\"oldpw\">",_('Ingrese contraseña actual'),":</label></span> <input class=form type=password id=oldpw name=oldpw size=40 /> <BR class=form>\n";
         if ($mfa !== '') {
-            echo "<span class=form><label for=\"mfa\">",_('Enter 2-factor Authentication code'),":</label></span> <input class=form type=text id=mfa name=mfa size=10 /> <BR class=form>\n";
+            echo "<span class=form><label for=\"mfa\">",_('Ingrese código de Autenticación 2-F'),":</label></span> <input class=form type=text id=mfa name=mfa size=10 /> <BR class=form>\n";
         }
-		echo "<span class=form><label for=\"pw1\">",_('Enter new password'),":</label></span>  <input class=form type=password id=pw1 name=pw1 size=40> <BR class=form>\n";
-		echo "<span class=form><label for=\"pw2\">",_('Verify new password'),":</label></span>  <input class=form type=password id=pw2 name=pw2 size=40> <BR class=form>\n";
+		echo "<span class=form><label for=\"pw1\">",_('Ingrese nueva contraseña'),":</label></span>  <input class=form type=password id=pw1 name=pw1 size=40> <BR class=form>\n";
+		echo "<span class=form><label for=\"pw2\">",_('Confirma la nueva contraseña'),":</label></span>  <input class=form type=password id=pw2 name=pw2 size=40> <BR class=form>\n";
 
 		showNewUserValidation("pageform",array("oldpw"));
 
-		echo "<div class=submit><input type=submit value=",_('Submit'),"></div>";
+		echo "<div class=submit><input type=submit value=",_('Guardar'),"></div>";
 		echo "</form>\n";
 		break;
 	case "chguserinfo":
@@ -213,7 +213,7 @@ switch($_GET['action']) {
                         $("#email").val() != oldemail ||
                         ($("#dochgmfa").val() < '.$mfatype.');
                     if (needchk && !$("#seccheck").is(":visible")) {
-                      $("#infolive").html("'._('The changes you are making require additional security verification. Re-enter your password later in the form.').'");
+                      $("#infolive").html("'._('Los cambios que está realizando requieren una verificación de seguridad adicional. Vuelva a ingresar su contraseña más adelante en el formulario.').'");
                     } else if (!needchk) {
                       $("#infolive").html("");
                     }
