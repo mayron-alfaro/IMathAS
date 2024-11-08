@@ -117,7 +117,7 @@ function getBlockDD($blocktype, $i, $parent, $bnum, $blockid, $name)
     if ($blocktype == 'T') {
         $out .= " <li><a href=\"course.php?cid=$cid&folder=$parent-$bnum\">" . _('Edit Contents') . "</a></li>";
     } else if ($blocktype == 'E') {
-        $out .= " <li><a href=\"course.php?cid=$cid&folder=$parent-$bnum\">" . _('Isolate') . "</a></li>";
+        $out .= " <li><a href=\"course.php?cid=$cid&folder=$parent-$bnum\">" . _('Enfocar') . "</a></li>";
     }
     $out .= " <li><a href=\"addblock.php?cid=$cid&id=$parent-$bnum\">" . _('Modify') . "</a></li>";
     $out .= " <li><a href=\"#\" onclick=\"return moveDialog('$parent','B{$blockid}');\">" . _('Move') . '</a></li>';
@@ -464,7 +464,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                         echo '<div class="itemhdrright">';
                         echo "<a href=\"" . ($ispublic ? "public" : "course") . ".php?cid=$cid&folder=$parent-$bnum\" $astyle ";
                         echo 'aria-label="' . _('Isolate block') . ' ' . Sanitize::encodeStringForDisplay($items[$i]['name']) . '">';
-                        echo _('Isolate'), "</a>";
+                        echo _('Enfocar'), "</a>";
                         echo '</div>';
 
                     }
@@ -651,7 +651,7 @@ function showitems($items, $parent, $inpublic = false, $greyitems = 0)
                         echo '<div class="itemhdrright">';
                         echo "<a href=\"" . ($ispublic ? "public" : "course") . ".php?cid=$cid&folder=$parent-$bnum\" $astyle ";
                         echo 'aria-label="' . _('Isolate block') . ' ' . Sanitize::encodeStringForDisplay($items[$i]['name']) . '">';
-                        echo _('Isolate'), "</a>";
+                        echo _('Enfocar'), "</a>";
                         echo '</div>';
                     }
                     echo '</div>'; //itemhdr
