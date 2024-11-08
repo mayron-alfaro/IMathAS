@@ -280,7 +280,7 @@ if (!isset($teacherid) && !isset($tutorid) && !isset($studentid) && !isset($inst
 			}
 			$curname = $backtrack[count($backtrack)-1][0];
 			if (count($backtrack)>$depth) {
-				$backlink = "<span class=right><a href=\"course.php?cid=$cid&folder=".Sanitize::encodeUrlParam($backtrack[count($backtrack)-2][1])."\">" . _('Back') . "</a></span><br class=\"form\" />";
+				$backlink = "<span class=right><a href=\"course.php?cid=$cid&folder=".Sanitize::encodeUrlParam($backtrack[count($backtrack)-2][1])."\">" . _('Regresar') . "</a></span><br class=\"form\" />";
 			}
 		} else {
 			$curBreadcrumb .= "<a href=\"course.php?cid=$cid&folder=0\">".Sanitize::encodeStringForDisplay($coursename)."</a> ";
@@ -296,9 +296,9 @@ if (!isset($teacherid) && !isset($tutorid) && !isset($studentid) && !isset($inst
             }
             $curname = $backtrack[count($backtrack)-1][0];
             if (count($backtrack)==1) {
-                $backlink =  "<span class=right><a href=\"course.php?cid=$cid&folder=0\">" . _('Back') . "</a></span><br class=\"form\" />";
+                $backlink =  "<span class=right><a href=\"course.php?cid=$cid&folder=0\">" . _('Regresar') . "</a></span><br class=\"form\" />";
             } else {
-                $backlink = "<span class=right><a href=\"course.php?cid=$cid&folder=".Sanitize::encodeUrlParam($backtrack[count($backtrack)-2][1])."\">" . _('Back') . "</a></span><br class=\"form\" />";
+                $backlink = "<span class=right><a href=\"course.php?cid=$cid&folder=".Sanitize::encodeUrlParam($backtrack[count($backtrack)-2][1])."\">" . _('Regresar') . "</a></span><br class=\"form\" />";
             }
 		}
 	} else {
@@ -736,7 +736,7 @@ function makeTopMenu() {
 
 		echo '<div class="cpmid">';
 
-		echo '<span class="showinmobile"><b>'._('Quick Rearrange.'), "</b> <a href=\"course.php?cid=$cid&quickview=off\">", _('Back to regular view'), "</a>.</span> ";
+		echo '<span class="showinmobile"><b>'._('Quick Rearrange.'), "</b> <a href=\"course.php?cid=$cid&quickview=off\">", _('Regresar a la vista regular'), "</a>.</span> ";
 
 		if (isset($CFG['CPS']['miniicons'])) {
 			echo _('Use icons to drag-and-drop order.'),' ',_('Click the icon next to a block to expand or collapse it. Click an item title to edit it in place.'), '  <input type="button" id="recchg" disabled="disabled" value="', _('Save Changes'), '" onclick="submitChanges(\'json\')"/>';
