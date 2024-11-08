@@ -3,7 +3,7 @@
 <?php if (isset($CFG['locale'])) {
 	echo '<html lang="'.$CFG['locale'].'">';
 } else {
-	echo '<html lang="en">';
+	echo '<html lang="es">';
 }
 if (!isset($myrights)) { 
     $myrights = 0; // avoid errors in headercontent if not defined
@@ -335,29 +335,29 @@ if (!empty($cid) && !isset($flexwidth) && !isset($hideAllHeaderNav) && !isset($n
 	$c = getactivetab();
 	$a[$c] = 'class="activetab"';
 
-	echo "<li><a {$a['course']} href=\"$imasroot/course/course.php?cid=$cid\">",_('Course'),"</a></li> ";
+	echo "<li><a {$a['course']} href=\"$imasroot/course/course.php?cid=$cid\">",_('Curso'),"</a></li> ";
 	if (isset($coursemsgset) && $coursemsgset<4) { //messages
-		echo "<li><a {$a['msg']} href=\"$imasroot/msgs/msglist.php?cid=$cid\">",_('Messages'),"</a></li> ";
+		echo "<li><a {$a['msg']} href=\"$imasroot/msgs/msglist.php?cid=$cid\">",_('Mensajes'),"</a></li> ";
 	}
 
 	if (isset($coursetoolset) && ($coursetoolset&2)==0) { //forums
-		echo "<li><a {$a['forum']} href=\"$imasroot/forums/forums.php?cid=$cid\">",_('Forums'),"</a></li>";
+		echo "<li><a {$a['forum']} href=\"$imasroot/forums/forums.php?cid=$cid\">",_('Foros'),"</a></li>";
 	}
 
 	if (isset($teacherid)) { //Roster
-		echo "<li><a {$a['roster']} href=\"$imasroot/course/listusers.php?cid=$cid\">",_('Roster'),"</a></li>\n";
+		echo "<li><a {$a['roster']} href=\"$imasroot/course/listusers.php?cid=$cid\">",_('Listado'),"</a></li>\n";
 	}
 
 	if (isset($coursetoolset) && ($coursetoolset&1)==0) { //Calendar
-		echo "<li><a {$a['cal']} href=\"$imasroot/course/showcalendar.php?cid=$cid\">",_('Calendar'),"</a></li>\n";
+		echo "<li><a {$a['cal']} href=\"$imasroot/course/showcalendar.php?cid=$cid\">",_('Calendario'),"</a></li>\n";
 	}
 
     if (isset($coursetoolset) && ($coursetoolset&4)==0) {
-	    echo "<li><a {$a['gb']} href=\"$imasroot/course/gradebook.php?cid=$cid\">",_('Gradebook'),"</a></li>"; //Gradebook
+	    echo "<li><a {$a['gb']} href=\"$imasroot/course/gradebook.php?cid=$cid\">",_('Notas'),"</a></li>"; //Gradebook
     }
 
 	if (!isset($haslogout)) { //Log out
-		echo "<li><a href=\"$imasroot/actions.php?action=logout\">",_('Log Out'),"</a></li>";
+		echo "<li><a href=\"$imasroot/actions.php?action=logout\">",_('Cerrar sesión'),"</a></li>";
 	}
 	echo '</ul>';
 
