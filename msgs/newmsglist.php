@@ -48,7 +48,7 @@
 	$pagetitle = "New Messages";
 	require_once "../header.php";
 
-	echo "<div class=breadcrumb><a href=\"../index.php\">Home</a> ";
+	echo "<div class=breadcrumb><a href=\"../index.php\">Inicio</a> ";
 	if ($cid>0) {
 		echo "&gt; <a href=\"../course/course.php?cid=$cid\">".Sanitize::encodeStringForDisplay($coursename)."</a> ";
 	}
