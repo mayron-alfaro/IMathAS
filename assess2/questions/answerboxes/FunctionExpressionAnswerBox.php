@@ -98,7 +98,7 @@ class FunctionExpressionAnswerBox implements AnswerBox
                 $shorttip = _('Enter an algebraic inequality');
                 $tip = _('Enter your answer as an inequality.  Example: y<3x^2+1, 2+x+y>=3') . "\n<br/>" . _('Be sure your variables match those in the question');
             } else {
-                $shorttip = _('Enter an algebraic expression');
+                $shorttip = _('Ingrese una expresión algebraica');
                 $tip = _('Enter your answer as an expression.  Example: 3x^2+1, x/5, (a+b)/c') . "\n<br/>" . _('Be sure your variables match those in the question');
             }
         }
