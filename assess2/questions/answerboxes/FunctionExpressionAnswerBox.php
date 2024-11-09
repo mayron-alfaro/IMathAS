@@ -99,7 +99,7 @@ class FunctionExpressionAnswerBox implements AnswerBox
                 $tip = _('Enter your answer as an inequality.  Example: y<3x^2+1, 2+x+y>=3') . "\n<br/>" . _('Be sure your variables match those in the question');
             } else {
                 $shorttip = _('Ingrese una expresión algebraica');
-                $tip = _('Tu respuesta debe ser una expresión.  Ejemplo: 3x^2+1, x/5, (a+b)/c') . "\n<br/>" . _('Asegúrate de que las variables coincidan con las de la pregunta');
+                $tip = _('Tu respuesta debe ser una expresión.  Ejemplo: 3x^2+1, x/5, (a+b)/c') . "\n<br/>" . _('Asegúrate de que las variables coincidan con las de la pregunta.');
             }
         }
         if (in_array('generalcomplex', $ansformats)) {
