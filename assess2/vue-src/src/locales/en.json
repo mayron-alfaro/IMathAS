@@ -27,7 +27,7 @@
     "hidden": "This assessment is not currently available.",
     "notyet": "This assessment is not yet available.  It will be available {sd} until {ed}.",
     "pastdue": "This assessment was due {ed}.",
-    "pasttime": "The timelimit has expired on this assessment.",
+    "pasttime": "El plazo ha expirado para esta evaluación.",
     "needprereq": "You have not yet met the prerequisite requirements to work on this assessment.",
     "prereqreq": "A score of {score} on {name} is required.",
     "no_attempts": "You have used all your attempts at this assessment.",
