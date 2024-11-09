@@ -74,7 +74,7 @@
     "keep_average": "Average score recorded as grade.",
     "keep_last": "Last attempt recorded as grade.",
     "retake_penalty": "A penalty of {p}% will be applied on the next retake.",
-    "time_expires": "Your current assessment time limit expires at {date}.",
+    "time_expires": "Su límite de tiempo de evaluación actual vence el {date}.",
     "time_expires_wgrace": "Your current assessment time limit expires at {date}, and the grace period ends {grace}.",
     "time_expired": "Your current assessment time limit expired at {date}.",
     "time_grace_expires": "Your current assessment time limit expired at {date}. The grace period ends {grace}.",
