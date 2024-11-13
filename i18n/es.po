@@ -217,13 +217,13 @@ msgstr "Profesor"
 #: admin/groupreportdetails.php:14 admin/userdetails.php:14
 #: admin/userreportdetails.php:15 admin/userreports.php:15
 msgid "LimCourseCreator"
-msgstr ""
+msgstr "Creador de Cursos Limitado"
 
 #: admin/admin2.php:15 admin/userdetails.php:14 admin/admin2.php:16
 #: admin/groupreportdetails.php:15 admin/userdetails.php:15
 #: admin/userreportdetails.php:16 admin/userreports.php:16
 msgid "GroupAdmin"
-msgstr ""
+msgstr "Administrador de Grupo"
 
 #: admin/admin2.php:33 admin/admin2.php:34
 msgid "Group Administration"
@@ -416,7 +416,7 @@ msgstr "Credenciales de proveedor LTI"
 
 #: admin/admin2.php:321 admin/admin2.php:335
 msgid "Federation Peers"
-msgstr "Compañeros de la Federación"
+msgstr "Compañeros de Federación"
 
 #: admin/admin2.php:322 admin/admin2.php:336 admin/admin2.php:342
 msgid "External Tools"
@@ -452,34 +452,34 @@ msgstr "Encontrar Grupo"
 #: admin/calendarfeed.php:188 admin/canvascalexport.php:41
 #: includes/calendardata.php:168
 msgid "Assignment Due: "
-msgstr ""
+msgstr "Fecha de entrega del trabajo: "
 
 #: admin/calendarfeed.php:245 includes/calendardata.php:231
 msgid "Drill Due: "
-msgstr ""
+msgstr "Fecha de entrega del ejercicio: "
 
 #: admin/calendarfeed.php:261 includes/calendardata.php:247
 msgid "Posts Due: "
-msgstr ""
+msgstr "Fecha límite para las publicaciones: "
 
 #: admin/calendarfeed.php:264 includes/calendardata.php:250
 msgid "Replies Due: "
-msgstr ""
+msgstr "Fecha límite para las respuestas: "
 
 #: admin/diagonetime.php:42 admin/diagonetime.php:43
 msgid "Diagnostic One-time Passwords"
-msgstr ""
+msgstr "Contraseñas de un solo uso para diagnóstico"
 
 #: admin/diagsetup.php:41 admin/diagsetup.php:42
 msgid "Diagnostic Setup"
-msgstr ""
+msgstr "Configuración de diagnóstico"
 
 #: admin/diagsetup.php:401 admin/ltiuserprefs.php:22 admin/diagsetup.php:391
 #: course/viewforumgrade.php:85 actions.php:860 admin/importitems.php:660
 #: admin/importitems.php:664 course/addquestions.php:1329
 #: course/addquestions2.php:599 course/sendmsgmodal.php:111
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
 #: admin/forms.php:70 course/assessendmsg.php:127 course/assessendmsg.php:113
 #: course/assessendmsg.php:130 course/moddataset.php:1162
@@ -490,7 +490,7 @@ msgstr "Guardar"
 
 #: admin/forms.php:255 admin/forms.php:470 admin/forms.php:560
 msgid "Will be assigned when the course is created"
-msgstr ""
+msgstr "Se asignará cuando se cree el curso"
 
 #: admin/forms.php:299 course/course.php:550 admin/forms.php:358
 #: admin/forms.php:572 course/course.php:547 admin/forms.php:436
@@ -538,7 +538,7 @@ msgstr "Modificar"
 
 #: admin/listdiag.php:92
 msgid "One-time Passwords"
-msgstr ""
+msgstr "Contraseñas de un solo uso"
 
 #: admin/listdiag.php:114 admin/listdiag.php:117
 msgid "No Diagnostics to display"
@@ -562,7 +562,7 @@ msgstr "Curso"
 
 #: admin/listdiag.php:122 admin/listdiag.php:125
 msgid "Owner"
-msgstr ""
+msgstr "Propietario"
 
 #: admin/listdiag.php:125 admin/userdetails.php:184 admin/userlti.php:113
 #: forms.php:167 admin/admin2.php:197 admin/admin2.php:246
@@ -865,12 +865,12 @@ msgstr "Desglose de Puntuación por Categoría"
 #: course/gradebook.php:345 includes/copyiteminc.php:563
 #: includes/copyiteminc.php:570
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 #: assessment/catscores.php:72 assessment/catscores.php:62
 #: assessment/catscores.php:65
 msgid "Points Earned / Possible (Percent)"
-msgstr ""
+msgstr "Puntos obtenidos / Posibles (Porcentaje)"
 
 #: assessment/displayq2.php:293 assess2/displayq3.php:310
 #: assess2/questions/QuestionHtmlGenerator.php:214
@@ -878,7 +878,7 @@ msgstr ""
 #: assess2/questions/QuestionHtmlGenerator.php:233
 #: assessment/displayq2.php:355
 msgid "Answers may vary"
-msgstr ""
+msgstr "Las respuestas pueden variar"
 
 #: assessment/displayq2.php:325 assessment/displayq2.php:346
 #: assess2/displayq3.php:337 assess2/displayq3.php:358
@@ -889,7 +889,7 @@ msgstr ""
 #: assess2/questions/QuestionHtmlGenerator.php:953
 #: assessment/displayq2.php:386 assessment/displayq2.php:407
 msgid "Hint:"
-msgstr ""
+msgstr "Pista:"
 
 #: assessment/displayq2.php:393 assessment/displayq2.php:413
 #: assessment/displayq2.php:421 assess2/displayq3.php:393
@@ -905,7 +905,7 @@ msgstr ""
 #: assessment/displayq2.php:454 assessment/displayq2.php:474
 #: assessment/displayq2.php:483
 msgid "Answer:"
-msgstr ""
+msgstr "Respuesta:"
 
 #: assessment/displayq2.php:395 assessment/displayq2.php:415
 #: assessment/displayq2.php:423 assess2/displayq3.php:395
@@ -921,7 +921,7 @@ msgstr ""
 #: assessment/displayq2.php:456 assessment/displayq2.php:476
 #: assessment/displayq2.php:485
 msgid "Show Answer"
-msgstr ""
+msgstr "Mostrar respuesta"
 
 #: assessment/displayq2.php:444 assess2/displayq3.php:454
 #: assess2/questions/QuestionHtmlGenerator.php:957
@@ -930,13 +930,13 @@ msgstr ""
 #: assess2/questions/QuestionHtmlGenerator.php:1207
 #: assessment/displayq2.php:515
 msgid "This solution is for a similar problem, not your specific version"
-msgstr ""
+msgstr "Esta solución es para un problema similar, no para tu versión específica"
 
 #: assessment/displayq2.php:520 assess2/displayq3.php:578
 #: assess2/questions/models/Question.php:161 assessment/displayq2.php:572
 #: assessment/displayq2.php:591
 msgid "Get help: "
-msgstr ""
+msgstr "Obtener ayuda: "
 
 #: assessment/displayq2.php:545 assessment/showsoln.php:23
 #: assess2/displayq3.php:449 assess2/displayq3.php:451
@@ -948,12 +948,12 @@ msgstr ""
 #: assessment/displayq2.php:626 course/addquestions2.php:715
 #: javascript/assess2supp.js:201
 msgid "Written Example"
-msgstr ""
+msgstr "Ejemplo escrito"
 
 #: assessment/displayq2.php:556 assess2/displayq3.php:548
 #: assessment/displayq2.php:617 assessment/displayq2.php:636
 msgid "Box"
-msgstr ""
+msgstr "Caja"
 
 #: assessment/displayq2.php:593 assess2/displayq3.php:524
 #: assess2/questions/QuestionHtmlGenerator.php:558
@@ -962,7 +962,7 @@ msgstr ""
 #: assessment/displayq2.php:674 course/addquestions.php:977
 #: course/addquestions2.php:716
 msgid "Detailed Solution"
-msgstr ""
+msgstr "Solución detallada"
 
 #: assessment/displayq2.php:595 assess2/displayq3.php:526
 #: assess2/questions/QuestionHtmlGenerator.php:560
@@ -970,32 +970,35 @@ msgstr ""
 #: assess2/questions/QuestionHtmlGenerator.php:765
 #: assessment/displayq2.php:676
 msgid "Show Detailed Solution"
-msgstr ""
+msgstr "Mostrar solución detallada"
 
 #: assessment/displayq2.php:1025
 msgid ""
 "Enter your answer as a list of whole or decimal numbers separated with "
 "commas: Examples: -4, 3, 2.5172"
 msgstr ""
+"Introduce tu respuesta como una lista de números enteros o decimales separados por comas: Ejemplos: -4, 3, 2.5172"
 
 #: assessment/displayq2.php:1026
 msgid "Enter a list of whole or decimal numbers"
-msgstr ""
+msgstr "Introduce una lista de números enteros o decimales"
 
 #: assessment/displayq2.php:1028
 msgid ""
 "Enter your answer as a set of whole or decimal numbers separated with "
 "commas: Example: {-4, 3, 2.5172}"
 msgstr ""
+"Introduce tu respuesta como un conjunto de números enteros o decimales separados por comas: Ejemplo: {-4, 3, 2.5172}"
 
 #: assessment/displayq2.php:1029
 msgid "Enter a set of whole or decimal numbers"
-msgstr ""
+msgstr "Introduce un conjunto de números enteros o decimales"
 
 #: assessment/displayq2.php:1031
 msgid ""
 "Enter your answer as a whole or decimal number.  Examples: 3, -4, 5.5172"
 msgstr ""
+"Introduce tu respuesta como un número entero o decimal. Ejemplos: 3, -4, 5.5172"
 
 #: assessment/displayq2.php:1032
 msgid "Enter a whole or decimal number"
